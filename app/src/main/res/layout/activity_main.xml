@@ -61,6 +61,23 @@
                 app:strokeWidth="@dimen/button_stroke_width" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/text_questions"
+                style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:stateListAnimator="@null"
+                android:padding="@dimen/button_pudding"
+                android:text="@string/tv_text_questions"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/button_text_size"
+                app:cornerRadius="@dimen/button_corner_radius"
+                app:rippleColor="@color/purple_200"
+                app:strokeColor="@color/purple_500"
+                app:strokeWidth="@dimen/button_stroke_width" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/image_questions"
                 style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                 android:layout_width="match_parent"

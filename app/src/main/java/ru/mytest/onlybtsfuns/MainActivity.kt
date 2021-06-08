@@ -15,8 +15,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.randomQuestions.setOnClickListener {
-            val intent = Intent(this, QuizActivity::class.java)
-            startActivity(intent)
+
+        }
+
+        binding.textQuestions.setOnClickListener {
+
+        }
+
+        binding.imageQuestions.setOnClickListener {
+
         }
     }
 }
