@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
-                android:elevation="@dimen/button_elevation"
+                android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
                 android:text="@string/tv_random_questions"
                 android:textAlignment="center"
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
-                android:elevation="@dimen/button_elevation"
+                android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
                 android:text="@string/tv_guess_member"
                 android:textAlignment="center"

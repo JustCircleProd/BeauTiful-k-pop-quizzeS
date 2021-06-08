@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
     android:fillViewport="true"
+    android:background="@drawable/main_background"
     tools:context=".QuizActivity">
 
     <LinearLayout
@@ -54,7 +54,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/question_height"
                     android:padding="@dimen/question_padding"
-                    android:src="@drawable/ic_background"
                     android:visibility="gone"
                     android:contentDescription="@string/image_for_question_description"/>
 
@@ -68,19 +67,17 @@
                     android:progress="1"
                     android:progressTint="@color/purple_500" />
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/first_option"
                     style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:elevation="@dimen/button_elevation"
+                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
-                    android:textStyle="bold"
                     app:cornerRadius="@dimen/button_corner_radius"
                     app:rippleColor="@color/purple_200"
                     app:strokeColor="@color/purple_500"
@@ -92,12 +89,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:elevation="@dimen/button_elevation"
+                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
-                    android:textStyle="bold"
                     app:cornerRadius="@dimen/button_corner_radius"
                     app:rippleColor="@color/purple_200"
                     app:strokeColor="@color/purple_500"
@@ -109,12 +105,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:elevation="@dimen/button_elevation"
+                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
-                    android:textStyle="bold"
                     app:cornerRadius="@dimen/button_corner_radius"
                     app:rippleColor="@color/purple_200"
                     app:strokeColor="@color/purple_500"
@@ -126,16 +121,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:elevation="@dimen/button_elevation"
+                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
-                    android:textStyle="bold"
                     app:cornerRadius="@dimen/button_corner_radius"
                     app:rippleColor="@color/purple_200"
                     app:strokeColor="@color/purple_500"
                     app:strokeWidth="@dimen/button_stroke_width" />
+
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
