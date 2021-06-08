@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Only BTS Funs</string>
+    <string name="tv_choose_category">Выберите категорию</string>
+    <string name="tv_random_questions">Случайные вопросы</string>
+    <string name="tv_guess_member">Угадай по фото</string>
+    <string name="image_for_question_description">Image for question</string>
+</resources>
