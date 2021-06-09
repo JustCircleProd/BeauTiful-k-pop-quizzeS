@@ -20,10 +20,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textQuestions.setOnClickListener {
-            val questions = TextQuestionStorage.getTextQuestions(2)
+            val questions = TextQuestionStorage.getTextQuestions(6)
             val intent = Intent(this, QuizActivity::class.java)
             intent.putExtra("questions", questions)
             startActivity(intent)
+            finish()
         }
 
         binding.imageQuestions.setOnClickListener {
