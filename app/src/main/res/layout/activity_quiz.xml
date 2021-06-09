@@ -45,7 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/question_height"
                     android:gravity="center"
-                    android:padding="@dimen/question_padding"
+                    android:paddingTop="@dimen/question_pudding_top"
+                    android:paddingBottom="@dimen/question_pudding_bottom"
                     android:textSize="@dimen/hint_text_size"
                     android:visibility="gone" />
 
@@ -53,9 +54,10 @@
                     android:id="@+id/image_question"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/question_height"
-                    android:padding="@dimen/question_padding"
-                    android:visibility="gone"
-                    android:contentDescription="@string/image_for_question_description"/>
+                    android:contentDescription="@string/image_for_question_description"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="24dp"
+                    android:visibility="gone" />
 
                 <ProgressBar
                     android:id="@+id/progress"

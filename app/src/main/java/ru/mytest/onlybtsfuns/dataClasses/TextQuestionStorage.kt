@@ -1,7 +1,7 @@
 package ru.mytest.onlybtsfuns.dataClasses
 
 object TextQuestionStorage {
-    fun getTextQuestions(count: Int): Array<TextQuestion> {
+    fun getQuestions(count: Int): Array<TextQuestion> {
         return listOf(
             TextQuestion(
                 "Test2",
