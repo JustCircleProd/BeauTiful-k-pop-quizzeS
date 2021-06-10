@@ -13,7 +13,10 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.result.text = intent.getIntExtra("result", 0).toString() + "/6"
+        val countOfQuestions = intent.getIntExtra("countOfQuestions", 6)
+        val correctAnswers = intent.getIntExtra("result", 0)
+
+        binding.result.text = "$correctAnswers/$countOfQuestions"
 
         binding.toCategories.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

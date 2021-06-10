@@ -3,6 +3,7 @@ package ru.mytest.onlybtsfuns
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import ru.mytest.onlybtsfuns.dataClasses.ImageQuestionStorage
@@ -26,8 +27,11 @@ class MainActivity : AppCompatActivity() {
             val textQuestions = TextQuestionStorage.getQuestions(countOfTextQuestion)
             val imageQuestions = ImageQuestionStorage.getQuestions(countOfImageQuestion)
 
+            val test = (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
+            Log.d("Tag", "here2")
             val questions =
-                (textQuestions.toList() + imageQuestions.toList()).shuffled() as Array<*>
+                (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
+
             startQuizActivity(questions, countOfQuestions)
         }
 
@@ -37,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.imageQuestions.setOnClickListener {
-            val questions = ImageQuestionStorage.getQuestions(1)
+            val questions = ImageQuestionStorage.getQuestions(countOfQuestions)
             startQuizActivity(questions, countOfQuestions)
         }
     }

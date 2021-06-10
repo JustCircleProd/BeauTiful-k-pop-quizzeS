@@ -103,6 +103,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                     }
                     override fun onFinish() {
                         val intent = Intent(context, ResultActivity::class.java)
+                        intent.putExtra("countOfQuestions", countOfQuestions)
                         intent.putExtra("result", correctAnswers)
                         startActivity(intent)
                         finish()

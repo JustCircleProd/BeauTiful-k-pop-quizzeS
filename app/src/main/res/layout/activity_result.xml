@@ -52,25 +52,6 @@
                 android:textSize="@dimen/result_text_size"
                 android:layout_marginBottom="@dimen/result_bottom_margin"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center_horizontal"
-                android:text="@string/best_result"
-                android:textColor="@color/hint_text_color"
-                android:textSize="@dimen/hint_text_size" />
-
-            <TextView
-                android:id="@+id/best_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="0/6"
-                android:textColor="@color/result_color"
-                android:textStyle="bold"
-                android:textSize="@dimen/result_text_size"
-                android:layout_marginBottom="@dimen/result_bottom_margin"/>
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/to_categories"
                 style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
