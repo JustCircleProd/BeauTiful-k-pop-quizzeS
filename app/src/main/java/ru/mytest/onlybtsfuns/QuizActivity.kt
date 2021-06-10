@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
@@ -64,10 +65,23 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v is MaterialButton) {
-            showRightAndWrong(v)
+            disableButtons()
+            val isAnswerRight = if (v.text == answer) {
+                correctAnswers++
+                setRightAnswerColor(v)
+                true
+            } else {
+                setWrongAnswerColor(v)
+                false
+            }
+
             if (binding.progress.progress < 6) {
-                val timer = object : CountDownTimer(2000, 1000) {
-                    override fun onTick(millisUntilFinished: Long) {}
+                val timer = object : CountDownTimer(2000, 250) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        if (!isAnswerRight && millisUntilFinished < 1750) {
+                            showRightAnswer()
+                        }
+                    }
                     override fun onFinish() {
                         updateViews()
                         updateQuestionsData()
@@ -76,8 +90,12 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 timer.start()
             } else {
                 val context = this
-                val timer = object : CountDownTimer(2000, 1000) {
-                    override fun onTick(millisUntilFinished: Long) {}
+                val timer = object : CountDownTimer(2000, 250) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        if (!isAnswerRight && millisUntilFinished < 1750) {
+                            showRightAnswer()
+                        }
+                    }
                     override fun onFinish() {
                         val intent = Intent(context, ResultActivity::class.java)
                         intent.putExtra("result", correctAnswers)
@@ -90,7 +108,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun showRightAndWrong(v: MaterialButton) {
+    private fun disableButtons() {
         binding.firstOption.isEnabled = false
         binding.firstOption.isClickable = false
         binding.secondOption.isEnabled = false
@@ -99,47 +117,26 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.thirdOption.isClickable = false
         binding.fourthOption.isEnabled = false
         binding.fourthOption.isClickable = false
+    }
 
-        if (v.text == answer) {
-            correctAnswers++
-            v.setBackgroundColor(ContextCompat.getColor(this, R.color.correct_answer_color))
-        } else {
-            v.setBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.incorrect_answer_color
-                )
-            )
-            when (answer) {
-                binding.firstOption.text.toString() ->
-                    binding.firstOption.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.correct_answer_color
-                        )
-                    )
-                binding.secondOption.text.toString() ->
-                    binding.secondOption.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.correct_answer_color
-                        )
-                    )
-                binding.thirdOption.text.toString() ->
-                    binding.thirdOption.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.correct_answer_color
-                        )
-                    )
-                binding.fourthOption.text.toString() ->
-                    binding.fourthOption.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.correct_answer_color
-                        )
-                    )
-            }
+    private fun setRightAnswerColor(v: MaterialButton) {
+        v.setBackgroundColor(ContextCompat.getColor(this, R.color.correct_answer_color))
+    }
+
+    private fun setWrongAnswerColor(v: MaterialButton) {
+        v.setBackgroundColor(ContextCompat.getColor(this, R.color.incorrect_answer_color))
+    }
+
+    private fun showRightAnswer() {
+        when (answer) {
+            binding.firstOption.text.toString() ->
+                setRightAnswerColor(binding.firstOption)
+            binding.secondOption.text.toString() ->
+                setRightAnswerColor(binding.secondOption)
+            binding.thirdOption.text.toString() ->
+                setRightAnswerColor(binding.thirdOption)
+            binding.fourthOption.text.toString() ->
+                setRightAnswerColor(binding.fourthOption)
         }
     }
 
