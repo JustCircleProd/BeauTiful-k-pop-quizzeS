@@ -1,6 +1,7 @@
 package ru.mytest.onlybtsfuns
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -68,9 +69,11 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             disableButtons()
             val isAnswerRight = if (v.text == answer) {
                 correctAnswers++
+                MediaPlayer.create(this, R.raw.correct_answer).start()
                 setRightAnswerColor(v)
                 true
             } else {
+                MediaPlayer.create(this, R.raw.incorrect_answer).start()
                 setWrongAnswerColor(v)
                 false
             }
