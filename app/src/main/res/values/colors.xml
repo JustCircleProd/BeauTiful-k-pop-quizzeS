@@ -19,4 +19,5 @@
     <color name="btn_ripple_color">#be9dcd</color>
     <color name="correct_answer_color">#a6f0b8</color>
     <color name="incorrect_answer_color">#f3a7b2</color>
+    <color name="result_color">#5e5e5e</color>
 </resources>

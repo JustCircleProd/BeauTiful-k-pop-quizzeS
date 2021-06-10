@@ -16,6 +16,7 @@ import ru.mytest.onlybtsfuns.databinding.ActivityQuizBinding
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
     private lateinit var questions: Array<*>
+    private var countOfQuestions = 0
     private var answer = ""
     private var correctAnswers = 0
 
@@ -30,6 +31,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.fourthOption.setOnClickListener(this)
 
         questions = intent.getParcelableArrayExtra("questions") as Array<*>
+        countOfQuestions = intent.getIntExtra("countOfQuestions", 6)
         updateQuestionsData()
     }
 
@@ -78,7 +80,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 false
             }
 
-            if (binding.progress.progress < 6) {
+            if (binding.progress.progress < countOfQuestions) {
                 val timer = object : CountDownTimer(2000, 250) {
                     override fun onTick(millisUntilFinished: Long) {
                         if (!isAnswerRight && millisUntilFinished < 1750) {

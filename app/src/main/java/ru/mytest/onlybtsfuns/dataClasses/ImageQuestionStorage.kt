@@ -6,7 +6,7 @@ object ImageQuestionStorage {
     fun getQuestions(count: Int): Array<ImageQuestion> {
         return listOf(
             ImageQuestion(
-                R.drawable.ho_seok_1,
+                R.drawable.jung_ho_seok_1,
                 arrayOf("1", "2", "3", "Правильный ответ"),
                 4
             )

@@ -26,27 +26,26 @@ class MainActivity : AppCompatActivity() {
             val textQuestions = TextQuestionStorage.getQuestions(countOfTextQuestion)
             val imageQuestions = ImageQuestionStorage.getQuestions(countOfImageQuestion)
 
-            Log.d("Test", "$countOfTextQuestion | $countOfImageQuestion")
-
             val questions =
                 (textQuestions.toList() + imageQuestions.toList()).shuffled() as Array<*>
-            startQuizActivity(questions)
+            startQuizActivity(questions, countOfQuestions)
         }
 
         binding.textQuestions.setOnClickListener {
             val questions = TextQuestionStorage.getQuestions(countOfQuestions)
-            startQuizActivity(questions)
+            startQuizActivity(questions, countOfQuestions)
         }
 
         binding.imageQuestions.setOnClickListener {
             val questions = ImageQuestionStorage.getQuestions(1)
-            startQuizActivity(questions)
+            startQuizActivity(questions, countOfQuestions)
         }
     }
 
-    private fun startQuizActivity(questions: Array<*>) {
+    private fun startQuizActivity(questions: Array<*>, countOfQuestions: Int) {
         val intent = Intent(this, QuizActivity::class.java)
         intent.putExtra("questions", questions)
+        intent.putExtra("countOfQuestions", countOfQuestions)
         startActivity(intent)
         finish()
     }

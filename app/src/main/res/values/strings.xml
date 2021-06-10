@@ -5,4 +5,7 @@
     <string name="tv_guess_member">Угадай по фото</string>
     <string name="image_for_question_description">Image for question</string>
     <string name="tv_text_questions">Текстовые вопросы</string>
+    <string name="your_result">Ваш результат</string>
+    <string name="best_result">Лучший результат</string>
+    <string name="to_categories_text">К выбору категории</string>
 </resources>
