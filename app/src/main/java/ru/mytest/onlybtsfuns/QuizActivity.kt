@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
@@ -79,38 +78,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 setWrongAnswerColor(v)
                 false
             }
-
-            if (binding.progress.progress < countOfQuestions) {
-                val timer = object : CountDownTimer(2000, 250) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        if (!isAnswerRight && millisUntilFinished < 1750) {
-                            showRightAnswer()
-                        }
-                    }
-                    override fun onFinish() {
-                        updateViews()
-                        updateQuestionsData()
-                    }
-                }
-                timer.start()
-            } else {
-                val context = this
-                val timer = object : CountDownTimer(2000, 250) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        if (!isAnswerRight && millisUntilFinished < 1750) {
-                            showRightAnswer()
-                        }
-                    }
-                    override fun onFinish() {
-                        val intent = Intent(context, ResultActivity::class.java)
-                        intent.putExtra("countOfQuestions", countOfQuestions)
-                        intent.putExtra("result", correctAnswers)
-                        startActivity(intent)
-                        finish()
-                    }
-                }
-                timer.start()
-            }
+            showRightAndWrong(isAnswerRight)
         }
     }
 
@@ -123,6 +91,39 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.thirdOption.isClickable = false
         binding.fourthOption.isEnabled = false
         binding.fourthOption.isClickable = false
+    }
+
+    private fun showRightAndWrong(isAnswerRight: Boolean) {
+        if (binding.progress.progress < countOfQuestions) {
+            val timer = object : CountDownTimer(2000, 250) {
+                override fun onTick(millisUntilFinished: Long) {
+                    if (!isAnswerRight && millisUntilFinished < 1750) {
+                        showRightAnswer()
+                    }
+                }
+                override fun onFinish() {
+                    updateViews()
+                    updateQuestionsData()
+                }
+            }
+            timer.start()
+        } else {
+            val timer = object : CountDownTimer(2000, 250) {
+                override fun onTick(millisUntilFinished: Long) {
+                    if (!isAnswerRight && millisUntilFinished < 1750) {
+                        showRightAnswer()
+                    }
+                }
+                override fun onFinish() {
+                    val intent = Intent(this@QuizActivity, ResultActivity::class.java)
+                    intent.putExtra("countOfQuestions", countOfQuestions)
+                    intent.putExtra("result", correctAnswers)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            timer.start()
+        }
     }
 
     private fun setRightAnswerColor(v: MaterialButton) {
