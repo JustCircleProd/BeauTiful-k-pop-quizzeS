@@ -19,10 +19,21 @@
         android:textSize="@dimen/brand_text_size"
         android:textStyle="bold" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/card_margin"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/brand_image_content_description"
+        android:paddingHorizontal="@dimen/brand_image_padding_horizontal"
+        android:scaleType="fitXY"
+        android:src="@drawable/brand_image_main" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_margin"
+        android:layout_marginHorizontal="@dimen/card_margin"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="@color/white"
         android:elevation="@dimen/card_elevation"
         app:cardCornerRadius="@dimen/card_corner_radius">
@@ -49,8 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
-                android:stateListAnimator="@null"
+                android:elevation="@dimen/button_elevation"
                 android:padding="@dimen/button_pudding"
+                android:stateListAnimator="@null"
                 android:text="@string/tv_random_questions"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -66,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
+                android:elevation="@dimen/button_elevation"
                 android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
                 android:text="@string/tv_text_questions"
@@ -83,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
+                android:elevation="@dimen/button_elevation"
                 android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
                 android:text="@string/tv_guess_member"

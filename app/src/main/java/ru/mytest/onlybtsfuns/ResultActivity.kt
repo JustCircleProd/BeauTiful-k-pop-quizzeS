@@ -1,13 +1,15 @@
 package ru.mytest.onlybtsfuns
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.mytest.onlybtsfuns.databinding.ActivityResultBinding
 
 class ResultActivity : AppCompatActivity() {
-    lateinit var binding: ActivityResultBinding
+    private lateinit var binding: ActivityResultBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
@@ -18,10 +20,29 @@ class ResultActivity : AppCompatActivity() {
 
         binding.result.text = "$correctAnswers/$countOfQuestions"
 
+        setImage(correctAnswers)
+
         binding.toCategories.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun setImage(correctAnswers: Int) {
+        when {
+            correctAnswers <= 2 -> {
+                binding.resultText.text = resources.getString(R.string.text_for_bad_result)
+                binding.resultImage.setImageResource(R.drawable.bad_image_result)
+            }
+            correctAnswers <= 4 -> {
+                binding.resultText.text = resources.getString(R.string.text_for_good_result)
+                binding.resultImage.setImageResource(R.drawable.good_image_result)
+            }
+            else -> {
+                binding.resultText.text = resources.getString(R.string.text_for_best_result)
+                binding.resultImage.setImageResource(R.drawable.best_image_result)
+            }
         }
     }
 }
