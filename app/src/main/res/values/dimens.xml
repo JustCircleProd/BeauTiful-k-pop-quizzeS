@@ -25,6 +25,11 @@
     <dimen name="question_image_bottom_padding">24dp</dimen>
 
     <dimen name="result_text_size">25sp</dimen>
-    <dimen name="result_bottom_margin">10dp</dimen>
+    <dimen name="result_bottom_margin">5dp</dimen>
     <dimen name="result_text_bottom_margin">5dp</dimen>
+    <dimen name="best_score_text_size">16sp</dimen>
+    <dimen name="best_score_margin_bottom">15dp</dimen>
+    <dimen name="best_score_size">20sp</dimen>
+    <dimen name="congrat_text_size">24sp</dimen>
+    <dimen name="congrat_image_padding_horizontal">10dp</dimen>
 </resources>

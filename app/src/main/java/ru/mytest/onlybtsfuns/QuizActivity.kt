@@ -9,15 +9,20 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import ru.mytest.onlybtsfuns.data.ImageQuestion
+import ru.mytest.onlybtsfuns.data.Score
 import ru.mytest.onlybtsfuns.data.TextQuestion
 import ru.mytest.onlybtsfuns.databinding.ActivityQuizBinding
 
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
-    private lateinit var questions: Array<*>
     private var countOfQuestions = 0
+    private lateinit var questions: Array<*>
     private var answer = ""
-    private var correctAnswers = 0
+
+    private lateinit var bestScore: Score
+    private var currentPoints = 0
+    private var correctInARow = 0
+    private var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +34,10 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.thirdOption.setOnClickListener(this)
         binding.fourthOption.setOnClickListener(this)
 
-        questions = intent.getParcelableArrayExtra("questions") as Array<*>
         countOfQuestions = intent.getIntExtra("countOfQuestions", 6)
+        questions = intent.getParcelableArrayExtra("questions") as Array<*>
+        bestScore = intent.getParcelableExtra("bestScore")!!
+
         updateQuestionsData()
     }
 
@@ -49,9 +56,10 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 )
 
                 answer = options[question.answerNum - 1]
-
                 binding.textQuestion.text = question.question
                 binding.textQuestion.visibility = View.VISIBLE
+
+                currentPoints = question.points
                 updateOptions(options)
             }
             is ImageQuestion -> {
@@ -64,7 +72,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 )
 
                 answer = options[question.answerNum - 1]
-
                 binding.imageQuestion.setImageResource(
                     resources.getIdentifier(
                         question.image_entry_name,
@@ -73,6 +80,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                     )
                 )
                 binding.imageQuestion.visibility = View.VISIBLE
+
+                currentPoints = question.points
                 updateOptions(options)
             }
         }
@@ -103,16 +112,18 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         if (v is MaterialButton) {
             disableButtons()
             val isAnswerRight = if (v.text == answer) {
-                correctAnswers++
+                correctInARow++
+                score += currentPoints * (1 + correctInARow / 10)
                 MediaPlayer.create(this, R.raw.correct_answer).start()
                 setRightAnswerColor(v)
                 true
             } else {
+                correctInARow = 0
                 MediaPlayer.create(this, R.raw.incorrect_answer).start()
                 setWrongAnswerColor(v)
                 false
             }
-            showRightAndWrong(isAnswerRight)
+            checkAnswer(isAnswerRight)
         }
     }
 
@@ -127,7 +138,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.fourthOption.isClickable = false
     }
 
-    private fun showRightAndWrong(isAnswerRight: Boolean) {
+    private fun checkAnswer(isAnswerRight: Boolean) {
         if (binding.progress.progress < countOfQuestions) {
             val timer = object : CountDownTimer(2000, 250) {
                 override fun onTick(millisUntilFinished: Long) {
@@ -135,7 +146,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                         showRightAnswer()
                     }
                 }
-
                 override fun onFinish() {
                     updateViews()
                     updateQuestionsData()
@@ -151,11 +161,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 override fun onFinish() {
-                    val intent = Intent(this@QuizActivity, ResultActivity::class.java)
-                    intent.putExtra("countOfQuestions", countOfQuestions)
-                    intent.putExtra("result", correctAnswers)
-                    startActivity(intent)
-                    finish()
+                    startResultActivity()
                 }
             }
             timer.start()
@@ -202,5 +208,13 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.thirdOption.isClickable = true
         binding.fourthOption.isEnabled = true
         binding.fourthOption.isClickable = true
+    }
+
+    private fun startResultActivity() {
+        val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra("bestScore", bestScore)
+        intent.putExtra("score", score)
+        startActivity(intent)
+        finish()
     }
 }

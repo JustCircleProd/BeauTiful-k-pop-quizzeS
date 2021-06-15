@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/main_background"
-    tools:context=".ResultActivity">
+    tools:context=".ResultsActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -38,12 +38,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/your_result"
+                android:text="@string/without_category"
                 android:textColor="@color/hint_text_color"
                 android:textSize="@dimen/hint_text_size" />
 
             <TextView
-                android:id="@+id/score"
+                android:id="@+id/no_category_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/result_bottom_margin"
@@ -56,37 +56,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/best_result"
+                android:text="@string/text_questions"
                 android:textColor="@color/hint_text_color"
-                android:textSize="@dimen/best_score_text_size" />
+                android:textSize="@dimen/hint_text_size" />
 
             <TextView
-                android:id="@+id/best_score"
+                android:id="@+id/text_questions_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/result_bottom_margin"
+                android:gravity="center_horizontal"
+                android:textColor="@color/result_color"
+                android:textSize="@dimen/result_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/image_questions"
+                android:textColor="@color/hint_text_color"
+                android:textSize="@dimen/hint_text_size" />
+
+            <TextView
+                android:id="@+id/image_questions_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/best_score_margin_bottom"
                 android:gravity="center_horizontal"
                 android:textColor="@color/result_color"
-                android:textSize="@dimen/best_score_size"
+                android:textSize="@dimen/result_text_size"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/result_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/btn_stroke_color"
-                android:textSize="@dimen/congrat_text_size"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/result_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:paddingHorizontal="@dimen/congrat_image_padding_horizontal"
-                android:scaleType="fitXY"
-                android:contentDescription="@string/result_image_content_description" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/to_categories"
