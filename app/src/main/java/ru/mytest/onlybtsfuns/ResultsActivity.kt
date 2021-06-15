@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.Room
 import ru.mytest.onlybtsfuns.data.AppDatabase
-import ru.mytest.onlybtsfuns.databinding.ActivityMainBinding
 import ru.mytest.onlybtsfuns.databinding.ActivityResultsBinding
 
 class ResultsActivity : AppCompatActivity() {

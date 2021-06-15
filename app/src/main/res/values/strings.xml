@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">Only BTS Funs</string>
-    <string name="brand_image_content_description">Brand image</string>
+
     <string name="tv_choose_category">Выберите категорию</string>
-    <string name="tv_random_questions">Случайные вопросы</string>
-    <string name="tv_text_questions">Текстовые вопросы</string>
-    <string name="tv_guess_member">Угадай по фото</string>
+    <string name="random_questions">Случайные вопросы</string>
+    <string name="text_questions">Текстовые вопросы</string>
+    <string name="image_questions">Угадай по фото</string>
+    <string name="button_text_results">Результаты</string>
 
-    <string name="image_for_question_description">Image for question</string>
+    <string name="tv_text_your_result">Ваш результат</string>
+    <string name="tv_text_best_result">Лучший результат</string>
 
-    <string name="your_result">Ваш результат</string>
-    <string name="best_result">Лучший результат</string>
     <string name="text_for_bad_result">Мы в тебя верим!</string>
     <string name="text_for_good_result">Отлично получается!</string>
     <string name="text_for_best_result">Новый рекорд!</string>
     <string name="to_categories_text">К выбору категории</string>
+
+    <string name="brand_image_content_description">Brand image</string>
+    <string name="image_for_question_description">Image for question</string>
     <string name="result_image_content_description">Result Image</string>
-    <string name="your_results">Результаты</string>
-    <string name="without_category">Без категории</string>
-    <string name="text_questions">Текстовые вопросы</string>
-    <string name="image_questions">Угадай по фото</string>
+
 </resources>

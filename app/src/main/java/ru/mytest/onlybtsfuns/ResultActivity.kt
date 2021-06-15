@@ -1,6 +1,5 @@
 package ru.mytest.onlybtsfuns
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity

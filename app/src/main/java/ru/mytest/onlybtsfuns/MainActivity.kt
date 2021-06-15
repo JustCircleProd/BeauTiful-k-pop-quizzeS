@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding.randomQuestions.setOnClickListener { showRandomQuestions(db) }
         binding.textQuestions.setOnClickListener { showTextQuestions(db) }
         binding.imageQuestions.setOnClickListener { showImageQuestions(db) }
-        binding.yourResults.setOnClickListener { showResults(db) }
+        binding.yourResults.setOnClickListener { showResults() }
     }
 
     private fun showRandomQuestions(db: AppDatabase) {
@@ -74,10 +74,9 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("questions", questions)
         intent.putExtra("bestScore", bestScore)
         startActivity(intent)
-        finish()
     }
 
-    private fun showResults(db: AppDatabase) {
+    private fun showResults() {
         val intent = Intent(this, ResultsActivity::class.java)
         startActivity(intent)
     }

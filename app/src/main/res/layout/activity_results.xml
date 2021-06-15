@@ -22,7 +22,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_margin"
+        android:layout_margin="@dimen/main_margin"
         android:backgroundTint="@color/white"
         android:elevation="@dimen/card_elevation"
         app:cardCornerRadius="@dimen/card_corner_radius">
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/without_category"
+                android:text="@string/random_questions"
                 android:textColor="@color/hint_text_color"
                 android:textSize="@dimen/hint_text_size" />
 
