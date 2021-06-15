@@ -3,8 +3,9 @@ package ru.mytest.onlybtsfuns
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.mytest.onlybtsfuns.dataClasses.ImageQuestionStorage
-import ru.mytest.onlybtsfuns.dataClasses.TextQuestionStorage
+import android.util.Log
+import androidx.room.Room
+import ru.mytest.onlybtsfuns.data.AppDatabase
 import ru.mytest.onlybtsfuns.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,29 +17,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val countOfQuestions = 6
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "db.db")
+            .createFromAsset("database/db.db").allowMainThreadQueries().build()
 
         binding.randomQuestions.setOnClickListener {
-            val countOfTextQuestion = (0..countOfQuestions).random()
+            val countOfTextQuestion = (2..countOfQuestions - 2).random()
             val countOfImageQuestion = countOfQuestions - countOfTextQuestion
 
-            val textQuestions = TextQuestionStorage.getQuestions(countOfTextQuestion)
-            val imageQuestions = ImageQuestionStorage.getQuestions(countOfImageQuestion)
 
-            val test = (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
-
-            val questions =
-                (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
-
-            startQuizActivity(questions, countOfQuestions)
+//            val textQuestions = TextQuestionStorage.getQuestions(countOfTextQuestion)
+//            val imageQuestions = ImageQuestionStorage.getQuestions(countOfImageQuestion)
+//
+//            val test = (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
+//
+//            val questions =
+//                (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
+//
+//            startQuizActivity(questions, countOfQuestions)
         }
 
         binding.textQuestions.setOnClickListener {
-            val questions = TextQuestionStorage.getQuestions(countOfQuestions)
-            startQuizActivity(questions, countOfQuestions)
+//            val questions = TextQuestionStorage.getQuestions(countOfQuestions)
+//            startQuizActivity(questions, countOfQuestions)
         }
 
         binding.imageQuestions.setOnClickListener {
-            val questions = ImageQuestionStorage.getQuestions(countOfQuestions)
+            val countOfRaw = db.imageQuestionDao().getCount()
+            Log.d("Tag", countOfRaw.toString())
+            val s: MutableSet<Int> = mutableSetOf()
+            while (s.size < countOfQuestions) { s.add((1..countOfRaw).random()) }
+            val ids = s.toIntArray()
+
+            val questions = db.imageQuestionDao().loadAllByIds(ids)
             startQuizActivity(questions, countOfQuestions)
         }
     }

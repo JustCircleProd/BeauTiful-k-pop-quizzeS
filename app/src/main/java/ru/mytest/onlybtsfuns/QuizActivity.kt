@@ -8,8 +8,8 @@ import android.os.CountDownTimer
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
-import ru.mytest.onlybtsfuns.dataClasses.ImageQuestion
-import ru.mytest.onlybtsfuns.dataClasses.TextQuestion
+import ru.mytest.onlybtsfuns.data.ImageQuestion
+import ru.mytest.onlybtsfuns.data.TextQuestion
 import ru.mytest.onlybtsfuns.databinding.ActivityQuizBinding
 
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
@@ -41,24 +41,58 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         when (questions[currentQuestion]) {
             is TextQuestion -> {
                 val question = questions[currentQuestion] as TextQuestion
-                answer = question.options[question.answerNum - 1]
+                val options = convertOptions(
+                    question.firstOption,
+                    question.secondOption,
+                    question.thirdOption,
+                    question.fourthOption
+                )
+
+                answer = options[question.answerNum - 1]
 
                 binding.textQuestion.text = question.question
                 binding.textQuestion.visibility = View.VISIBLE
-                updateOptions(question.options)
+                updateOptions(options)
             }
             is ImageQuestion -> {
                 val question = questions[currentQuestion] as ImageQuestion
-                answer = question.options[question.answerNum - 1]
+                val options = convertOptions(
+                    question.firstOption,
+                    question.secondOption,
+                    question.thirdOption,
+                    question.fourthOption
+                )
 
-                binding.imageQuestion.setImageResource(question.image)
+                answer = options[question.answerNum - 1]
+
+                binding.imageQuestion.setImageResource(
+                    resources.getIdentifier(
+                        question.image_entry_name,
+                        "drawable",
+                        packageName
+                    )
+                )
                 binding.imageQuestion.visibility = View.VISIBLE
-                updateOptions(question.options)
+                updateOptions(options)
             }
         }
     }
 
-    private fun updateOptions(options: Array<String>) {
+    private fun convertOptions(
+        firstOption: String,
+        secondOption: String,
+        thirdOption: String,
+        fourthOption: String
+    ): List<String> {
+        return listOf(
+            firstOption,
+            secondOption,
+            thirdOption,
+            fourthOption
+        )
+    }
+
+    private fun updateOptions(options: List<String>) {
         binding.firstOption.text = options[0]
         binding.secondOption.text = options[1]
         binding.thirdOption.text = options[2]
@@ -101,6 +135,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                         showRightAnswer()
                     }
                 }
+
                 override fun onFinish() {
                     updateViews()
                     updateQuestionsData()
@@ -114,6 +149,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                         showRightAnswer()
                     }
                 }
+
                 override fun onFinish() {
                     val intent = Intent(this@QuizActivity, ResultActivity::class.java)
                     intent.putExtra("countOfQuestions", countOfQuestions)
