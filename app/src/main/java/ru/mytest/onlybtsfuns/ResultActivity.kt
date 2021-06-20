@@ -1,6 +1,5 @@
 package ru.mytest.onlybtsfuns
 
-import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +27,7 @@ class ResultActivity : AppCompatActivity() {
         updateViews()
         checkScore()
 
-        binding.toCategories.setOnClickListener { startMainActivity() }
+        binding.toCategories.setOnClickListener { super.onBackPressed() }
     }
 
     private fun updateViews() {
@@ -55,11 +54,5 @@ class ResultActivity : AppCompatActivity() {
                 MediaPlayer.create(this, R.raw.good_result).start()
             }
         }
-    }
-
-    private fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
