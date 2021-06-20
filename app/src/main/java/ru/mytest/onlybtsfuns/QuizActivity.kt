@@ -7,124 +7,67 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
-import ru.mytest.onlybtsfuns.data.ImageQuestion
-import ru.mytest.onlybtsfuns.data.Score
-import ru.mytest.onlybtsfuns.data.TextQuestion
+import ru.mytest.onlybtsfuns.data.AppRepository
 import ru.mytest.onlybtsfuns.databinding.ActivityQuizBinding
+import ru.mytest.onlybtsfuns.viewModels.QuizViewModel
+import ru.mytest.onlybtsfuns.viewModels.QuizViewModelFactory
 
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
-    private var countOfQuestions = 0
-    private lateinit var questions: Array<*>
-    private var answer = ""
-
-    private lateinit var bestScore: Score
-    private var currentPoints = 0
-    private var correctInARow = 0
-    private var score = 0
+    private lateinit var viewModel: QuizViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val appRepository = AppRepository(this)
+        val categoryId = intent.getIntExtra("categoryId", 1)
+        val factory = QuizViewModelFactory(appRepository, categoryId)
+        viewModel = ViewModelProvider(this, factory).get(QuizViewModel::class.java)
+
         binding.firstOption.setOnClickListener(this)
         binding.secondOption.setOnClickListener(this)
         binding.thirdOption.setOnClickListener(this)
         binding.fourthOption.setOnClickListener(this)
 
-        countOfQuestions = intent.getIntExtra("countOfQuestions", 6)
-        questions = intent.getParcelableArrayExtra("questions") as Array<*>
-        bestScore = intent.getParcelableExtra("bestScore")!!
-
-        updateQuestionsData()
+        textQuestionObserver()
+        imageQuestionObserver()
+        viewModel.updateQuestion(binding.progress.progress)
     }
 
+    private fun textQuestionObserver() {
+        viewModel.textQuestion.observe(this, {
+            binding.imageQuestion.visibility = View.GONE
+            binding.textQuestion.visibility = View.VISIBLE
 
-    private fun updateQuestionsData() {
-        val currentQuestion = binding.progress.progress - 1
+            binding.textQuestion.text = it.question
+            binding.firstOption.text = it.firstOption
+            binding.secondOption.text = it.secondOption
+            binding.thirdOption.text = it.thirdOption
+            binding.fourthOption.text = it.fourthOption
+        })
+    }
 
-        when (questions[currentQuestion]) {
-            is TextQuestion -> {
-                val question = questions[currentQuestion] as TextQuestion
-                val options = convertOptions(
-                    question.firstOption,
-                    question.secondOption,
-                    question.thirdOption,
-                    question.fourthOption
+    private fun imageQuestionObserver() {
+        viewModel.imageQuestion.observe(this, {
+            binding.textQuestion.visibility = View.GONE
+            binding.imageQuestion.visibility = View.VISIBLE
+
+            binding.imageQuestion.setImageResource(
+                resources.getIdentifier(
+                    it.image_entry_name,
+                    "drawable",
+                    packageName
                 )
-
-                answer = options[question.answerNum - 1]
-                binding.textQuestion.text = question.question
-                binding.textQuestion.visibility = View.VISIBLE
-
-                currentPoints = question.points
-                updateOptions(options)
-            }
-            is ImageQuestion -> {
-                val question = questions[currentQuestion] as ImageQuestion
-                val options = convertOptions(
-                    question.firstOption,
-                    question.secondOption,
-                    question.thirdOption,
-                    question.fourthOption
-                )
-
-                answer = options[question.answerNum - 1]
-                binding.imageQuestion.setImageResource(
-                    resources.getIdentifier(
-                        question.image_entry_name,
-                        "drawable",
-                        packageName
-                    )
-                )
-                binding.imageQuestion.visibility = View.VISIBLE
-
-                currentPoints = question.points
-                updateOptions(options)
-            }
-        }
-    }
-
-    private fun convertOptions(
-        firstOption: String,
-        secondOption: String,
-        thirdOption: String,
-        fourthOption: String
-    ): List<String> {
-        return listOf(
-            firstOption,
-            secondOption,
-            thirdOption,
-            fourthOption
-        )
-    }
-
-    private fun updateOptions(options: List<String>) {
-        binding.firstOption.text = options[0]
-        binding.secondOption.text = options[1]
-        binding.thirdOption.text = options[2]
-        binding.fourthOption.text = options[3]
-    }
-
-    override fun onClick(v: View?) {
-        if (v is MaterialButton) {
-            disableButtons()
-            val isAnswerRight = if (v.text == answer) {
-                correctInARow++
-                score += currentPoints * (1 + correctInARow / 10)
-                MediaPlayer.create(this, R.raw.correct_answer).start()
-                setRightAnswerColor(v)
-                true
-            } else {
-                correctInARow = 0
-                MediaPlayer.create(this, R.raw.incorrect_answer).start()
-                setWrongAnswerColor(v)
-                false
-            }
-            checkAnswer(isAnswerRight)
-        }
+            )
+            binding.firstOption.text = it.firstOption
+            binding.secondOption.text = it.secondOption
+            binding.thirdOption.text = it.thirdOption
+            binding.fourthOption.text = it.fourthOption
+        })
     }
 
     private fun disableButtons() {
@@ -138,62 +81,91 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.fourthOption.isClickable = false
     }
 
-    private fun checkAnswer(isAnswerRight: Boolean) {
-        if (binding.progress.progress < countOfQuestions) {
-            val timer = object : CountDownTimer(2000, 250) {
-                override fun onTick(millisUntilFinished: Long) {
-                    if (!isAnswerRight && millisUntilFinished < 1750) {
-                        showRightAnswer()
-                    }
-                }
-                override fun onFinish() {
-                    updateViews()
-                    updateQuestionsData()
-                }
+    override fun onClick(v: View?) {
+        if (v is MaterialButton) {
+            disableButtons()
+            val isAnswerRight = viewModel.checkAnswer(v.text.toString())
+            if (isAnswerRight) {
+                doOnRightAnswer(v)
+            } else {
+                doOnWrongAnswer(v)
             }
-            timer.start()
-        } else {
-            val timer = object : CountDownTimer(2000, 250) {
-                override fun onTick(millisUntilFinished: Long) {
-                    if (!isAnswerRight && millisUntilFinished < 1750) {
-                        showRightAnswer()
-                    }
-                }
-
-                override fun onFinish() {
-                    startResultActivity()
-                }
-            }
-            timer.start()
         }
     }
 
-    private fun setRightAnswerColor(v: MaterialButton) {
+    private fun doOnRightAnswer(v: MaterialButton) {
+        MediaPlayer.create(this, R.raw.correct_answer).start()
         v.setBackgroundColor(ContextCompat.getColor(this, R.color.correct_answer_color))
+        val timer = object : CountDownTimer(2000, 2000) {
+            override fun onTick(millisUntilFinished: Long) {}
+            override fun onFinish() {
+                updateQuestion()
+            }
+        }
+        timer.start()
     }
 
-    private fun setWrongAnswerColor(v: MaterialButton) {
+    private fun doOnWrongAnswer(v: MaterialButton) {
+        MediaPlayer.create(this, R.raw.incorrect_answer).start()
         v.setBackgroundColor(ContextCompat.getColor(this, R.color.incorrect_answer_color))
+        val timer = object : CountDownTimer(2000, 250) {
+            override fun onTick(millisUntilFinished: Long) {
+                if (millisUntilFinished < 1750) {
+                    showRightAnswer(viewModel.answer)
+                }
+            }
+
+            override fun onFinish() {
+                updateQuestion()
+            }
+        }
+        timer.start()
     }
 
-    private fun showRightAnswer() {
+    private fun showRightAnswer(answer: String) {
         when (answer) {
             binding.firstOption.text.toString() ->
-                setRightAnswerColor(binding.firstOption)
+                binding.firstOption.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.correct_answer_color
+                    )
+                )
             binding.secondOption.text.toString() ->
-                setRightAnswerColor(binding.secondOption)
+                binding.secondOption.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.correct_answer_color
+                    )
+                )
             binding.thirdOption.text.toString() ->
-                setRightAnswerColor(binding.thirdOption)
+                binding.thirdOption.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.correct_answer_color
+                    )
+                )
             binding.fourthOption.text.toString() ->
-                setRightAnswerColor(binding.fourthOption)
+                binding.fourthOption.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.correct_answer_color
+                    )
+                )
+        }
+    }
+
+    private fun updateQuestion() {
+        if (binding.progress.progress < viewModel.countOfQuestions) {
+            updateViews()
+            viewModel.updateQuestion(binding.progress.progress)
+        } else {
+            startResultActivity()
         }
     }
 
     private fun updateViews() {
         binding.progress.progress++
-
-        binding.textQuestion.visibility = View.GONE
-        binding.imageQuestion.visibility = View.GONE
 
         binding.firstOption.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
         binding.secondOption.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
@@ -212,8 +184,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun startResultActivity() {
         val intent = Intent(this, ResultActivity::class.java)
-        intent.putExtra("bestScore", bestScore)
-        intent.putExtra("score", score)
+        intent.putExtra("categoryId", viewModel.categoryId)
+        intent.putExtra("score", viewModel.score)
         startActivity(intent)
         finish()
     }
