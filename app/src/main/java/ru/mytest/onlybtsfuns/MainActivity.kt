@@ -23,12 +23,10 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, QuizActivity::class.java)
         intent.putExtra("categoryId", categoryId)
         startActivity(intent)
-        finish()
     }
 
     private fun showResults() {
         val intent = Intent(this, ResultsActivity::class.java)
         startActivity(intent)
-        finish()
     }
 }

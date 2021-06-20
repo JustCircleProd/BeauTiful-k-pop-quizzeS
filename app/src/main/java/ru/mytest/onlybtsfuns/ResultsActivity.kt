@@ -25,18 +25,12 @@ class ResultsActivity : AppCompatActivity() {
 
         updateViews(viewModel.getScores())
 
-        binding.toCategories.setOnClickListener { startMainActivity() }
+        binding.toCategories.setOnClickListener { super.onBackPressed() }
     }
 
     private fun updateViews(scores: Array<Score>) {
         binding.noCategoryScore.text = scores[0].score.toString()
         binding.textQuestionsScore.text = scores[1].score.toString()
         binding.imageQuestionsScore.text = scores[2].score.toString()
-    }
-
-    private fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
