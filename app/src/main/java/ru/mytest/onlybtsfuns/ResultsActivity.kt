@@ -3,31 +3,40 @@ package ru.mytest.onlybtsfuns
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.room.Room
-import ru.mytest.onlybtsfuns.data.AppDatabase
+import androidx.lifecycle.ViewModelProvider
+import ru.mytest.onlybtsfuns.data.AppRepository
 import ru.mytest.onlybtsfuns.data.Score
 import ru.mytest.onlybtsfuns.databinding.ActivityResultsBinding
+import ru.mytest.onlybtsfuns.viewModels.ResultsViewModel
+import ru.mytest.onlybtsfuns.viewModels.ResultsViewModelFactory
 
 class ResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultsBinding
+    private lateinit var viewModel: ResultsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val scores = intent.getParcelableArrayExtra("scores") as Array<*>
+        val repository = AppRepository(this)
+        val factory = ResultsViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory).get(ResultsViewModel::class.java)
 
-        if (scores[0] is Score) {
-            binding.noCategoryScore.text = (scores[0] as Score).score.toString()
-            binding.textQuestionsScore.text = (scores[1] as Score).score.toString()
-            binding.imageQuestionsScore.text = (scores[2] as Score).score.toString()
-        }
+        updateViews(viewModel.getScores())
 
-        binding.toCategories.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        binding.toCategories.setOnClickListener { startMainActivity() }
+    }
+
+    private fun updateViews(scores: Array<Score>) {
+        binding.noCategoryScore.text = scores[0].score.toString()
+        binding.textQuestionsScore.text = scores[1].score.toString()
+        binding.imageQuestionsScore.text = scores[2].score.toString()
+    }
+
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

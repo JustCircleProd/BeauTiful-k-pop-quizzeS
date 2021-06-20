@@ -1,0 +1,59 @@
+package ru.mytest.onlybtsfuns.viewModels
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import ru.mytest.onlybtsfuns.data.AppRepository
+import ru.mytest.onlybtsfuns.data.ImageQuestion
+import ru.mytest.onlybtsfuns.data.TextQuestion
+
+class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel() {
+    val countOfQuestions = 6
+    private val questions = repository.getQuestions(categoryId, countOfQuestions)
+
+    var textQuestion = MutableLiveData<TextQuestion>()
+    var imageQuestion = MutableLiveData<ImageQuestion>()
+
+    var answer = ""
+    private var pointsForThisQuestion = 0
+    private var correctInARow = 0
+    var score = 0
+
+    fun updateQuestion(i: Int) {
+        val index = i - 1
+        when (questions[index]) {
+            is TextQuestion -> {
+                val question = questions[index] as TextQuestion
+                textQuestion.postValue(question)
+                answer = listOf(
+                    question.firstOption,
+                    question.secondOption,
+                    question.thirdOption,
+                    question.fourthOption
+                )[question.answerNum - 1]
+                pointsForThisQuestion = question.points
+            }
+            is ImageQuestion -> {
+                val question = questions[index] as ImageQuestion
+                imageQuestion.postValue(question)
+                answer = listOf(
+                    question.firstOption,
+                    question.secondOption,
+                    question.thirdOption,
+                    question.fourthOption
+                )[question.answerNum - 1]
+                pointsForThisQuestion = question.points
+            }
+        }
+    }
+
+    fun checkAnswer(userAnswer: String): Boolean {
+        return if (userAnswer == answer) {
+            correctInARow++
+            score += pointsForThisQuestion * (1 + correctInARow / 10)
+            true
+        } else {
+            correctInARow = 0
+            false
+        }
+    }
+}

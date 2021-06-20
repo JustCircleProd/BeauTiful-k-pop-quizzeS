@@ -4,46 +4,47 @@ import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.room.Room
-import ru.mytest.onlybtsfuns.data.AppDatabase
-import ru.mytest.onlybtsfuns.data.Score
+import androidx.lifecycle.ViewModelProvider
+import ru.mytest.onlybtsfuns.data.AppRepository
 import ru.mytest.onlybtsfuns.databinding.ActivityResultBinding
+import ru.mytest.onlybtsfuns.viewModels.ResultViewModel
+import ru.mytest.onlybtsfuns.viewModels.ResultViewModelFactory
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
+    private lateinit var viewModel: ResultViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val categoryId = intent.getIntExtra("categoryId", 1)
         val score = intent.getIntExtra("score", 0)
-        val bestScore = intent.getParcelableExtra<Score>("bestScore")!!
+        val appRepository = AppRepository(this)
+        val factory = ResultViewModelFactory(appRepository, categoryId, score)
+        viewModel = ViewModelProvider(this, factory).get(ResultViewModel::class.java)
 
-        updateViews(score, bestScore)
-        checkScore(score, bestScore)
+        updateViews()
+        checkScore()
 
-        binding.toCategories.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        binding.toCategories.setOnClickListener { startMainActivity() }
     }
 
-    private fun updateViews(score: Int, bestScore: Score) {
-        binding.score.text = score.toString()
-        binding.bestScore.text = bestScore.score.toString()
+    private fun updateViews() {
+        binding.score.text = viewModel.score.toString()
+        binding.bestScore.text = viewModel.bestScore.toString()
     }
 
-    private fun checkScore(score: Int, bestScore: Score) {
+    private fun checkScore() {
         when {
-            score > bestScore.score -> {
-                updateScore(score, bestScore)
+            viewModel.score > viewModel.bestScore -> {
+                viewModel.updateScore()
                 binding.resultText.text = resources.getString(R.string.text_for_best_result)
                 binding.resultImage.setImageResource(R.drawable.best_image_result)
                 MediaPlayer.create(this, R.raw.best_result).start()
             }
-            score < 1000 -> {
+            viewModel.score < 1000 -> {
                 binding.resultText.text = resources.getString(R.string.text_for_bad_result)
                 binding.resultImage.setImageResource(R.drawable.bad_image_result)
                 MediaPlayer.create(this, R.raw.bad_result).start()
@@ -56,9 +57,9 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateScore(score: Int, bestScore: Score) {
-        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "db.db")
-            .allowMainThreadQueries().build()
-        db.scoreDao().update(bestScore.id, score)
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
