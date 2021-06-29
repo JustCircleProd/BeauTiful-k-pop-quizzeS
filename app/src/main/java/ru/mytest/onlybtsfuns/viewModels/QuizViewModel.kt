@@ -2,16 +2,24 @@ package ru.mytest.onlybtsfuns.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.mytest.onlybtsfuns.data.AppRepository
 import ru.mytest.onlybtsfuns.data.ImageQuestion
 import ru.mytest.onlybtsfuns.data.TextQuestion
 
 class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel() {
     val countOfQuestions = 6
-    private val questions = repository.getQuestions(categoryId, countOfQuestions)
+    private lateinit var questions: Array<*>
 
     var textQuestion = MutableLiveData<TextQuestion>()
     var imageQuestion = MutableLiveData<ImageQuestion>()
+
+    init {
+        viewModelScope.launch {
+            questions = repository.getQuestions(categoryId, countOfQuestions)
+        }
+    }
 
     var answer = ""
     private var pointsForThisQuestion = 0
