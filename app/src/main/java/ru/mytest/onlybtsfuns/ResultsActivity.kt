@@ -1,11 +1,9 @@
 package ru.mytest.onlybtsfuns
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import ru.mytest.onlybtsfuns.data.AppRepository
-import ru.mytest.onlybtsfuns.data.Score
 import ru.mytest.onlybtsfuns.databinding.ActivityResultsBinding
 import ru.mytest.onlybtsfuns.viewModels.ResultsViewModel
 import ru.mytest.onlybtsfuns.viewModels.ResultsViewModelFactory
@@ -23,14 +21,19 @@ class ResultsActivity : AppCompatActivity() {
         val factory = ResultsViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(ResultsViewModel::class.java)
 
-        updateViews(viewModel.getScores())
-
+        scoresObservers()
         binding.toCategories.setOnClickListener { super.onBackPressed() }
     }
 
-    private fun updateViews(scores: Array<Score>) {
-        binding.noCategoryScore.text = scores[0].score.toString()
-        binding.textQuestionsScore.text = scores[1].score.toString()
-        binding.imageQuestionsScore.text = scores[2].score.toString()
+    private fun scoresObservers() {
+        viewModel.noCategoryScore.observe(this, {
+            binding.noCategoryScore.text = it.toString()
+        })
+        viewModel.textQuestionsScore.observe(this, {
+            binding.textQuestionsScore.text = it.toString()
+        })
+        viewModel.imageQuestionsScore.observe(this, {
+            binding.imageQuestionsScore.text = it.toString()
+        })
     }
 }
