@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/main_background"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/main_background"
     tools:context=".ResultActivity">
 
     <TextView
@@ -23,16 +24,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/main_margin"
+        android:animateLayoutChanges="true"
         android:backgroundTint="@color/white"
         android:elevation="@dimen/card_elevation"
         app:cardCornerRadius="@dimen/card_corner_radius">
 
         <LinearLayout
+            android:id="@+id/load_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/inner_layout_margin"
             android:gravity="center"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/tv_question_pudding_top"
+                android:paddingBottom="@dimen/tv_question_pudding_bottom"
+                android:text="@string/tv_loading_result_text"
+                android:textSize="@dimen/hint_text_size" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:progressTint="@color/progress_bar_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/inner_layout_margin"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,9 +112,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/result_image_content_description"
                 android:paddingHorizontal="@dimen/congratulation_image_padding_horizontal"
-                android:scaleType="fitXY"
-                android:contentDescription="@string/result_image_content_description" />
+                android:scaleType="fitXY" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/to_categories"

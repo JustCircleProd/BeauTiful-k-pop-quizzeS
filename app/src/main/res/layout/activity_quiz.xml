@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@drawable/main_background"
+    android:fillViewport="true"
     tools:context=".QuizActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,20 +26,49 @@
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/root_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/main_margin"
+            android:animateLayoutChanges="true"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/card_elevation"
             app:cardCornerRadius="@dimen/card_corner_radius">
 
             <LinearLayout
+                android:id="@+id/load_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/inner_layout_margin"
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/tv_question_pudding_top"
+                    android:paddingBottom="@dimen/tv_question_pudding_bottom"
+                    android:text="@string/tv_loading_quiz_text"
+                    android:textSize="@dimen/hint_text_size" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:progressTint="@color/progress_bar_color" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:layout_margin="@dimen/inner_layout_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/text_question"
@@ -76,8 +106,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:elevation="@dimen/button_elevation"
-                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
+                    android:stateListAnimator="@null"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
@@ -93,8 +123,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:elevation="@dimen/button_elevation"
-                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
+                    android:stateListAnimator="@null"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
@@ -110,8 +140,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:elevation="@dimen/button_elevation"
-                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
+                    android:stateListAnimator="@null"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
@@ -127,8 +157,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:elevation="@dimen/button_elevation"
-                    android:stateListAnimator="@null"
                     android:padding="@dimen/button_pudding"
+                    android:stateListAnimator="@null"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"

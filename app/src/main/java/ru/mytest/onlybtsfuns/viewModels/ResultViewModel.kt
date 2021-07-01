@@ -1,16 +1,28 @@
 package ru.mytest.onlybtsfuns.viewModels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.mytest.onlybtsfuns.data.AppRepository
 
 class ResultViewModel(
     private val repository: AppRepository,
     private val categoryId: Int,
-    val score: Int
+    score: Int
 ) : ViewModel() {
-    val bestScore: Int = repository.getScore(categoryId).score
+    val currentScore = MutableLiveData(score)
+    val bestScore = MutableLiveData<Int>()
+
+    init {
+        viewModelScope.launch {
+            bestScore.postValue(repository.getScore(categoryId).score)
+        }
+    }
 
     fun updateScore() {
-        repository.updateScore(categoryId, score)
+        viewModelScope.launch {
+            repository.updateScore(categoryId, currentScore.value!!)
+        }
     }
 }

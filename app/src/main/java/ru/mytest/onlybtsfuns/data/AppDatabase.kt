@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TextQuestion::class, ImageQuestion::class, Score::class], version = 2)
+@Database(entities = [TextQuestion::class, ImageQuestion::class, Score::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun textQuestionDao(): TextQuestionDao
     abstract fun imageQuestionDao(): ImageQuestionDao
@@ -19,7 +19,7 @@ abstract class AppDatabase : RoomDatabase() {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(context, AppDatabase::class.java, "db.db")
                     .createFromAsset("database/db.db")
-                    .allowMainThreadQueries().build()
+                    .build()
 
                 INSTANCE = instance
                 instance

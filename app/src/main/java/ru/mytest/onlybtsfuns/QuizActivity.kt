@@ -2,10 +2,10 @@ package ru.mytest.onlybtsfuns
 
 import android.content.Intent
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
@@ -14,9 +14,12 @@ import ru.mytest.onlybtsfuns.databinding.ActivityQuizBinding
 import ru.mytest.onlybtsfuns.viewModels.QuizViewModel
 import ru.mytest.onlybtsfuns.viewModels.QuizViewModelFactory
 
+
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
     private lateinit var viewModel: QuizViewModel
+    private lateinit var correctAnswerPlayer: MediaPlayer
+    private lateinit var incorrectAnswerPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +36,20 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.thirdOption.setOnClickListener(this)
         binding.fourthOption.setOnClickListener(this)
 
+        correctAnswerPlayer = MediaPlayer.create(this, R.raw.correct_answer)
+        incorrectAnswerPlayer = MediaPlayer.create(this, R.raw.incorrect_answer)
+
         textQuestionObserver()
         imageQuestionObserver()
-        viewModel.updateQuestion(binding.progress.progress)
+
+        val timer = object : CountDownTimer(2000, 2000) {
+            override fun onTick(millisUntilFinished: Long) {}
+            override fun onFinish() {
+                binding.loadLayout.visibility = View.GONE
+                binding.contentLayout.visibility = View.VISIBLE
+            }
+        }
+        timer.start()
     }
 
     private fun textQuestionObserver() {
@@ -94,7 +108,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun doOnRightAnswer(v: MaterialButton) {
-        MediaPlayer.create(this, R.raw.correct_answer).start()
+        correctAnswerPlayer.start()
         v.setBackgroundColor(ContextCompat.getColor(this, R.color.correct_answer_color))
         val timer = object : CountDownTimer(2000, 2000) {
             override fun onTick(millisUntilFinished: Long) {}
@@ -106,7 +120,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun doOnWrongAnswer(v: MaterialButton) {
-        MediaPlayer.create(this, R.raw.incorrect_answer).start()
+        incorrectAnswerPlayer.start()
         v.setBackgroundColor(ContextCompat.getColor(this, R.color.incorrect_answer_color))
         val timer = object : CountDownTimer(2000, 250) {
             override fun onTick(millisUntilFinished: Long) {

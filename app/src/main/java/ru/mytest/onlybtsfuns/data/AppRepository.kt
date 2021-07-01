@@ -15,8 +15,8 @@ class AppRepository(context: Context) {
         scoreDao = db.scoreDao()
     }
 
-    fun getQuestions(categoryId: Int, countOfQuestions: Int): Array<*> {
-        return when (categoryId){
+    suspend fun getQuestions(categoryId: Int, countOfQuestions: Int): Array<*> {
+        return when (categoryId) {
             1 -> getRandomQuestions(countOfQuestions)
             2 -> getTextQuestions(countOfQuestions)
             3 -> getImageQuestions(countOfQuestions)
@@ -24,7 +24,7 @@ class AppRepository(context: Context) {
         }
     }
 
-    private fun getRandomQuestions(countOfQuestions: Int): Array<Parcelable> {
+    private suspend fun getRandomQuestions(countOfQuestions: Int): Array<Parcelable> {
         val countOfTextQuestion = (2..countOfQuestions - 2).random()
         val countOfImageQuestion = countOfQuestions - countOfTextQuestion
 
@@ -32,37 +32,45 @@ class AppRepository(context: Context) {
         val countOfImageRaw = imageQuestionDao.getCount()
 
         val textIds: MutableSet<Int> = mutableSetOf()
-        while (textIds.size < countOfTextQuestion) { textIds.add((1..countOfTextRaw).random()) }
+        while (textIds.size < countOfTextQuestion) {
+            textIds.add((1..countOfTextRaw).random())
+        }
         val textQuestions = textQuestionDao.loadAllByIds(textIds.toIntArray())
 
         val imageIds: MutableSet<Int> = mutableSetOf()
-        while (imageIds.size < countOfImageQuestion) { imageIds.add((1..countOfImageRaw).random()) }
+        while (imageIds.size < countOfImageQuestion) {
+            imageIds.add((1..countOfImageRaw).random())
+        }
         val imageQuestions = imageQuestionDao.loadAllByIds(imageIds.toIntArray())
 
         return (textQuestions.toList() + imageQuestions.toList()).shuffled().toTypedArray()
     }
 
-    private fun getTextQuestions(countOfQuestions: Int): Array<TextQuestion> {
+    private suspend fun getTextQuestions(countOfQuestions: Int): Array<TextQuestion> {
         val countOfRaw = textQuestionDao.getCount()
         val ids: MutableSet<Int> = mutableSetOf()
-        while (ids.size < countOfQuestions) { ids.add((1..countOfRaw).random()) }
+        while (ids.size < countOfQuestions) {
+            ids.add((1..countOfRaw).random())
+        }
 
         return textQuestionDao.loadAllByIds(ids.toIntArray())
     }
 
-    private fun getImageQuestions(countOfQuestions: Int): Array<ImageQuestion> {
+    private suspend fun getImageQuestions(countOfQuestions: Int): Array<ImageQuestion> {
         val countOfRaw = imageQuestionDao.getCount()
         val ids: MutableSet<Int> = mutableSetOf()
-        while (ids.size < countOfQuestions) { ids.add((1..countOfRaw).random()) }
+        while (ids.size < countOfQuestions) {
+            ids.add((1..countOfRaw).random())
+        }
 
         return imageQuestionDao.loadAllByIds(ids.toIntArray())
     }
 
-    fun getScores() = scoreDao.getAll().toTypedArray()
+    suspend fun getScores() = scoreDao.getAll().toTypedArray()
 
-    fun getScore(id: Int) = scoreDao.findById(id)
+    suspend fun getScore(id: Int) = scoreDao.findById(id)
 
-    fun updateScore(id: Int, score: Int) {
+    suspend fun updateScore(id: Int, score: Int) {
         scoreDao.update(id, score)
     }
 }

@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/main_background"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -39,6 +40,7 @@
         app:cardCornerRadius="@dimen/card_corner_radius">
 
         <LinearLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/inner_layout_margin"
@@ -48,11 +50,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/hint_bottom_margin"
                 android:gravity="top|center_horizontal"
                 android:text="@string/tv_choose_category"
                 android:textColor="@color/hint_text_color"
-                android:textSize="@dimen/hint_text_size"
-                android:layout_marginBottom="@dimen/hint_bottom_margin"/>
+                android:textSize="@dimen/hint_text_size" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/random_questions"
@@ -79,8 +81,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:elevation="@dimen/button_elevation"
-                android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
+                android:stateListAnimator="@null"
                 android:text="@string/text_questions"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -97,8 +99,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:elevation="@dimen/button_elevation"
-                android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
+                android:stateListAnimator="@null"
                 android:text="@string/image_questions"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -115,8 +117,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:elevation="@dimen/button_elevation"
-                android:stateListAnimator="@null"
                 android:padding="@dimen/button_pudding"
+                android:stateListAnimator="@null"
                 android:text="@string/button_text_results"
                 android:textAlignment="center"
                 android:textColor="@color/black"
