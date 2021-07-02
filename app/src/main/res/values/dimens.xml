@@ -19,11 +19,11 @@
     <dimen name="button_pudding">10dp</dimen>
 
     <dimen name="tv_question_height">280dp</dimen>
-    <dimen name="tv_question_pudding_top">10dp</dimen>
-    <dimen name="tv_question_pudding_bottom">24dp</dimen>
+    <dimen name="tv_question_margin_top">10dp</dimen>
+    <dimen name="tv_question_margin_bottom">24dp</dimen>
 
-    <dimen name="question_image_top_padding">10dp</dimen>
-    <dimen name="question_image_bottom_padding">24dp</dimen>
+    <dimen name="question_image_top_margin">10dp</dimen>
+    <dimen name="question_image_bottom_margin">24dp</dimen>
 
     <dimen name="result_text_size">25sp</dimen>
     <dimen name="result_bottom_margin">5dp</dimen>

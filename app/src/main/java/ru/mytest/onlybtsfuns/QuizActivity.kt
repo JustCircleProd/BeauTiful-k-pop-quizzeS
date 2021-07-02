@@ -54,7 +54,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun textQuestionObserver() {
         viewModel.textQuestion.observe(this, {
-            binding.imageQuestion.visibility = View.GONE
             binding.textQuestion.visibility = View.VISIBLE
 
             binding.textQuestion.text = it.question
@@ -67,7 +66,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun imageQuestionObserver() {
         viewModel.imageQuestion.observe(this, {
-            binding.textQuestion.visibility = View.GONE
             binding.imageQuestion.visibility = View.VISIBLE
 
             binding.imageQuestion.setImageResource(
@@ -113,6 +111,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         val timer = object : CountDownTimer(2000, 2000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
+                binding.textQuestion.visibility = View.GONE
+                binding.imageQuestion.visibility = View.GONE
                 updateQuestion()
             }
         }
@@ -128,8 +128,9 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                     showRightAnswer(viewModel.answer)
                 }
             }
-
             override fun onFinish() {
+                binding.textQuestion.visibility = View.GONE
+                binding.imageQuestion.visibility = View.GONE
                 updateQuestion()
             }
         }

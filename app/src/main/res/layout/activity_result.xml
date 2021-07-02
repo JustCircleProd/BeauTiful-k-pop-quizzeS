@@ -40,10 +40,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tv_question_margin_top"
+                android:layout_marginBottom="@dimen/tv_question_margin_bottom"
                 android:gravity="center"
-                android:paddingTop="@dimen/tv_question_pudding_top"
-                android:paddingBottom="@dimen/tv_question_pudding_bottom"
                 android:text="@string/tv_loading_result_text"
+                android:textColor="@color/hint_text_color"
                 android:textSize="@dimen/hint_text_size" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -102,6 +103,7 @@
                 android:id="@+id/result_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/result_bottom_margin"
                 android:gravity="center"
                 android:textColor="@color/btn_stroke_color"
                 android:textSize="@dimen/congratulation_text_size"
