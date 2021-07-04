@@ -26,16 +26,16 @@
     <dimen name="question_image_top_margin">15dp</dimen>
     <dimen name="question_image_bottom_margin">24dp</dimen>
 
-    <dimen name="result_text_size">24sp</dimen>
+    <dimen name="result_text_size">23sp</dimen>
     <dimen name="result_bottom_margin">5dp</dimen>
     <dimen name="result_text_bottom_margin">5dp</dimen>
 
-    <dimen name="best_score_text_size">19sp</dimen>
-    <dimen name="last_score_margin_bottom">17dp</dimen>
+    <dimen name="best_score_text_size">18sp</dimen>
+    <dimen name="last_score_margin_bottom">15dp</dimen>
     <dimen name="best_score_margin_bottom">10dp</dimen>
-    <dimen name="best_score_size">22sp</dimen>
+    <dimen name="best_score_size">20sp</dimen>
 
-    <dimen name="congratulation_text_size">24sp</dimen>
+    <dimen name="congratulation_text_size">23sp</dimen>
     <dimen name="congratulation_image_padding_horizontal">10dp</dimen>
 
 
