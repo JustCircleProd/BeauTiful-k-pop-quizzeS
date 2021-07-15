@@ -1,6 +1,5 @@
 package ru.mytest.onlybtsfuns
 
-import android.animation.LayoutTransition
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -40,10 +39,10 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         correctAnswerPlayer = MediaPlayer.create(this, R.raw.correct_answer)
         incorrectAnswerPlayer = MediaPlayer.create(this, R.raw.incorrect_answer)
 
-        textQuestionObserver()
-        imageQuestionObserver()
+        setTextQuestionObserver()
+        setImageQuestionObserver()
 
-        val timer = object : CountDownTimer(2000, 2000) {
+        val timer = object : CountDownTimer(1200, 1200) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
                 binding.loadLayout.visibility = View.GONE
@@ -53,7 +52,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         timer.start()
     }
 
-    private fun textQuestionObserver() {
+    private fun setTextQuestionObserver() {
         viewModel.textQuestion.observe(this, {
             binding.imageQuestion.visibility = View.GONE
             binding.textQuestion.visibility = View.GONE
@@ -67,7 +66,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun imageQuestionObserver() {
+    private fun setImageQuestionObserver() {
         viewModel.imageQuestion.observe(this, {
             binding.textQuestion.visibility = View.GONE
             binding.imageQuestion.visibility = View.GONE
@@ -101,8 +100,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v is MaterialButton) {
             disableButtons()
-            val isAnswerRight = viewModel.checkAnswer(v.text.toString())
-            if (isAnswerRight) {
+            if (viewModel.checkAnswer(v.text.toString())) {
                 doOnRightAnswer(v)
             } else {
                 doOnWrongAnswer(v)

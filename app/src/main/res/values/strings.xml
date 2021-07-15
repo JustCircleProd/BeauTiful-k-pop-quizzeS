@@ -7,8 +7,8 @@
     <string name="image_questions">Угадай по фото</string>
     <string name="button_text_results">Результаты</string>
 
-    <string name="tv_loading_quiz_text">Подготавливаем для вас самые интересные вопросы</string>
-    <string name="tv_loading_result_text">Подсчитываем ваши баллы</string>
+    <string name="tv_loading_quiz_text">Подготавливаем самые интересные вопросы</string>
+    <string name="tv_loading_result_text">Подсчитываем баллы</string>
 
     <string name="tv_text_your_result">Ваш результат</string>
     <string name="tv_text_best_result">Лучший результат</string>

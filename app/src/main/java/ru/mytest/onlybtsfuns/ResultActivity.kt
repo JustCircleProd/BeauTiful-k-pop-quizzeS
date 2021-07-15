@@ -28,10 +28,11 @@ class ResultActivity : AppCompatActivity() {
 
         binding.toCategories.setOnClickListener { super.onBackPressed() }
 
+        setScoresObservers()
+
         val timer = object : CountDownTimer(1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                scoresObservers()
                 checkScore()
                 binding.loadLayout.visibility = View.GONE
                 binding.contentLayout.visibility = View.VISIBLE
@@ -40,7 +41,7 @@ class ResultActivity : AppCompatActivity() {
         timer.start()
     }
 
-    private fun scoresObservers() {
+    private fun setScoresObservers() {
         viewModel.currentScore.observe(this, {
             binding.score.text = it.toString()
         })

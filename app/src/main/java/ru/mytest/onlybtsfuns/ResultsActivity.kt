@@ -21,11 +21,11 @@ class ResultsActivity : AppCompatActivity() {
         val factory = ResultsViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(ResultsViewModel::class.java)
 
-        scoresObservers()
+        setScoresObservers()
         binding.toCategories.setOnClickListener { super.onBackPressed() }
     }
 
-    private fun scoresObservers() {
+    private fun setScoresObservers() {
         viewModel.noCategoryScore.observe(this, {
             binding.noCategoryScore.text = it.toString()
         })

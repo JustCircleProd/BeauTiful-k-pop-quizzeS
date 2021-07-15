@@ -19,9 +19,12 @@
     <dimen name="button_elevation">1dp</dimen>
     <dimen name="button_pudding">11dp</dimen>
 
+    <dimen name="load_text_pudding">10dp</dimen>
+
     <dimen name="tv_question_height">280dp</dimen>
     <dimen name="tv_question_margin_top">15dp</dimen>
     <dimen name="tv_question_margin_bottom">24dp</dimen>
+    <dimen name="tv_question_pudding">15dp</dimen>
 
     <dimen name="question_image_top_margin">15dp</dimen>
     <dimen name="question_image_bottom_margin">24dp</dimen>
