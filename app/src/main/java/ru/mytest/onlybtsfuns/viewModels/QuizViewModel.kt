@@ -17,7 +17,7 @@ class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel(
 
     var answer = ""
     private var pointsForThisQuestion = 0
-    private var correctInARow = 0
+    private var countOfCorrect = 0
     var score = 0
 
     init {
@@ -57,11 +57,10 @@ class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel(
 
     fun checkAnswer(userAnswer: String): Boolean {
         return if (userAnswer == answer) {
-            correctInARow++
-            score += pointsForThisQuestion * (1 + correctInARow / 10)
+            countOfCorrect++
+            score += pointsForThisQuestion * (1 + countOfCorrect / 15)
             true
         } else {
-            correctInARow = 0
             false
         }
     }
