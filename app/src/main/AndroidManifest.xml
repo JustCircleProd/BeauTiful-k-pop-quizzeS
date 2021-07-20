@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.mytest.onlybtsfuns">
+    package="ru.justcircleprod.onlybtsfuns">
 
     <application
         android:allowBackup="true"
@@ -11,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
-            android:name=".ResultsActivity"
+            android:name="ru.justcircleprod.onlybtsfuns.ResultsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ResultActivity"
+            android:name="ru.justcircleprod.onlybtsfuns.ResultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".QuizActivity"
+            android:name="ru.justcircleprod.onlybtsfuns.QuizActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="ru.justcircleprod.onlybtsfuns.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
