@@ -8,6 +8,10 @@
     <string name="button_text_results">Результаты</string>
 
     <string name="tv_loading_quiz_text">Подготавливаем самые интересные вопросы</string>
+
+    <string name="tv_points_label">За вопрос: %1$d</string>
+    <string name="tv_score_label">Всего очков: %1$d</string>
+
     <string name="tv_loading_result_text">Подсчитываем баллы</string>
 
     <string name="tv_text_your_result">Ваш результат</string>

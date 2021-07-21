@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding.randomQuestions.setOnClickListener { startQuizActivity(1) }
         binding.textQuestions.setOnClickListener { startQuizActivity(2) }
         binding.imageQuestions.setOnClickListener { startQuizActivity(3) }
-        binding.yourResults.setOnClickListener { showResults() }
+        binding.yourResults.setOnClickListener { startResultsActivity() }
     }
 
     private fun startQuizActivity(categoryId: Int) {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun showResults() {
+    private fun startResultsActivity() {
         val intent = Intent(this, ResultsActivity::class.java)
         startActivity(intent)
     }

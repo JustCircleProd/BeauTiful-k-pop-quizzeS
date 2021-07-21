@@ -54,6 +54,10 @@ class ResultActivity : AppCompatActivity() {
         when {
             viewModel.currentScore.value!! > viewModel.bestScore.value!! -> {
                 viewModel.updateScore()
+
+                binding.bestScoreLabel.visibility = View.GONE
+                binding.bestScore.visibility = View.GONE
+
                 binding.resultText.text = resources.getString(R.string.text_for_best_result)
                 binding.resultImage.setImageResource(R.drawable.best_image_result)
                 MediaPlayer.create(this, R.raw.best_result).start()

@@ -41,6 +41,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
         setTextQuestionObserver()
         setImageQuestionObserver()
+        setScoreObservers()
 
         val timer = object : CountDownTimer(1200, 1200) {
             override fun onTick(millisUntilFinished: Long) {}
@@ -83,6 +84,15 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             binding.secondOption.text = it.secondOption
             binding.thirdOption.text = it.thirdOption
             binding.fourthOption.text = it.fourthOption
+        })
+    }
+
+    private fun setScoreObservers() {
+        viewModel.pointsForThisQuestion.observe(this, {
+            binding.points.text = getString(R.string.tv_points_label, it)
+        })
+        viewModel.score.observe(this, {
+            binding.score.text = getString(R.string.tv_score_label, it)
         })
     }
 
@@ -199,7 +209,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private fun startResultActivity() {
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("categoryId", viewModel.categoryId)
-        intent.putExtra("score", viewModel.score)
+        intent.putExtra("score", viewModel.score.value)
         startActivity(intent)
         finish()
     }

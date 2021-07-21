@@ -12,13 +12,13 @@ class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel(
     val countOfQuestions = 6
     private lateinit var questions: Array<*>
 
-    var textQuestion = MutableLiveData<TextQuestion>()
-    var imageQuestion = MutableLiveData<ImageQuestion>()
+    val textQuestion = MutableLiveData<TextQuestion>()
+    val imageQuestion = MutableLiveData<ImageQuestion>()
+
+    val pointsForThisQuestion = MutableLiveData(0)
+    val score = MutableLiveData(0)
 
     var answer = ""
-    private var pointsForThisQuestion = 0
-    private var countOfCorrect = 0
-    var score = 0
 
     init {
         viewModelScope.launch {
@@ -39,7 +39,7 @@ class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel(
                     question.thirdOption,
                     question.fourthOption
                 )[question.answerNum - 1]
-                pointsForThisQuestion = question.points
+                pointsForThisQuestion.postValue(question.points)
             }
             is ImageQuestion -> {
                 val question = questions[index] as ImageQuestion
@@ -50,15 +50,14 @@ class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel(
                     question.thirdOption,
                     question.fourthOption
                 )[question.answerNum - 1]
-                pointsForThisQuestion = question.points
+                pointsForThisQuestion.postValue(question.points)
             }
         }
     }
 
     fun checkAnswer(userAnswer: String): Boolean {
         return if (userAnswer == answer) {
-            countOfCorrect++
-            score += pointsForThisQuestion * (1 + countOfCorrect / 15)
+            score.postValue(score.value?.plus(pointsForThisQuestion.value!!))
             true
         } else {
             false
