@@ -21,8 +21,9 @@ class ResultsActivity : AppCompatActivity() {
         val factory = ResultsViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(ResultsViewModel::class.java)
 
+        binding.toMenu.setOnClickListener { super.onBackPressed() }
+
         setScoresObservers()
-        binding.toCategories.setOnClickListener { super.onBackPressed() }
     }
 
     private fun setScoresObservers() {
@@ -34,6 +35,12 @@ class ResultsActivity : AppCompatActivity() {
         })
         viewModel.imageQuestionsScore.observe(this, {
             binding.imageQuestionsScore.text = it.toString()
+        })
+        viewModel.videoQuestionsScore.observe(this, {
+            binding.videoQuestionsScore.text = it.toString()
+        })
+        viewModel.audioQuestionScore.observe(this, {
+            binding.audioQuestionsScore.text = it.toString()
         })
     }
 }

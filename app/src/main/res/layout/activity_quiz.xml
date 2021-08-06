@@ -39,7 +39,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/load_layout"
@@ -132,6 +133,32 @@
                     app:layout_constraintTop_toBottomOf="@id/score"
                     tools:src="@tools:sample/avatars" />
 
+                <VideoView
+                    android:id="@+id/video_question"
+                    android:layout_width="@dimen/video_question_width"
+                    android:layout_height="@dimen/video_question_height"
+                    android:layout_marginHorizontal="@dimen/video_question_margin_horizontal"
+                    android:layout_marginTop="@dimen/video_question_margin_top"
+                    android:layout_marginBottom="@dimen/video_question_margin_bottom"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/progress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/score" />
+
+                <ImageView
+                    android:id="@+id/audio_question"
+                    android:layout_width="@dimen/audio_question_size"
+                    android:layout_height="@dimen/audio_question_size"
+                    android:layout_marginTop="@dimen/audio_question_margin_top"
+                    android:layout_marginBottom="@dimen/audio_question_margin_bottom"
+                    android:src="@drawable/ic_audio_question"
+                    app:layout_constraintBottom_toTopOf="@id/progress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/score"
+                    android:contentDescription="@string/audio_question_content_description" />
+
                 <ProgressBar
                     android:id="@+id/progress"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -140,6 +167,7 @@
                     android:indeterminate="false"
                     android:max="6"
                     android:progress="1"
+                    android:progressBackgroundTint="@color/progress_bar_color"
                     android:progressTint="@color/progress_bar_color"
                     app:layout_constraintBottom_toTopOf="@id/first_option"
                     app:layout_constraintEnd_toEndOf="parent"

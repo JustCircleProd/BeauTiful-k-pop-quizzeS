@@ -11,7 +11,11 @@
     <dimen name="brand_image_padding_horizontal">20dp</dimen>
 
     <dimen name="hint_text_size">19sp</dimen>
-    <dimen name="hint_bottom_margin">8dp</dimen>
+    <dimen name="hint_bottom_margin">5dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <dimen name="line_bottom_margin">8dp</dimen>
+
+    <dimen name="setting_chip_text_size">13sp</dimen>
 
     <dimen name="button_stroke_width">1dp</dimen>
     <dimen name="button_corner_radius">10dp</dimen>
@@ -31,6 +35,16 @@
     <dimen name="question_image_top_margin">15dp</dimen>
     <dimen name="question_image_bottom_margin">20dp</dimen>
 
+    <dimen name="video_question_width">240dp</dimen>
+    <dimen name="video_question_height">135dp</dimen>
+    <dimen name="video_question_margin_top">50dp</dimen>
+    <dimen name="video_question_margin_bottom">60dp</dimen>
+    <dimen name="video_question_margin_horizontal">20dp</dimen>
+
+    <dimen name="audio_question_size">90dp</dimen>
+    <dimen name="audio_question_margin_top">70dp</dimen>
+    <dimen name="audio_question_margin_bottom">85dp</dimen>
+
     <dimen name="result_text_size">21sp</dimen>
     <dimen name="result_bottom_margin">5dp</dimen>
     <dimen name="result_text_bottom_margin">5dp</dimen>
@@ -42,6 +56,6 @@
 
     <dimen name="congratulation_text_size">21sp</dimen>
     <dimen name="congratulation_image_padding_horizontal">10dp</dimen>
-
+    <dimen name="result_line_height">2dp</dimen>
 
 </resources>

@@ -2,6 +2,7 @@ package ru.justcircleprod.onlybtsfuns
 
 import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -20,6 +21,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewModel: QuizViewModel
     private lateinit var correctAnswerPlayer: MediaPlayer
     private lateinit var incorrectAnswerPlayer: MediaPlayer
+    private lateinit var musicPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
         setTextQuestionObserver()
         setImageQuestionObserver()
+        setVideoQuestionObserver()
+        setAudioQuestionObserver()
         setScoreObservers()
 
         val timer = object : CountDownTimer(1200, 1200) {
@@ -55,8 +59,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setTextQuestionObserver() {
         viewModel.textQuestion.observe(this, {
-            binding.imageQuestion.visibility = View.GONE
-            binding.textQuestion.visibility = View.GONE
+            hidePreviousQuestion()
             binding.textQuestion.visibility = View.VISIBLE
 
             binding.textQuestion.text = it.question
@@ -69,8 +72,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setImageQuestionObserver() {
         viewModel.imageQuestion.observe(this, {
-            binding.textQuestion.visibility = View.GONE
-            binding.imageQuestion.visibility = View.GONE
+            hidePreviousQuestion()
             binding.imageQuestion.visibility = View.VISIBLE
 
             binding.imageQuestion.setImageResource(
@@ -87,6 +89,48 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+    private fun setVideoQuestionObserver() {
+        viewModel.videoQuestion.observe(this, {
+            hidePreviousQuestion()
+            binding.videoQuestion.visibility = View.VISIBLE
+
+            binding.videoQuestion.setVideoURI(
+                Uri.parse("android.resource://$packageName/raw/${it.video_entry_name}")
+            )
+            binding.videoQuestion.start()
+
+            binding.firstOption.text = it.firstOption
+            binding.secondOption.text = it.secondOption
+            binding.thirdOption.text = it.thirdOption
+            binding.fourthOption.text = it.fourthOption
+        })
+    }
+
+    private fun setAudioQuestionObserver() {
+        viewModel.audioQuestion.observe(this, {
+            hidePreviousQuestion()
+            binding.audioQuestion.visibility = View.VISIBLE
+
+            musicPlayer = MediaPlayer.create(
+                this,
+                Uri.parse("android.resource://$packageName/raw/${it.audio_entry_name}")
+            )
+            musicPlayer.start()
+
+            binding.firstOption.text = it.firstOption
+            binding.secondOption.text = it.secondOption
+            binding.thirdOption.text = it.thirdOption
+            binding.fourthOption.text = it.fourthOption
+        })
+    }
+
+    private fun hidePreviousQuestion() {
+        binding.textQuestion.visibility = View.GONE
+        binding.imageQuestion.visibility = View.GONE
+        binding.audioQuestion.visibility = View.GONE
+        binding.videoQuestion.visibility = View.GONE
+    }
+
     private fun setScoreObservers() {
         viewModel.pointsForThisQuestion.observe(this, {
             binding.points.text = getString(R.string.tv_points_label, it)
@@ -94,6 +138,18 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.score.observe(this, {
             binding.score.text = getString(R.string.tv_score_label, it)
         })
+    }
+
+    override fun onClick(v: View?) {
+        if (v is MaterialButton) {
+            disableButtons()
+            stopPlayers()
+            if (viewModel.checkAnswer(v.text.toString())) {
+                doOnRightAnswer(v)
+            } else {
+                doOnWrongAnswer(v)
+            }
+        }
     }
 
     private fun disableButtons() {
@@ -107,14 +163,12 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.fourthOption.isClickable = false
     }
 
-    override fun onClick(v: View?) {
-        if (v is MaterialButton) {
-            disableButtons()
-            if (viewModel.checkAnswer(v.text.toString())) {
-                doOnRightAnswer(v)
-            } else {
-                doOnWrongAnswer(v)
-            }
+    private fun stopPlayers() {
+        when {
+            binding.videoQuestion.visibility == View.VISIBLE ->
+                binding.videoQuestion.stopPlayback()
+            binding.audioQuestion.visibility == View.VISIBLE ->
+                musicPlayer.stop()
         }
     }
 
@@ -139,6 +193,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                     showRightAnswer(viewModel.answer)
                 }
             }
+
             override fun onFinish() {
                 updateQuestion()
             }

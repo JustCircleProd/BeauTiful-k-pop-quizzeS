@@ -51,7 +51,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/content_layout"
@@ -59,21 +60,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/inner_layout_margin">
 
-                <TextView
-                    android:id="@+id/hint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/hint_bottom_margin"
-                    android:gravity="top|center_horizontal"
-                    android:text="@string/tv_choose_category"
-                    android:textColor="@color/hint_text_color"
-                    android:textSize="@dimen/hint_text_size"
-                    app:layout_constraintBottom_toTopOf="@id/random_questions"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/random_questions"
+                    android:id="@+id/start_quiz"
                     style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,12 +70,12 @@
                     android:elevation="@dimen/button_elevation"
                     android:padding="@dimen/button_pudding"
                     android:stateListAnimator="@null"
-                    android:text="@string/random_questions"
+                    android:text="@string/start_quiz"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
                     app:cornerRadius="@dimen/button_corner_radius"
-                    app:layout_constraintBottom_toTopOf="@id/text_questions"
+                    app:layout_constraintBottom_toTopOf="@id/settings"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:rippleColor="@color/btn_ripple_color"
@@ -94,7 +83,7 @@
                     app:strokeWidth="@dimen/button_stroke_width" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/text_questions"
+                    android:id="@+id/settings"
                     style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -102,28 +91,7 @@
                     android:elevation="@dimen/button_elevation"
                     android:padding="@dimen/button_pudding"
                     android:stateListAnimator="@null"
-                    android:text="@string/text_questions"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/button_text_size"
-                    app:cornerRadius="@dimen/button_corner_radius"
-                    app:layout_constraintBottom_toTopOf="@id/image_questions"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:rippleColor="@color/btn_ripple_color"
-                    app:strokeColor="@color/btn_stroke_color"
-                    app:strokeWidth="@dimen/button_stroke_width" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/image_questions"
-                    style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:elevation="@dimen/button_elevation"
-                    android:padding="@dimen/button_pudding"
-                    android:stateListAnimator="@null"
-                    android:text="@string/image_questions"
+                    android:text="@string/settings"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
