@@ -10,19 +10,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.randomQuestions.setOnClickListener { startQuizActivity(1) }
-        binding.textQuestions.setOnClickListener { startQuizActivity(2) }
-        binding.imageQuestions.setOnClickListener { startQuizActivity(3) }
+        binding.startQuiz.setOnClickListener { startCategoryActivity() }
+        binding.settings.setOnClickListener { startSettingActivity() }
         binding.yourResults.setOnClickListener { startResultsActivity() }
     }
 
-    private fun startQuizActivity(categoryId: Int) {
-        val intent = Intent(this, QuizActivity::class.java)
-        intent.putExtra("categoryId", categoryId)
+    private fun startCategoryActivity() {
+        val intent = Intent(this, CategoryActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun startSettingActivity() {
+        val intent = Intent(this, SettingActivity::class.java)
         startActivity(intent)
     }
 

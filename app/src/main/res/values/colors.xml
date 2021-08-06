@@ -15,6 +15,8 @@
 
     <color name="brand_color">#F7DCEB</color>
 
+    <color name="chip_setting_background">#EFEFEF</color>
+    <color name="line_color">#A8AAAAAA</color>
     <color name="hint_text_color">#757575</color>
     <color name="progress_bar_color">#b480cb</color>
 
@@ -25,4 +27,5 @@
     <color name="incorrect_answer_color">#f3a7b2</color>
 
     <color name="result_color">#5e5e5e</color>
+    <color name="setting_label_color">#4E4E4E</color>
 </resources>

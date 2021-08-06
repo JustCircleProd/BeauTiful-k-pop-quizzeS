@@ -10,6 +10,8 @@ class ResultsViewModel(repository: AppRepository) : ViewModel() {
     val noCategoryScore = MutableLiveData<Int>()
     val textQuestionsScore = MutableLiveData<Int>()
     val imageQuestionsScore = MutableLiveData<Int>()
+    val videoQuestionsScore = MutableLiveData<Int>()
+    val audioQuestionScore = MutableLiveData<Int>()
 
     init {
         viewModelScope.launch {
@@ -17,6 +19,8 @@ class ResultsViewModel(repository: AppRepository) : ViewModel() {
             noCategoryScore.postValue(scores[0].score)
             textQuestionsScore.postValue(scores[1].score)
             imageQuestionsScore.postValue(scores[2].score)
+            videoQuestionsScore.postValue(scores[3].score)
+            audioQuestionScore.postValue(scores[4].score)
         }
     }
 }

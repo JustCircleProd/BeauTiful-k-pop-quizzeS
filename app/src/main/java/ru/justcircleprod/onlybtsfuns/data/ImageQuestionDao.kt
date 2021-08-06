@@ -10,4 +10,7 @@ interface ImageQuestionDao {
 
     @Query("SELECT COUNT(id) FROM image_questions")
     suspend fun getCount(): Int
+
+    @Query("SELECT id FROM image_questions WHERE points >= :lowerPoints AND points <= :upperPoints")
+    suspend fun getIds(lowerPoints: Int, upperPoints: Int): List<Int>
 }

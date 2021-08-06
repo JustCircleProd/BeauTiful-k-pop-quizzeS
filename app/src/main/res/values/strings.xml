@@ -1,11 +1,21 @@
 <resources>
     <string name="app_name">Only BTS Funs</string>
 
+    <string name="start_quiz">Начать тест</string>
+    <string name="settings">Настройки</string>
+    <string name="difficulty">Сложность вопросов</string>
+    <string name="button_text_results">Результаты</string>
+
+    <string name="random_difficulty">Случайная</string>
+    <string name="usual_difficulty">Обычная</string>
+    <string name="difficult_difficulty">Повышенная</string>
+
     <string name="tv_choose_category">Выберите категорию</string>
     <string name="random_questions">Случайные вопросы</string>
     <string name="text_questions">Текстовые вопросы</string>
+    <string name="video_questions">Угадай клип</string>
     <string name="image_questions">Угадай по фото</string>
-    <string name="button_text_results">Результаты</string>
+    <string name="audio_questions">Угадай песню</string>
 
     <string name="tv_loading_quiz_text">Подготавливаем самые интересные вопросы</string>
 
@@ -25,4 +35,6 @@
     <string name="brand_image_content_description">Brand image</string>
     <string name="image_for_question_description">Image for question</string>
     <string name="result_image_content_description">Result Image</string>
+    <string name="audio_question_content_description">Audio question icon</string>
+    <string name="go_to_menu">В меню</string>
 </resources>

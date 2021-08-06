@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowActionBar">false</item>
@@ -31,4 +31,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="ChipUncheckedText" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">@color/btn_ripple_color</item>
+        <item name="android:textSize">@dimen/setting_chip_text_size</item>
+    </style>
+
 </resources>

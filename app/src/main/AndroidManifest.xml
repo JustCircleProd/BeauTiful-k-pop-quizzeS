@@ -11,17 +11,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
-            android:name="ru.justcircleprod.onlybtsfuns.ResultsActivity"
+            android:name=".SettingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CategoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ResultsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ru.justcircleprod.onlybtsfuns.ResultActivity"
+            android:name=".ResultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ru.justcircleprod.onlybtsfuns.QuizActivity"
+            android:name=".QuizActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ru.justcircleprod.onlybtsfuns.MainActivity"
-            android:screenOrientation="portrait">
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
