@@ -67,64 +67,59 @@
                     android:layout_height="@dimen/line_height"
                     android:layout_marginBottom="@dimen/line_bottom_margin"
                     android:background="@color/line_color"
-                    app:layout_constraintBottom_toTopOf="@id/difficulty_label"
+                    app:layout_constraintBottom_toTopOf="@id/scroll_for_difficulty_chips"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/difficulty_label"
+                <HorizontalScrollView
+                    android:id="@+id/scroll_for_difficulty_chips"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/difficulty"
-                    android:textColor="@color/setting_label_color"
-                    android:textSize="@dimen/hint_text_size"
-                    app:layout_constraintBottom_toTopOf="@id/difficulty_chips"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/difficulty_chips"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@id/line2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    app:layout_constraintStart_toStartOf="parent">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_random"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/difficulty_chips"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/random_difficulty"
-                        android:textAppearance="@style/ChipUncheckedText"
-                        android:textColorHighlight="@color/btn_ripple_color"
-                        app:chipBackgroundColor="@color/chip_setting_background" />
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_usual"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/usual_difficulty"
-                        android:textAppearance="@style/ChipUncheckedText"
-                        android:textColorHighlight="@color/btn_ripple_color"
-                        app:chipBackgroundColor="@color/chip_setting_background" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_random"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/random_difficulty"
+                            android:textAppearance="@style/ChipUncheckedText"
+                            android:textColorHighlight="@color/btn_ripple_color"
+                            app:chipBackgroundColor="@color/chip_setting_background" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_difficult"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/difficult_difficulty"
-                        android:textAppearance="@style/ChipUncheckedText"
-                        android:textColorHighlight="@color/btn_ripple_color"
-                        app:chipBackgroundColor="@color/chip_setting_background" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_usual"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/usual_difficulty"
+                            android:textAppearance="@style/ChipUncheckedText"
+                            android:textColorHighlight="@color/btn_ripple_color"
+                            app:chipBackgroundColor="@color/chip_setting_background" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_difficult"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/difficult_difficulty"
+                            android:textAppearance="@style/ChipUncheckedText"
+                            android:textColorHighlight="@color/btn_ripple_color"
+                            app:chipBackgroundColor="@color/chip_setting_background" />
 
 
-                </com.google.android.material.chip.ChipGroup>
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
 
                 <View
                     android:id="@+id/line2"

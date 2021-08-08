@@ -6,9 +6,25 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import ru.justcircleprod.onlybtsfuns.dataForUpdate.AudioQuestionsStorage
+import ru.justcircleprod.onlybtsfuns.dataForUpdate.ImageQuestionUpdatedPoints
+import ru.justcircleprod.onlybtsfuns.dataForUpdate.TextQuestionUpdatedPoints
+import ru.justcircleprod.onlybtsfuns.dataForUpdate.VideoQuestionsStorage
 
 val MIGRATION_1_2: Migration = object : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
+        for ((id, points) in TextQuestionUpdatedPoints.getQuestions()) {
+            database.execSQL(
+                "UPDATE OR IGNORE text_questions SET points = $points WHERE id = $id"
+            )
+        }
+
+        for ((id, points) in ImageQuestionUpdatedPoints.getQuestions()) {
+            database.execSQL(
+                "UPDATE OR IGNORE image_questions SET points = $points WHERE id = $id"
+            )
+        }
+
         database.execSQL(
             "CREATE TABLE IF NOT EXISTS video_questions (" +
                     "id	INTEGER NOT NULL," +

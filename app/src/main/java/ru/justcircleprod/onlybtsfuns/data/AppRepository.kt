@@ -25,15 +25,15 @@ class AppRepository(context: Context) {
         val difficultyState = getSetting(1).state
 
         val lowerPoints = when (difficultyState) {
-            0 -> 400
-            1 -> 400
+            0 -> 300
+            1 -> 300
             2 -> 500
-            else -> 400
+            else -> 300
         }
 
         val upperPoints = when (difficultyState) {
             0 -> 600
-            1 -> 500
+            1 -> 499
             2 -> 600
             else -> 600
         }

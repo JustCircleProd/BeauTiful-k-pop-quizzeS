@@ -50,6 +50,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         val timer = object : CountDownTimer(1200, 1200) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
+                viewModel.updateQuestion(binding.progress.progress)
                 binding.loadLayout.visibility = View.GONE
                 binding.contentLayout.visibility = View.VISIBLE
             }
@@ -92,12 +93,11 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private fun setVideoQuestionObserver() {
         viewModel.videoQuestion.observe(this, {
             hidePreviousQuestion()
-            binding.videoQuestion.visibility = View.VISIBLE
-
             binding.videoQuestion.setVideoURI(
                 Uri.parse("android.resource://$packageName/raw/${it.video_entry_name}")
             )
             binding.videoQuestion.start()
+            binding.videoQuestion.visibility = View.VISIBLE
 
             binding.firstOption.text = it.firstOption
             binding.secondOption.text = it.secondOption
