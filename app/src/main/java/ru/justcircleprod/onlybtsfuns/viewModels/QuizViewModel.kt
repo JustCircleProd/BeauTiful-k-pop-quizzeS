@@ -23,7 +23,6 @@ class QuizViewModel(repository: AppRepository, val categoryId: Int) : ViewModel(
     init {
         viewModelScope.launch {
             questions = repository.getQuestions(categoryId, countOfQuestions)
-            updateQuestion(1)
         }
     }
 

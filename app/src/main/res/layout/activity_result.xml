@@ -105,16 +105,6 @@
                     android:textColor="@color/result_color"
                     android:textSize="@dimen/result_text_size"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/line"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <View
-                    android:id="@+id/line"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:layout_marginBottom="@dimen/line_bottom_margin"
-                    android:background="@color/line_color"
                     app:layout_constraintBottom_toTopOf="@id/best_score_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -139,12 +129,12 @@
                     android:textColor="@color/result_color"
                     android:textSize="@dimen/best_score_size"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/line2"
+                    app:layout_constraintBottom_toTopOf="@id/line"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <View
-                    android:id="@+id/line2"
+                    android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/result_line_height"
                     android:layout_marginBottom="@dimen/best_score_margin_bottom"
