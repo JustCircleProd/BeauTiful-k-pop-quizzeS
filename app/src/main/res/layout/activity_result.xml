@@ -136,7 +136,7 @@
                 <View
                     android:id="@+id/line"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/result_line_height"
+                    android:layout_height="@dimen/line_height"
                     android:layout_marginBottom="@dimen/best_score_margin_bottom"
                     android:background="@color/line_color"
                     app:layout_constraintBottom_toTopOf="@id/result_text"
