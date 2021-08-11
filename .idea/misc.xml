@@ -4,12 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/drawable/splash_screen.xml" value="0.22320675105485233" />
-        <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_category.xml" value="0.4" />
+        <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_category.xml" value="0.264" />
         <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_main.xml" value="0.2128205128205128" />
         <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_quiz.xml" value="0.4" />
         <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_result.xml" value="0.264" />
         <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_results.xml" value="0.2128205128205128" />
         <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/activity_setting.xml" value="0.2" />
+        <entry key="..\:/Users/Vadim/Desktop/Programs/AndroidStud/OnlyBTSFuns/app/src/main/res/layout/toast_text.xml" value="0.16381578947368422" />
       </map>
     </option>
   </component>

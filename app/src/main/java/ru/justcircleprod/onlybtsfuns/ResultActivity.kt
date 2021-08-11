@@ -55,7 +55,6 @@ class ResultActivity : AppCompatActivity() {
             viewModel.currentScore.value!! > viewModel.bestScore.value!! -> {
                 viewModel.updateScore()
 
-                binding.line.visibility = View.GONE
                 binding.bestScoreLabel.visibility = View.GONE
                 binding.bestScore.visibility = View.GONE
 

@@ -22,6 +22,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var correctAnswerPlayer: MediaPlayer
     private lateinit var incorrectAnswerPlayer: MediaPlayer
     private lateinit var musicPlayer: MediaPlayer
+    private var positionOfVideoPlayer = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,41 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         timer.start()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        resumePlayers()
+    }
+
+    override fun onPause() {
+        pausePlayers()
+        super.onPause()
+    }
+
+    private fun resumePlayers() {
+        when {
+            binding.videoQuestion.visibility == View.VISIBLE -> {
+                binding.videoQuestion.seekTo(positionOfVideoPlayer)
+                binding.videoQuestion.start()
+            }
+            ::musicPlayer.isInitialized && binding.audioQuestion.visibility == View.VISIBLE -> {
+                musicPlayer.start()
+            }
+        }
+    }
+
+    private fun pausePlayers() {
+        when {
+            binding.videoQuestion.visibility == View.VISIBLE -> {
+                binding.videoQuestion.pause()
+                positionOfVideoPlayer = binding.videoQuestion.currentPosition
+            }
+            ::musicPlayer.isInitialized && binding.audioQuestion.visibility == View.VISIBLE -> {
+                musicPlayer.pause()
+            }
+
+        }
     }
 
     private fun setTextQuestionObserver() {
@@ -143,7 +179,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v is MaterialButton) {
             disableButtons()
-            stopPlayers()
+            stopAndResetPlayers()
             if (viewModel.checkAnswer(v.text.toString())) {
                 doOnRightAnswer(v)
             } else {
@@ -163,12 +199,15 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.fourthOption.isClickable = false
     }
 
-    private fun stopPlayers() {
+    private fun stopAndResetPlayers() {
         when {
-            binding.videoQuestion.visibility == View.VISIBLE ->
+            binding.videoQuestion.visibility == View.VISIBLE -> {
+                positionOfVideoPlayer = 0
                 binding.videoQuestion.stopPlayback()
-            binding.audioQuestion.visibility == View.VISIBLE ->
+            }
+            binding.audioQuestion.visibility == View.VISIBLE -> {
                 musicPlayer.stop()
+            }
         }
     }
 
