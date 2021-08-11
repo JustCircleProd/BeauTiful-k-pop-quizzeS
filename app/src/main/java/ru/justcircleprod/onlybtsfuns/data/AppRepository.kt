@@ -52,21 +52,36 @@ class AppRepository(context: Context) {
         lowerPoints: Int,
         upperPoints: Int
     ): Array<Parcelable> {
-        val countOfAudioQuestion = (1..2).random()
-        val countOfImageQuestion = (1..2).random()
-        val countOfVideoQuestion = 1
-        val countOfTextQuestion =
-            countOfQuestions - (countOfImageQuestion + countOfAudioQuestion) - countOfVideoQuestion
+        return if (upperPoints >= 500) {
+            val countOfAudioQuestion = (1..2).random()
+            val countOfImageQuestion = (1..2).random()
+            val countOfVideoQuestion = 1
+            val countOfTextQuestion =
+                countOfQuestions - (countOfImageQuestion + countOfAudioQuestion) - countOfVideoQuestion
 
 
-        val textQuestions = getTextQuestions(countOfTextQuestion, lowerPoints, upperPoints)
-        val imageQuestions = getImageQuestions(countOfImageQuestion, lowerPoints, upperPoints)
-        val videoQuestion = getVideoQuestions(countOfVideoQuestion, lowerPoints, upperPoints)
-        val audioQuestion = getAudioQuestions(countOfAudioQuestion, lowerPoints, upperPoints)
+            val textQuestions = getTextQuestions(countOfTextQuestion, lowerPoints, upperPoints)
+            val imageQuestions = getImageQuestions(countOfImageQuestion, lowerPoints, upperPoints)
+            val videoQuestion = getVideoQuestions(countOfVideoQuestion, lowerPoints, upperPoints)
+            val audioQuestion = getAudioQuestions(countOfAudioQuestion, lowerPoints, upperPoints)
 
-        return (textQuestions.toList() + imageQuestions.toList()
-                + videoQuestion.toList() + audioQuestion.toList())
-            .shuffled().toTypedArray()
+            (textQuestions.toList() + imageQuestions.toList()
+                    + videoQuestion.toList() + audioQuestion.toList())
+                .shuffled().toTypedArray()
+        } else {
+            val countOfAudioQuestion = (1..2).random()
+            val countOfImageQuestion = (2..3).random()
+            val countOfTextQuestion = countOfQuestions - (countOfImageQuestion + countOfAudioQuestion)
+
+
+            val textQuestions = getTextQuestions(countOfTextQuestion, lowerPoints, upperPoints)
+            val imageQuestions = getImageQuestions(countOfImageQuestion, lowerPoints, upperPoints)
+            val audioQuestion = getAudioQuestions(countOfAudioQuestion, lowerPoints, upperPoints)
+
+            (textQuestions.toList() + imageQuestions.toList() + audioQuestion.toList())
+                .shuffled().toTypedArray()
+        }
+
     }
 
     private suspend fun getTextQuestions(

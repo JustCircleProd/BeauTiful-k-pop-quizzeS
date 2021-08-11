@@ -43,6 +43,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun updateDifficulty(state: Int) {
         viewModel.updateDifficulty(state)
-        Toast.makeText(this, "Сложность установлена", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, resources.getString(R.string.set_difficulty), Toast.LENGTH_SHORT)
+            .show()
     }
 }

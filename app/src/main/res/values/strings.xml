@@ -9,6 +9,7 @@
     <string name="random_difficulty">Случайная</string>
     <string name="usual_difficulty">Обычная</string>
     <string name="difficult_difficulty">Повышенная</string>
+    <string name="set_difficulty">Сложность установлена</string>
 
     <string name="tv_choose_category">Выберите категорию</string>
     <string name="random_questions">Случайные вопросы</string>
@@ -16,6 +17,8 @@
     <string name="video_questions">Угадай клип</string>
     <string name="image_questions">Угадай по фото</string>
     <string name="audio_questions">Угадай песню</string>
+
+    <string name="difficulty_warning">Необходимо переключить сложность на Случайную или Повышенную</string>
 
     <string name="tv_loading_quiz_text">Подготавливаем самые интересные вопросы</string>
 
