@@ -10,56 +10,56 @@ object AudioQuestionsStorage {
                 "black_swan",
                 "Black Swan", "FAKE LOVE",
                 "Come Back Home", "DNA",
-                1, 450
+                1, 400
             ),
             AudioQuestion(
                 2,
                 "blood_sweat_tears",
                 "Euphoria", "Blood Sweat & Tears",
                 "Dynamite", "Waste It On Me",
-                2, 500
+                2, 550
             ),
             AudioQuestion(
                 3,
                 "boy_with_luv",
                 "Save ME", "Black Swan",
                 "Boy With Luv", "FAKE LOVE",
-                3, 500
+                3, 400
             ),
             AudioQuestion(
                 4,
                 "butter",
                 "Dynamite", "MIC Drop",
                 "Spring Day", "Butter",
-                4, 400
+                4, 350
             ),
             AudioQuestion(
                 5,
                 "dna",
                 "DNA", "Crystal Show",
                 "Permission to Dance", "Magic Shop",
-                1, 500
+                1, 400
             ),
             AudioQuestion(
                 6,
                 "dynamite",
                 "Butter", "Dynamite",
                 "Pied Piper", "The Truth Untold",
-                2, 450
+                2, 350
             ),
             AudioQuestion(
                 7,
                 "euphoria",
                 "IDOL", "Not Today",
                 "Euphoria", "DNA",
-                3, 550
+                3, 500
             ),
             AudioQuestion(
                 8,
                 "fake_love",
                 "BEGIN", "Dynamite",
                 "Crystal Snow", "FAKE LOVE",
-                4, 450
+                4, 400
             ),
             AudioQuestion(
                 9,
@@ -73,7 +73,7 @@ object AudioQuestionsStorage {
                 "mic_drop",
                 "Blood Sweat & Tears", "MIC Drop",
                 "IDOL", "Not Today",
-                2, 450
+                2, 500
             ),
             AudioQuestion(
                 11,
@@ -87,14 +87,14 @@ object AudioQuestionsStorage {
                 "permission_to_dance",
                 "Pied Piper", "Life Goes On",
                 "DNA", "Permission to Dance",
-                4, 400
+                4, 500
             ),
             AudioQuestion(
                 13,
                 "pied_piper",
                 "Pied Piper", "Euphoria",
                 "Spring Day", "Dynamite",
-                1, 550
+                1, 500
             ),
             AudioQuestion(
                 14,
