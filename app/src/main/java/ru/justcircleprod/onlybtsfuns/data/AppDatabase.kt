@@ -59,7 +59,7 @@ val MIGRATION_1_2: Migration = object : Migration(1, 2) {
                     "fourth_option	TEXT NOT NULL," +
                     "answer_num	INTEGER NOT NULL, " +
                     "points INTEGER NOT NULL DEFAULT 0," +
-                    "PRIMARY KEY(id AUTOINCREMENT))"
+                    "PRIMARY KEY (id))"
         )
 
         for (question in VideoQuestionsStorage.getQuestions()) {
@@ -86,7 +86,7 @@ val MIGRATION_1_2: Migration = object : Migration(1, 2) {
                     "fourth_option	TEXT NOT NULL," +
                     "answer_num	INTEGER NOT NULL, " +
                     "points INTEGER NOT NULL DEFAULT 0," +
-                    "PRIMARY KEY(id AUTOINCREMENT))"
+                    "PRIMARY KEY(id))"
         )
 
         for (question in AudioQuestionsStorage.getQuestions()) {
@@ -118,7 +118,7 @@ val MIGRATION_1_2: Migration = object : Migration(1, 2) {
                     "id	INTEGER NOT NULL," +
                     "name	TEXT NOT NULL," +
                     "state	INTEGER NOT NULL," +
-                    "PRIMARY KEY(id AUTOINCREMENT))"
+                    "PRIMARY KEY(id))"
         )
 
         database.execSQL(

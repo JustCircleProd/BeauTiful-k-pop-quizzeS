@@ -24,7 +24,7 @@ class ResultActivity : AppCompatActivity() {
         val score = intent.getIntExtra("score", 0)
         val appRepository = AppRepository(this)
         val factory = ResultViewModelFactory(appRepository, categoryId, score)
-        viewModel = ViewModelProvider(this, factory).get(ResultViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
 
         binding.toCategories.setOnClickListener { super.onBackPressed() }
 
@@ -42,12 +42,12 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun setScoresObservers() {
-        viewModel.currentScore.observe(this, {
+        viewModel.currentScore.observe(this) {
             binding.score.text = it.toString()
-        })
-        viewModel.bestScore.observe(this, {
+        }
+        viewModel.bestScore.observe(this) {
             binding.bestScore.text = it.toString()
-        })
+        }
     }
 
     private fun checkScore() {

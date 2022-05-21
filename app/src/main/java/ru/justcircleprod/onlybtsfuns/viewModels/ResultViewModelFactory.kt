@@ -10,7 +10,7 @@ class ResultViewModelFactory(
     private val score: Int
 ) :
     ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ResultViewModel(repository, categoryId, score) as T
     }
 }

@@ -32,7 +32,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         val appRepository = AppRepository(this)
         val categoryId = intent.getIntExtra("categoryId", 1)
         val factory = QuizViewModelFactory(appRepository, categoryId)
-        viewModel = ViewModelProvider(this, factory).get(QuizViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[QuizViewModel::class.java]
 
         binding.firstOption.setOnClickListener(this)
         binding.secondOption.setOnClickListener(this)
@@ -95,7 +95,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setTextQuestionObserver() {
-        viewModel.textQuestion.observe(this, {
+        viewModel.textQuestion.observe(this) {
             hidePreviousQuestion()
             binding.textQuestion.visibility = View.VISIBLE
 
@@ -104,11 +104,11 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             binding.secondOption.text = it.secondOption
             binding.thirdOption.text = it.thirdOption
             binding.fourthOption.text = it.fourthOption
-        })
+        }
     }
 
     private fun setImageQuestionObserver() {
-        viewModel.imageQuestion.observe(this, {
+        viewModel.imageQuestion.observe(this) {
             hidePreviousQuestion()
             binding.imageQuestion.visibility = View.VISIBLE
 
@@ -123,11 +123,11 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             binding.secondOption.text = it.secondOption
             binding.thirdOption.text = it.thirdOption
             binding.fourthOption.text = it.fourthOption
-        })
+        }
     }
 
     private fun setVideoQuestionObserver() {
-        viewModel.videoQuestion.observe(this, {
+        viewModel.videoQuestion.observe(this) {
             hidePreviousQuestion()
             binding.videoQuestion.setVideoURI(
                 Uri.parse("android.resource://$packageName/raw/${it.video_entry_name}")
@@ -139,11 +139,11 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             binding.secondOption.text = it.secondOption
             binding.thirdOption.text = it.thirdOption
             binding.fourthOption.text = it.fourthOption
-        })
+        }
     }
 
     private fun setAudioQuestionObserver() {
-        viewModel.audioQuestion.observe(this, {
+        viewModel.audioQuestion.observe(this) {
             hidePreviousQuestion()
             binding.audioQuestion.visibility = View.VISIBLE
 
@@ -157,7 +157,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             binding.secondOption.text = it.secondOption
             binding.thirdOption.text = it.thirdOption
             binding.fourthOption.text = it.fourthOption
-        })
+        }
     }
 
     private fun hidePreviousQuestion() {
@@ -168,12 +168,12 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setScoreObservers() {
-        viewModel.pointsForThisQuestion.observe(this, {
+        viewModel.pointsForThisQuestion.observe(this) {
             binding.points.text = getString(R.string.tv_points_label, it)
-        })
-        viewModel.score.observe(this, {
+        }
+        viewModel.score.observe(this) {
             binding.score.text = getString(R.string.tv_score_label, it)
-        })
+        }
     }
 
     override fun onClick(v: View?) {

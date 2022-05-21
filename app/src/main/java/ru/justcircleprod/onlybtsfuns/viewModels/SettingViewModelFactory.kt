@@ -6,7 +6,7 @@ import ru.justcircleprod.onlybtsfuns.data.AppRepository
 
 class SettingViewModelFactory(private val repository: AppRepository) :
     ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return SettingViewModel(repository) as T
     }
 }

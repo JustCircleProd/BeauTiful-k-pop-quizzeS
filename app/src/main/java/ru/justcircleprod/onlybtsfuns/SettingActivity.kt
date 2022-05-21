@@ -20,7 +20,7 @@ class SettingActivity : AppCompatActivity() {
 
         val appRepository = AppRepository(this)
         val factory = SettingViewModelFactory(appRepository)
-        viewModel = ViewModelProvider(this, factory).get(SettingViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
 
         setObserver()
 
@@ -32,13 +32,13 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        viewModel.difficultyState.observe(this, {
+        viewModel.difficultyState.observe(this) {
             when (viewModel.difficultyState.value) {
                 0 -> binding.chipRandom.isChecked = true
                 1 -> binding.chipUsual.isChecked = true
                 2 -> binding.chipDifficult.isChecked = true
             }
-        })
+        }
     }
 
     private fun updateDifficulty(state: Int) {

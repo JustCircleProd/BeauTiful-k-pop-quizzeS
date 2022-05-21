@@ -27,20 +27,20 @@ class ResultsActivity : AppCompatActivity() {
     }
 
     private fun setScoresObservers() {
-        viewModel.noCategoryScore.observe(this, {
+        viewModel.noCategoryScore.observe(this) {
             binding.noCategoryScore.text = it.toString()
-        })
-        viewModel.textQuestionsScore.observe(this, {
+        }
+        viewModel.textQuestionsScore.observe(this) {
             binding.textQuestionsScore.text = it.toString()
-        })
-        viewModel.imageQuestionsScore.observe(this, {
+        }
+        viewModel.imageQuestionsScore.observe(this) {
             binding.imageQuestionsScore.text = it.toString()
-        })
-        viewModel.videoQuestionsScore.observe(this, {
+        }
+        viewModel.videoQuestionsScore.observe(this) {
             binding.videoQuestionsScore.text = it.toString()
-        })
-        viewModel.audioQuestionScore.observe(this, {
+        }
+        viewModel.audioQuestionScore.observe(this) {
             binding.audioQuestionsScore.text = it.toString()
-        })
+        }
     }
 }

@@ -23,7 +23,7 @@ class CategoryActivity : AppCompatActivity() {
 
         val appRepository = AppRepository(this)
         val factory = CategoryViewModelFactory(appRepository)
-        viewModel = ViewModelProvider(this, factory).get(CategoryViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
 
         binding.randomQuestions.setOnClickListener { startQuizActivity(1) }
         binding.textQuestions.setOnClickListener { startQuizActivity(2) }
