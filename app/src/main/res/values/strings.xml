@@ -15,6 +15,16 @@
     <string name="set_no_questions_repetition">Опция \"Без повторения вопросов\" включена</string>
     <string name="unset_no_questions_repetition">Опция \"Без повторения вопросов\" выключена</string>
 
+    <string name="start_quiz">Начать тест</string>
+    <string name="settings">Сложность вопросов</string>
+    <string name="difficulty">Сложность вопросов</string>
+    <string name="button_text_results">Результаты</string>
+
+    <string name="random_difficulty">Случайная</string>
+    <string name="usual_difficulty">Обычная</string>
+    <string name="difficult_difficulty">Повышенная</string>
+    <string name="set_difficulty">Сложность установлена</string>
+
     <string name="tv_choose_category">Выберите категорию</string>
     <string name="random_questions">Случайные вопросы</string>
     <string name="text_questions">Текстовые вопросы</string>
