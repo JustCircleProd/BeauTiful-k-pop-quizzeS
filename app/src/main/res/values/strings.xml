@@ -2,14 +2,18 @@
     <string name="app_name">Only BTS Fans</string>
 
     <string name="start_quiz">Начать тест</string>
-    <string name="settings">Сложность вопросов</string>
-    <string name="difficulty">Сложность вопросов</string>
+    <string name="settings">Настройки</string>
     <string name="button_text_results">Результаты</string>
 
+
+    <string name="difficulty">Сложность вопросов</string>
     <string name="random_difficulty">Случайная</string>
     <string name="usual_difficulty">Обычная</string>
     <string name="difficult_difficulty">Повышенная</string>
     <string name="set_difficulty">Сложность установлена</string>
+    <string name="no_questions_repetition">Без повторения</string>
+    <string name="set_no_questions_repetition">Опция \"Без повторения вопросов\" включена</string>
+    <string name="unset_no_questions_repetition">Опция \"Без повторения вопросов\" выключена</string>
 
     <string name="tv_choose_category">Выберите категорию</string>
     <string name="random_questions">Случайные вопросы</string>
@@ -21,6 +25,8 @@
     <string name="difficulty_warning">Необходимо переключить сложность на Случайную или Повышенную</string>
 
     <string name="tv_loading_quiz_text">Подготавливаем самые интересные вопросы</string>
+    <string name="tv_loading_quiz_internet_hint_text">Подготавливаем самые интересные вопросы.\nПроверьте подключение к интернету</string>
+    <string name="tv_out_of_questions_hint_text">Похоже, что вы ответили на все вопросы в данной категории!\nВы можете выключить опцию \"Без повторения\" и вернуться снова :)</string>
 
     <string name="tv_points_label">За вопрос: %1$d</string>
     <string name="tv_score_label">Всего очков: %1$d</string>

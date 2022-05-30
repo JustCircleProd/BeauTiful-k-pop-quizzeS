@@ -18,6 +18,7 @@
     <dimen name="line_bottom_margin">8dp</dimen>
 
     <dimen name="setting_chip_text_size">15sp</dimen>
+    <dimen name="settings_item_line_bottom_margin">12dp</dimen>
 
     <dimen name="button_stroke_width">1dp</dimen>
     <dimen name="button_corner_radius">10dp</dimen>
@@ -28,6 +29,8 @@
     <dimen name="load_text_pudding">10dp</dimen>
 
     <dimen name="points_text_size">13sp</dimen>
+
+    <dimen name="content_loading_progress_size">40dp</dimen>
 
     <dimen name="tv_question_height">210dp</dimen>
     <dimen name="tv_question_margin_top">15dp</dimen>

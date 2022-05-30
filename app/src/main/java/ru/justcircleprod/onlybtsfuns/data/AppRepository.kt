@@ -1,143 +1,57 @@
 package ru.justcircleprod.onlybtsfuns.data
 
-import android.content.Context
-import android.os.Parcelable
+import com.google.firebase.firestore.FirebaseFirestore
+import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestionContentType
+import ru.justcircleprod.onlybtsfuns.data.models.Setting
+import ru.justcircleprod.onlybtsfuns.data.models.TextQuestion
+import ru.justcircleprod.onlybtsfuns.data.room.AppDatabase
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppRepository(context: Context) {
-    private val textQuestionDao: TextQuestionDao
-    private val imageQuestionDao: ImageQuestionDao
-    private val videoQuestionDao: VideoQuestionDao
-    private val audioQuestionDao: AudioQuestionDao
-    private val scoreDao: ScoreDao
-    private val settingDao: SettingDao
-
-    init {
-        val db = AppDatabase.getDatabase(context)
-        textQuestionDao = db.textQuestionDao()
-        imageQuestionDao = db.imageQuestionDao()
-        videoQuestionDao = db.videoQuestionDao()
-        audioQuestionDao = db.audioQuestionDao()
-        scoreDao = db.scoreDao()
-        settingDao = db.settingDao()
-    }
-
-    suspend fun getQuestions(categoryId: Int, countOfQuestions: Int): Array<*> {
-        val difficultyState = getSetting(1).state
-
-        val lowerPoints = when (difficultyState) {
-            0 -> 300
-            1 -> 300
-            2 -> 500
-            else -> 300
-        }
-
-        val upperPoints = when (difficultyState) {
-            0 -> 600
-            1 -> 499
-            2 -> 600
-            else -> 600
-        }
-        return when (categoryId) {
-            1 -> getRandomQuestions(countOfQuestions, lowerPoints, upperPoints)
-            2 -> getTextQuestions(countOfQuestions, lowerPoints, upperPoints)
-            3 -> getImageQuestions(countOfQuestions, lowerPoints, upperPoints)
-            4 -> getVideoQuestions(countOfQuestions, lowerPoints, upperPoints)
-            5 -> getAudioQuestions(countOfQuestions, lowerPoints, upperPoints)
-            else -> getRandomQuestions(countOfQuestions, lowerPoints, upperPoints)
-        }
-    }
-
-    private suspend fun getRandomQuestions(
-        countOfQuestions: Int,
-        lowerPoints: Int,
-        upperPoints: Int
-    ): Array<Parcelable> {
-        return if (upperPoints >= 500) {
-            val countOfAudioQuestion = (1..2).random()
-            val countOfImageQuestion = (1..2).random()
-            val countOfVideoQuestion = 1
-            val countOfTextQuestion =
-                countOfQuestions - (countOfImageQuestion + countOfAudioQuestion) - countOfVideoQuestion
-
-
-            val textQuestions = getTextQuestions(countOfTextQuestion, lowerPoints, upperPoints)
-            val imageQuestions = getImageQuestions(countOfImageQuestion, lowerPoints, upperPoints)
-            val videoQuestion = getVideoQuestions(countOfVideoQuestion, lowerPoints, upperPoints)
-            val audioQuestion = getAudioQuestions(countOfAudioQuestion, lowerPoints, upperPoints)
-
-            (textQuestions.toList() + imageQuestions.toList()
-                    + videoQuestion.toList() + audioQuestion.toList())
-                .shuffled().toTypedArray()
-        } else {
-            val countOfAudioQuestion = (1..2).random()
-            val countOfImageQuestion = (2..3).random()
-            val countOfTextQuestion = countOfQuestions - (countOfImageQuestion + countOfAudioQuestion)
-
-
-            val textQuestions = getTextQuestions(countOfTextQuestion, lowerPoints, upperPoints)
-            val imageQuestions = getImageQuestions(countOfImageQuestion, lowerPoints, upperPoints)
-            val audioQuestion = getAudioQuestions(countOfAudioQuestion, lowerPoints, upperPoints)
-
-            (textQuestions.toList() + imageQuestions.toList() + audioQuestion.toList())
-                .shuffled().toTypedArray()
-        }
-
-    }
-
-    private suspend fun getTextQuestions(
+@Singleton
+class AppRepository @Inject constructor(
+    private val db: AppDatabase,
+    private val firestoreDb: FirebaseFirestore
+) {
+    suspend fun getRandomTextQuestions(
         countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ): Array<TextQuestion> {
-        val ids = textQuestionDao.getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
-
-        return textQuestionDao.loadAllByIds(ids.toIntArray())
-    }
-
-    private suspend fun getImageQuestions(
-        countOfQuestions: Int,
-        lowerPoints: Int,
-        upperPoints: Int
-    ): Array<ImageQuestion> {
         val ids =
-            imageQuestionDao.getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
+            db.textQuestionDao().getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
 
-        return imageQuestionDao.loadAllByIds(ids.toIntArray())
+        return db.textQuestionDao().getByIds(ids.toIntArray())
     }
 
-    private suspend fun getVideoQuestions(
-        countOfQuestions: Int,
-        lowerPoints: Int,
-        upperPoints: Int
-    ): Array<VideoQuestion> {
-        val ids =
-            videoQuestionDao.getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
+    fun getImageQuestionsTask() =
+        firestoreDb.collection("questions").document("image_questions").get()
 
-        return videoQuestionDao.loadAllByIds(ids.toIntArray())
+    fun getVideoQuestionsTask() =
+        firestoreDb.collection("questions").document("video_questions").get()
+
+    fun getAudioQuestionsTask() =
+        firestoreDb.collection("questions").document("audio_questions").get()
+
+    suspend fun getPassedQuestionsId(questionContentType: PassedQuestionContentType) =
+        db.passedQuestionDao().getIdsByContentType(questionContentType)
+
+    suspend fun insertPassedQuestion(passedQuestion: PassedQuestion) {
+        db.passedQuestionDao().insert(passedQuestion)
     }
 
-    private suspend fun getAudioQuestions(
-        countOfQuestions: Int,
-        lowerPoints: Int,
-        upperPoints: Int
-    ): Array<AudioQuestion> {
-        val ids =
-            audioQuestionDao.getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
+    suspend fun getSetting(id: Int) = db.settingDao().getById(id)
 
-        return audioQuestionDao.loadAllByIds(ids.toIntArray())
+    suspend fun updateSetting(setting: Setting) {
+        db.settingDao().update(setting)
     }
 
-    suspend fun getScores() = scoreDao.getAll().toTypedArray()
+    fun getScores() = db.scoreDao().getAll()
 
-    suspend fun getScore(id: Int) = scoreDao.findById(id)
+    suspend fun getScore(id: Int) = db.scoreDao().getById(id)
 
     suspend fun updateScore(id: Int, score: Int) {
-        scoreDao.update(id, score)
-    }
-
-    suspend fun getSetting(id: Int) = settingDao.loadById(id)
-
-    suspend fun updateSetting(id: Int, state: Int) {
-        settingDao.update(id, state)
+        db.scoreDao().update(id, score)
     }
 }
