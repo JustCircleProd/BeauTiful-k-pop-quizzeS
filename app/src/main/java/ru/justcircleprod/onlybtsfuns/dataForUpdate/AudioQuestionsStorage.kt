@@ -1,6 +1,6 @@
 package ru.justcircleprod.onlybtsfuns.dataForUpdate
 
-import ru.justcircleprod.onlybtsfuns.data.AudioQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.oldModels.AudioQuestion
 
 object AudioQuestionsStorage {
     fun getQuestions(): List<AudioQuestion> {

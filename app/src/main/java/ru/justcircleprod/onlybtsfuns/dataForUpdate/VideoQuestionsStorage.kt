@@ -1,6 +1,6 @@
 package ru.justcircleprod.onlybtsfuns.dataForUpdate
 
-import ru.justcircleprod.onlybtsfuns.data.VideoQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.oldModels.VideoQuestion
 
 object VideoQuestionsStorage {
     fun getQuestions(): List<VideoQuestion> {

@@ -1,6 +1,6 @@
 package ru.justcircleprod.onlybtsfuns.dataForUpdate
 
-import ru.justcircleprod.onlybtsfuns.data.ImageQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.oldModels.ImageQuestion
 
 object ImageQuestionsStorage {
     fun getQuestions(): List<ImageQuestion> {
