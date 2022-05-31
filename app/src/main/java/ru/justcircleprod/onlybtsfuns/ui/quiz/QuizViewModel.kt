@@ -37,6 +37,8 @@ class QuizViewModel @Inject constructor(
     // the list of questions (public, because its size is involved in some checks)
     var questions = mutableListOf<Question>()
 
+    private var questionPosition = 0
+
     // the current question or a sign of the end of questions is placed here
     val question = MutableLiveData<Question?>()
 
@@ -251,14 +253,22 @@ class QuizViewModel @Inject constructor(
         }
     }
 
-    fun updateQuestion() {
+    fun setQuestionOnCurrentPosition() {
+        if (questions.size <= countOfQuestions) {
+            question.value = questions[questionPosition]
+        } else {
+            question.value = null
+        }
+    }
+
+    fun setQuestionOnNextPosition() {
         if (noQuestionRepetition && question.value != null) {
             addToPassedQuestions()
         }
 
-        if (questions.isNotEmpty()) {
-            question.value = questions[0]
-            questions.removeAt(0)
+        questionPosition++
+        if (questions.size <= countOfQuestions) {
+            question.value = questions[questionPosition]
         } else {
             question.value = null
         }

@@ -154,7 +154,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 if (isLoading.all { !it }) {
                     if (viewModel.questions.size == viewModel.countOfQuestions) {
-                        viewModel.updateQuestion()
+                        viewModel.setQuestionOnCurrentPosition()
 
                         setScoreObserver()
                         setQuestionsObserver()
@@ -327,7 +327,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         val timer = object : CountDownTimer(2000, 2000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                viewModel.updateQuestion()
+                viewModel.setQuestionOnNextPosition()
             }
         }
         timer.start()
@@ -345,7 +345,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onFinish() {
-                viewModel.updateQuestion()
+                viewModel.setQuestionOnNextPosition()
             }
         }
         timer.start()
