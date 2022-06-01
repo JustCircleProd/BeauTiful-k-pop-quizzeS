@@ -254,7 +254,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun setQuestionOnCurrentPosition() {
-        if (questions.size <= countOfQuestions) {
+        if (questionPosition < countOfQuestions) {
             question.value = questions[questionPosition]
         } else {
             question.value = null
@@ -267,7 +267,7 @@ class QuizViewModel @Inject constructor(
         }
 
         questionPosition++
-        if (questions.size <= countOfQuestions) {
+        if (questionPosition < countOfQuestions) {
             question.value = questions[questionPosition]
         } else {
             question.value = null
