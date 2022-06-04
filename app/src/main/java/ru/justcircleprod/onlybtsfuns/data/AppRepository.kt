@@ -17,10 +17,17 @@ class AppRepository @Inject constructor(
     suspend fun getRandomTextQuestions(
         countOfQuestions: Int,
         lowerPoints: Int,
-        upperPoints: Int
+        upperPoints: Int,
+        noQuestionRepetition: Boolean
     ): Array<TextQuestion> {
-        val ids =
-            db.textQuestionDao().getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
+        var ids = db.textQuestionDao().getIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
+            ids = ids.filter { it !in passedQuestionsId }
+        }
+
+        ids = ids.shuffled().take(countOfQuestions)
 
         return db.textQuestionDao().getByIds(ids.toIntArray())
     }

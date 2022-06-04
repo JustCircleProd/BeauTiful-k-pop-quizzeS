@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ru.justcircleprod.onlybtsfuns.data.dataForUpdate.*
+import ru.justcircleprod.onlybtsfuns.data.room.dataForUpdate.*
 import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestion
 import ru.justcircleprod.onlybtsfuns.data.models.Score
 import ru.justcircleprod.onlybtsfuns.data.models.Setting

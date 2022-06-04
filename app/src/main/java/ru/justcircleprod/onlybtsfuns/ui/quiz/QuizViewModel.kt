@@ -147,15 +147,9 @@ class QuizViewModel @Inject constructor(
             repository.getRandomTextQuestions(
                 countOfQuestions,
                 lowerPoints,
-                upperPoints
-            ).apply {
-                if (noQuestionRepetition) {
-                    val passedQuestionsId = withContext(Dispatchers.IO) {
-                        repository.getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
-                    }
-                    filter { it.id !in passedQuestionsId }
-                }
-            }
+                upperPoints,
+                noQuestionRepetition
+            )
         )
 
         onLoadingEnd(0)

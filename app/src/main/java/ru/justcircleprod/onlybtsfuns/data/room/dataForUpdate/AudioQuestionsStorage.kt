@@ -1,4 +1,4 @@
-package ru.justcircleprod.onlybtsfuns.dataForUpdate
+package ru.justcircleprod.onlybtsfuns.data.room.dataForUpdate
 
 import ru.justcircleprod.onlybtsfuns.data.models.oldModels.AudioQuestion
 
