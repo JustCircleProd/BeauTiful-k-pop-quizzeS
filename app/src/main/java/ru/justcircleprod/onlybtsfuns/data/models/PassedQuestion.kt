@@ -13,17 +13,17 @@ data class PassedQuestion(
 ) {
     companion object {
         fun Question.toPassedQuestion(): PassedQuestion {
-            val contentType = when {
-                this is TextQuestion -> {
+            val contentType = when (this) {
+                is TextQuestion -> {
                     PassedQuestionContentType.TEXT_CONTENT_TYPE
                 }
-                this is MediaQuestion && this.type == MediaQuestionType.IMAGE_QUESTION -> {
+                is ImageQuestion -> {
                     PassedQuestionContentType.IMAGE_CONTENT_TYPE
                 }
-                this is MediaQuestion && this.type == MediaQuestionType.VIDEO_QUESTION -> {
+                is VideoQuestion -> {
                     PassedQuestionContentType.VIDEO_CONTENT_TYPE
                 }
-                this is MediaQuestion && this.type == MediaQuestionType.AUDIO_QUESTION -> {
+                is AudioQuestion -> {
                     PassedQuestionContentType.AUDIO_CONTENT_TYPE
                 }
                 else -> {

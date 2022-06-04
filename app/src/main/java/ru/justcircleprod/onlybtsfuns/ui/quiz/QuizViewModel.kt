@@ -10,9 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.justcircleprod.onlybtsfuns.appConstants.QuizCategory
 import ru.justcircleprod.onlybtsfuns.data.AppRepository
-import ru.justcircleprod.onlybtsfuns.data.models.MediaQuestion.Companion.toMediaQuestions
 import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestion.Companion.toPassedQuestion
-import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestionContentType
 import ru.justcircleprod.onlybtsfuns.data.models.Question
 import ru.justcircleprod.onlybtsfuns.data.room.constants.AppDatabaseConstants
 import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
@@ -47,7 +45,7 @@ class QuizViewModel @Inject constructor(
     val score = MutableLiveData(0)
 
     init {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             noQuestionRepetition = getNoQuestionsRepetitionValue()
             val (lowerPoints, upperPoints) = getPointBorders()
 
@@ -143,99 +141,65 @@ class QuizViewModel @Inject constructor(
         lowerPoints: Int,
         upperPoints: Int
     ) {
-        questions.addAll(
-            repository.getRandomTextQuestions(
-                countOfQuestions,
-                lowerPoints,
-                upperPoints
-            ).apply {
-                if (noQuestionRepetition) {
-                    val passedQuestionsId = withContext(Dispatchers.IO) {
-                        repository.getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
-                    }
-                    filter { it.id !in passedQuestionsId }
-                }
-            }
+        val textQuestions = repository.getRandomTextQuestions(
+            countOfQuestions,
+            lowerPoints,
+            upperPoints,
+            noQuestionRepetition
         )
 
+        questions.addAll(textQuestions)
         onLoadingEnd(0)
     }
 
-    private fun setImageQuestions(countOfQuestions: Int, lowerPoints: Int, upperPoints: Int) {
-        repository.getImageQuestionsTask().addOnSuccessListener { documents ->
-            if (documents.data != null) {
-                viewModelScope.launch(Dispatchers.Default) {
-                    var imageQuestions = documents.data!!.toMediaQuestions()
-
-                    imageQuestions = imageQuestions.filter { it.points in lowerPoints..upperPoints }
-                    if (noQuestionRepetition) {
-                        val passedQuestionsId = withContext(Dispatchers.IO) {
-                            repository.getPassedQuestionsId(PassedQuestionContentType.IMAGE_CONTENT_TYPE)
-                        }
-                        imageQuestions = imageQuestions.filter { it.id !in passedQuestionsId }
-                    }
-                    imageQuestions = imageQuestions.shuffled().take(countOfQuestions)
-
-                    questions.addAll(imageQuestions)
-
-                    onLoadingEnd(1)
-                }
-            }
-        }
-    }
-
-    private fun setVideoQuestions(
+    private suspend fun setImageQuestions(
         countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ) {
-        repository.getVideoQuestionsTask().addOnSuccessListener { documents ->
-            if (documents.data != null) {
-                viewModelScope.launch(Dispatchers.Default) {
-                    var videoQuestions = documents.data!!.toMediaQuestions()
+        val imageQuestions = repository.getRandomImageQuestions(
+            countOfQuestions,
+            lowerPoints,
+            upperPoints,
+            noQuestionRepetition
+        )
 
-                    videoQuestions = videoQuestions.filter { it.points in lowerPoints..upperPoints }
-                    if (noQuestionRepetition) {
-                        val passedQuestionsId = withContext(Dispatchers.IO) {
-                            repository.getPassedQuestionsId(PassedQuestionContentType.VIDEO_CONTENT_TYPE)
-                        }
-                        videoQuestions = videoQuestions.filter { it.id !in passedQuestionsId }
-                    }
-                    videoQuestions = videoQuestions.shuffled().take(countOfQuestions)
-
-                    questions.addAll(videoQuestions)
-
-                    onLoadingEnd(2)
-                }
-            }
-        }
+        questions.addAll(imageQuestions)
+        onLoadingEnd(1)
     }
 
-    private fun setAudioQuestions(
+    private suspend fun setVideoQuestions(
         countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ) {
-        repository.getAudioQuestionsTask().addOnSuccessListener { documents ->
-            if (documents.data != null) {
-                viewModelScope.launch(Dispatchers.Default) {
-                    var audioQuestions = documents.data!!.toMediaQuestions()
+        val videoQuestions =
+            repository.getRandomVideoQuestions(
+                countOfQuestions,
+                lowerPoints,
+                upperPoints,
+                noQuestionRepetition
+            )
 
-                    audioQuestions = audioQuestions.filter { it.points in lowerPoints..upperPoints }
-                    if (noQuestionRepetition) {
-                        val passedQuestionsId = withContext(Dispatchers.IO) {
-                            repository.getPassedQuestionsId(PassedQuestionContentType.AUDIO_CONTENT_TYPE)
-                        }
-                        audioQuestions = audioQuestions.filter { it.id !in passedQuestionsId }
-                    }
-                    audioQuestions = audioQuestions.shuffled().take(countOfQuestions)
+        questions.addAll(videoQuestions)
+        onLoadingEnd(2)
+    }
 
-                    questions.addAll(audioQuestions)
+    private suspend fun setAudioQuestions(
+        countOfQuestions: Int,
+        lowerPoints: Int,
+        upperPoints: Int
+    ) {
+        val audioQuestions =
+            repository.getRandomAudioQuestions(
+                countOfQuestions,
+                lowerPoints,
+                upperPoints,
+                noQuestionRepetition
+            )
 
-                    onLoadingEnd(3)
-                }
-            }
-        }
+        questions.addAll(audioQuestions)
+        onLoadingEnd(3)
     }
 
     // a method that updates the download status

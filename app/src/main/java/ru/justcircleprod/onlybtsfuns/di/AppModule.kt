@@ -1,8 +1,6 @@
 package ru.justcircleprod.onlybtsfuns.di
 
 import android.content.Context
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,8 +16,4 @@ object AppModule {
     @Provides
     fun provideRoomDatabase(@ApplicationContext context: Context) =
         AppDatabase.getInstance(context)
-
-    @Singleton
-    @Provides
-    fun provideFirestoreDatabase() = Firebase.firestore
 }

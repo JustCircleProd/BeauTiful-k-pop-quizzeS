@@ -25,7 +25,3 @@
 
 -keep class kotlin.** { *; }
 -keep interface kotlin.** { *; }
-
--dontwarn okhttp3.internal.platform.*
--dontwarn org.conscrypt.Conscrypt
--dontwarn org.conscrypt.OpenSSLProvider

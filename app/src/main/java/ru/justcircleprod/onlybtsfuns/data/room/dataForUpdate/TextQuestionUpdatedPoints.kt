@@ -1,4 +1,4 @@
-package ru.justcircleprod.onlybtsfuns.data.dataForUpdate
+package ru.justcircleprod.onlybtsfuns.data.room.dataForUpdate
 
 object TextQuestionUpdatedPoints {
     fun getQuestions(): Map<Int, Int> {

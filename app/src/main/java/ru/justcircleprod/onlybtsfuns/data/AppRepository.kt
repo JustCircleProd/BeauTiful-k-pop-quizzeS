@@ -1,38 +1,85 @@
 package ru.justcircleprod.onlybtsfuns.data
 
-import com.google.firebase.firestore.FirebaseFirestore
-import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestion
-import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestionContentType
-import ru.justcircleprod.onlybtsfuns.data.models.Setting
-import ru.justcircleprod.onlybtsfuns.data.models.TextQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.*
 import ru.justcircleprod.onlybtsfuns.data.room.AppDatabase
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AppRepository @Inject constructor(
-    private val db: AppDatabase,
-    private val firestoreDb: FirebaseFirestore
+    private val db: AppDatabase
 ) {
     suspend fun getRandomTextQuestions(
         countOfQuestions: Int,
         lowerPoints: Int,
-        upperPoints: Int
+        upperPoints: Int,
+        noQuestionRepetition: Boolean
     ): Array<TextQuestion> {
-        val ids =
-            db.textQuestionDao().getIds(lowerPoints, upperPoints).shuffled().take(countOfQuestions)
+        var ids = db.textQuestionDao().getIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
+            ids = ids.filter { it !in passedQuestionsId }
+        }
+
+        ids = ids.shuffled().take(countOfQuestions)
 
         return db.textQuestionDao().getByIds(ids.toIntArray())
     }
 
-    fun getImageQuestionsTask() =
-        firestoreDb.collection("questions").document("image_questions").get()
+    suspend fun getRandomImageQuestions(
+        countOfQuestions: Int,
+        lowerPoints: Int,
+        upperPoints: Int,
+        noQuestionRepetition: Boolean
+    ): Array<ImageQuestion> {
+        var ids = db.imageQuestionDao().getIds(lowerPoints, upperPoints)
 
-    fun getVideoQuestionsTask() =
-        firestoreDb.collection("questions").document("video_questions").get()
+        if (noQuestionRepetition) {
+            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.IMAGE_CONTENT_TYPE)
+            ids = ids.filter { it !in passedQuestionsId }
+        }
 
-    fun getAudioQuestionsTask() =
-        firestoreDb.collection("questions").document("audio_questions").get()
+        ids = ids.shuffled().take(countOfQuestions)
+
+        return db.imageQuestionDao().getByIds(ids.toIntArray())
+    }
+
+    suspend fun getRandomAudioQuestions(
+        countOfQuestions: Int,
+        lowerPoints: Int,
+        upperPoints: Int,
+        noQuestionRepetition: Boolean
+    ): Array<AudioQuestion> {
+        var ids = db.audioQuestionDao().getIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.AUDIO_CONTENT_TYPE)
+            ids = ids.filter { it !in passedQuestionsId }
+        }
+
+        ids = ids.shuffled().take(countOfQuestions)
+
+        return db.audioQuestionDao().getByIds(ids.toIntArray())
+    }
+
+    suspend fun getRandomVideoQuestions(
+        countOfQuestions: Int,
+        lowerPoints: Int,
+        upperPoints: Int,
+        noQuestionRepetition: Boolean
+    ): Array<VideoQuestion> {
+        var ids = db.videoQuestionDao().getIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.VIDEO_CONTENT_TYPE)
+            ids = ids.filter { it !in passedQuestionsId }
+        }
+
+        ids = ids.shuffled().take(countOfQuestions)
+
+        return db.videoQuestionDao().getByIds(ids.toIntArray())
+    }
 
     suspend fun getPassedQuestionsId(questionContentType: PassedQuestionContentType) =
         db.passedQuestionDao().getIdsByContentType(questionContentType)

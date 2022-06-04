@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.google.gms.google-services'
 }
 
 android {
@@ -15,7 +14,7 @@ android {
         applicationId "ru.justcircleprod.onlybtsfuns"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 16
+        versionCode 18
         versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -65,12 +64,6 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation 'androidx.room:room-ktx:2.4.2'
     kapt 'androidx.room:room-compiler:2.4.2'
-
-    implementation platform('com.google.firebase:firebase-bom:30.0.2')
-    implementation 'com.google.firebase:firebase-appcheck-playintegrity'
-    implementation 'com.google.firebase:firebase-firestore-ktx'
-
-    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.yandex.android:mobileads:5.1.0'
 

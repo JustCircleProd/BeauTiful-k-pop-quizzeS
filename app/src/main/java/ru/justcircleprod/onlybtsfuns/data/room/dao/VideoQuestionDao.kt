@@ -1,7 +1,8 @@
-package ru.justcircleprod.onlybtsfuns.data.models.oldModels
+package ru.justcircleprod.onlybtsfuns.data.room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import ru.justcircleprod.onlybtsfuns.data.models.VideoQuestion
 
 @Dao
 interface VideoQuestionDao {

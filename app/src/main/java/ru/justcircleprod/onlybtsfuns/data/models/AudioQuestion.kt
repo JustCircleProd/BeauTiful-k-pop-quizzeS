@@ -1,10 +1,9 @@
-package ru.justcircleprod.onlybtsfuns.data.models.oldModels
+package ru.justcircleprod.onlybtsfuns.data.models
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ru.justcircleprod.onlybtsfuns.data.models.Question
 
 @Entity(tableName = "audio_questions")
 data class AudioQuestion(

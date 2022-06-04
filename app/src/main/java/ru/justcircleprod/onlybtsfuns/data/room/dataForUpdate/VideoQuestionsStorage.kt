@@ -1,6 +1,6 @@
-package ru.justcircleprod.onlybtsfuns.dataForUpdate
+package ru.justcircleprod.onlybtsfuns.data.room.dataForUpdate
 
-import ru.justcircleprod.onlybtsfuns.data.models.oldModels.VideoQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.VideoQuestion
 
 object VideoQuestionsStorage {
     fun getQuestions(): List<VideoQuestion> {
@@ -85,4 +85,57 @@ object VideoQuestionsStorage {
         )
     }
 
+    fun getQuestionsFor23Migration(): List<VideoQuestion> {
+        return listOf(
+            VideoQuestion(
+                13,
+                "i_need_u_video",
+                "PERSONA", "I Need U",
+                "IDOL", "Pied Piper",
+                2, 500
+            ),
+            VideoQuestion(
+                14,
+                "life_goes_on_video",
+                "DNA", "Black Swan",
+                "Life Goes On", "IDOL",
+                3, 600
+            ),
+            VideoQuestion(
+                15,
+                "my_universe_video",
+                "We are Bulletproof : the Eternal", "FIRE",
+                "Permission to Dance", "My Universe",
+                4, 500
+            ),
+            VideoQuestion(
+                16,
+                "on_video",
+                "On", "Blood Sweat & Tears",
+                "Butter", "Euphoria",
+                1, 550
+            ),
+            VideoQuestion(
+                17,
+                "persona_video",
+                "My Universe", "PERSONA",
+                "Dynamite", "Boy With Luv",
+                2, 500
+            ),
+            VideoQuestion(
+                18,
+                "run_video",
+                "Life Goes On", "I Need U",
+                "Run", "Butter",
+                3, 500
+            ),
+            VideoQuestion(
+                19,
+                "we_are_bulletproof_the_eternal_video",
+                "DNA", "IDOL",
+                "Daechwita", "We are Bulletproof : the Eternal",
+                4, 550
+            )
+        )
+    }
 }

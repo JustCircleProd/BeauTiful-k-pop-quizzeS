@@ -11,16 +11,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import com.yandex.mobile.ads.banner.AdSize
 import com.yandex.mobile.ads.common.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import ru.justcircleprod.onlybtsfuns.R
-import ru.justcircleprod.onlybtsfuns.appConstants.QuizCategory
-import ru.justcircleprod.onlybtsfuns.data.models.MediaQuestion
-import ru.justcircleprod.onlybtsfuns.data.models.MediaQuestionType
+import ru.justcircleprod.onlybtsfuns.data.models.AudioQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.ImageQuestion
 import ru.justcircleprod.onlybtsfuns.data.models.TextQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.VideoQuestion
 import ru.justcircleprod.onlybtsfuns.databinding.ActivityQuizBinding
 import ru.justcircleprod.onlybtsfuns.ui.quizResult.QuizResultActivity
 
@@ -44,7 +42,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setLoadingText()
         enableAnimation()
         initAd()
         initPlayers()
@@ -69,19 +66,17 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 binding.videoQuestion.start()
             }
             // if the application was minimized when downloading the video
-            viewModel.question.value is MediaQuestion &&
-                    (viewModel.question.value as MediaQuestion).type == MediaQuestionType.VIDEO_QUESTION &&
+            viewModel.question.value is VideoQuestion &&
                     binding.videoQuestionLayout.visibility == View.INVISIBLE -> {
-                setVideoQuestionData(viewModel.question.value!! as MediaQuestion)
+                setVideoQuestionData(viewModel.question.value!! as VideoQuestion)
             }
             musicPlayer != null && binding.audioQuestion.visibility == View.VISIBLE -> {
                 musicPlayer?.start()
             }
             // if the application was minimized when downloading the audio
-            viewModel.question.value is MediaQuestion &&
-                    (viewModel.question.value as MediaQuestion).type == MediaQuestionType.AUDIO_QUESTION &&
+            viewModel.question.value is AudioQuestion &&
                     binding.audioQuestion.visibility == View.INVISIBLE -> {
-                setAudioQuestionData(viewModel.question.value!! as MediaQuestion)
+                setAudioQuestionData(viewModel.question.value!! as AudioQuestion)
             }
         }
     }
@@ -93,8 +88,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 positionOfVideoPlayer = binding.videoQuestion.currentPosition
             }
             // if the application was minimized when downloading the audio
-            viewModel.question.value is MediaQuestion &&
-                    (viewModel.question.value as MediaQuestion).type == MediaQuestionType.AUDIO_QUESTION &&
+            viewModel.question.value is AudioQuestion &&
                     binding.audioQuestion.visibility == View.INVISIBLE -> {
                 musicPlayer = null
             }
@@ -113,14 +107,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 onWrongAnswer(view)
             }
-        }
-    }
-
-    private fun setLoadingText() {
-        if (viewModel.categoryId == QuizCategory.TEXT_CATEGORY.value) {
-            binding.loadHint.text = getString(R.string.tv_loading_quiz_text)
-        } else {
-            binding.loadHint.text = getString(R.string.tv_loading_quiz_internet_hint_text)
         }
     }
 
@@ -201,14 +187,14 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 binding.contentLoadingProgress.visibility = View.VISIBLE
 
-                when ((question as MediaQuestion).type) {
-                    MediaQuestionType.IMAGE_QUESTION -> {
+                when (question) {
+                    is ImageQuestion -> {
                         setImageQuestionData(question)
                     }
-                    MediaQuestionType.VIDEO_QUESTION -> {
+                    is VideoQuestion -> {
                         setVideoQuestionData(question)
                     }
-                    MediaQuestionType.AUDIO_QUESTION -> {
+                    is AudioQuestion -> {
                         setAudioQuestionData(question)
                     }
                 }
@@ -242,21 +228,23 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.textQuestion.text = question.question
     }
 
-    private fun setImageQuestionData(question: MediaQuestion) {
+    private fun setImageQuestionData(question: ImageQuestion) {
         binding.imageQuestion.visibility = View.INVISIBLE
 
-        Picasso.get().load(question.mediaUrl).into(binding.imageQuestion, object : Callback {
-            override fun onSuccess() {
-                binding.contentLoadingProgress.visibility = View.GONE
-                binding.imageQuestion.visibility = View.VISIBLE
-                enableButtons()
-            }
+        binding.imageQuestion.setImageResource(
+            resources.getIdentifier(
+                question.image_entry_name,
+                "drawable",
+                packageName
+            )
+        )
 
-            override fun onError(e: Exception?) {}
-        })
+        binding.contentLoadingProgress.visibility = View.GONE
+        binding.imageQuestion.visibility = View.VISIBLE
+        enableButtons()
     }
 
-    private fun setVideoQuestionData(question: MediaQuestion) {
+    private fun setVideoQuestionData(question: VideoQuestion) {
         binding.videoQuestion.setOnPreparedListener {
             it.setOnInfoListener { _, info, _ ->
                 if (info == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
@@ -269,12 +257,15 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 return@setOnInfoListener false
             }
         }
-        binding.videoQuestion.setVideoURI(Uri.parse(question.mediaUrl))
+
+        binding.videoQuestion.setVideoURI(
+            Uri.parse("android.resource://$packageName/raw/${question.video_entry_name}")
+        )
         binding.videoQuestion.start()
 
     }
 
-    private fun setAudioQuestionData(question: MediaQuestion) {
+    private fun setAudioQuestionData(question: AudioQuestion) {
         musicPlayer = MediaPlayer()
 
         musicPlayer?.setOnPreparedListener {
@@ -286,7 +277,10 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        musicPlayer?.setDataSource(question.mediaUrl)
+        musicPlayer?.setDataSource(
+            this,
+            Uri.parse("android.resource://$packageName/raw/${question.audio_entry_name}")
+        )
         musicPlayer?.prepareAsync()
     }
 

@@ -7,15 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ru.justcircleprod.onlybtsfuns.data.dataForUpdate.*
-import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestion
-import ru.justcircleprod.onlybtsfuns.data.models.Score
-import ru.justcircleprod.onlybtsfuns.data.models.Setting
-import ru.justcircleprod.onlybtsfuns.data.models.TextQuestion
-import ru.justcircleprod.onlybtsfuns.data.room.dao.PassedQuestionDao
-import ru.justcircleprod.onlybtsfuns.data.room.dao.ScoreDao
-import ru.justcircleprod.onlybtsfuns.data.room.dao.SettingDao
-import ru.justcircleprod.onlybtsfuns.data.room.dao.TextQuestionDao
+import ru.justcircleprod.onlybtsfuns.data.models.*
+import ru.justcircleprod.onlybtsfuns.data.room.dao.*
+import ru.justcircleprod.onlybtsfuns.data.room.dataForUpdate.*
 
 val MIGRATION_1_2: Migration = object : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
@@ -138,11 +132,43 @@ val MIGRATION_1_2: Migration = object : Migration(1, 2) {
 
 val MIGRATION_2_3: Migration = object : Migration(2, 3) {
     override fun migrate(database: SupportSQLiteDatabase) {
-        with(database) {
-            execSQL("DROP TABLE image_questions")
-            execSQL("DROP TABLE video_questions")
-            execSQL("DROP TABLE audio_questions")
+        for (question in ImageQuestionsStorage.getQuestionsFor23Migration()) {
+            database.execSQL(
+                """INSERT OR IGNORE INTO image_questions
+                | (id, image_entry_name, first_option, second_option, 
+                | third_option, fourth_option, answer_num, points) 
+                | VALUES (${question.id}, "${question.image_entry_name}",
+                | "${question.firstOption}", "${question.secondOption}",
+                | "${question.thirdOption}", "${question.fourthOption}",
+                | ${question.answerNum}, ${question.points})""".trimMargin()
+            )
+        }
 
+        for (question in VideoQuestionsStorage.getQuestionsFor23Migration()) {
+            database.execSQL(
+                """INSERT OR IGNORE INTO video_questions
+                | (id, video_entry_name, first_option, second_option, 
+                | third_option, fourth_option, answer_num, points) 
+                | VALUES (${question.id}, "${question.video_entry_name}",
+                | "${question.firstOption}", "${question.secondOption}",
+                | "${question.thirdOption}", "${question.fourthOption}",
+                | ${question.answerNum}, ${question.points})""".trimMargin()
+            )
+        }
+
+        for (question in AudioQuestionsStorage.getQuestionsFor23Migration()) {
+            database.execSQL(
+                """INSERT OR IGNORE INTO audio_questions
+                | (id, audio_entry_name, first_option, second_option, 
+                | third_option, fourth_option, answer_num, points) 
+                | VALUES (${question.id}, "${question.audio_entry_name}",
+                | "${question.firstOption}", "${question.secondOption}",
+                | "${question.thirdOption}", "${question.fourthOption}",
+                | ${question.answerNum}, ${question.points})""".trimMargin()
+            )
+        }
+
+        with(database) {
             execSQL("CREATE TABLE settings_backup (id INTEGER NOT NULL, state INTEGER NOT NULL, PRIMARY KEY (id))")
             execSQL("INSERT INTO settings_backup SELECT id, state FROM settings")
             execSQL("DROP TABLE settings")
@@ -170,11 +196,15 @@ val MIGRATION_2_3: Migration = object : Migration(2, 3) {
 
 @Database(
     version = 3,
-    entities = [TextQuestion::class, PassedQuestion::class, Score::class, Setting::class]
+    entities = [TextQuestion::class, ImageQuestion::class, AudioQuestion::class,
+        VideoQuestion::class, PassedQuestion::class, Score::class, Setting::class]
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun textQuestionDao(): TextQuestionDao
+    abstract fun imageQuestionDao(): ImageQuestionDao
+    abstract fun audioQuestionDao(): AudioQuestionDao
+    abstract fun videoQuestionDao(): VideoQuestionDao
     abstract fun passedQuestionDao(): PassedQuestionDao
     abstract fun scoreDao(): ScoreDao
     abstract fun settingDao(): SettingDao

@@ -1,15 +1,14 @@
-package ru.justcircleprod.onlybtsfuns.data.models.oldModels
+package ru.justcircleprod.onlybtsfuns.data.models
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ru.justcircleprod.onlybtsfuns.data.models.Question
 
-@Entity(tableName = "image_questions")
-data class ImageQuestion(
+@Entity(tableName = "video_questions")
+data class VideoQuestion(
     @NonNull @PrimaryKey(autoGenerate = true) override val id: Int,
-    @NonNull @ColumnInfo(name = "image_entry_name") val image_entry_name: String,
+    @NonNull @ColumnInfo(name = "video_entry_name") val video_entry_name: String,
     @NonNull @ColumnInfo(name = "first_option") override val firstOption: String,
     @NonNull @ColumnInfo(name = "second_option") override val secondOption: String,
     @NonNull @ColumnInfo(name = "third_option") override val thirdOption: String,

@@ -59,7 +59,7 @@
                     android:paddingHorizontal="@dimen/load_text_pudding"
                     android:textColor="@color/hint_text_color"
                     android:textSize="@dimen/hint_text_size"
-                    tools:text="@string/tv_loading_quiz_text" />
+                    android:text="@string/tv_loading_quiz_text" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/load_progress"

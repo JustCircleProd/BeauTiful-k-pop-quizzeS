@@ -1,6 +1,6 @@
-package ru.justcircleprod.onlybtsfuns.dataForUpdate
+package ru.justcircleprod.onlybtsfuns.data.room.dataForUpdate
 
-import ru.justcircleprod.onlybtsfuns.data.models.oldModels.AudioQuestion
+import ru.justcircleprod.onlybtsfuns.data.models.AudioQuestion
 
 object AudioQuestionsStorage {
     fun getQuestions(): List<AudioQuestion> {
@@ -109,6 +109,74 @@ object AudioQuestionsStorage {
                 "Euphoria", "Black Swan",
                 "Spring Day", "Pied Piper",
                 3, 550
+            )
+        )
+    }
+
+    fun getQuestionsFor23Migration(): List<AudioQuestion> {
+        return listOf(
+            AudioQuestion(
+                16,
+                "fire",
+                "FIRE", "Black Swan",
+                "Daechwita", "Dynamite",
+                1, 350
+            ),
+            AudioQuestion(
+                17,
+                "i_need_u",
+                "PERSONA", "Boy With Luv",
+                "Save ME", "I NEED U",
+                4, 400
+            ),
+            AudioQuestion(
+                18,
+                "life_goes_on",
+                "Pied Piper", "Life Goes On",
+                "Spring Day", "Butter",
+                2, 500
+            ),
+            AudioQuestion(
+                19,
+                "my_universe",
+                "On", "FIRE",
+                "My Universe", "Not Today",
+                3, 300
+            ),
+            AudioQuestion(
+                20,
+                "on",
+                "FIRE", "On",
+                "MIC Drop", "DNA",
+                2, 500
+            ),
+            AudioQuestion(
+                21,
+                "persona",
+                "Daechwita", "IDOL",
+                "Blood Sweat & Tears", "PERSONA",
+                4, 550
+            ),
+            AudioQuestion(
+                22,
+                "run",
+                "Life Goes On", "RUN",
+                "Dynamite", "Permission to Dance",
+                2, 400
+            ),
+            AudioQuestion(
+                23,
+                "we_are_bulletproof_the_eternal",
+                "PERSONA", "Euphoria",
+                "We are Bulletproof : the Eternal", "Pied Piper",
+                3, 500
+            ),
+            AudioQuestion(
+                24,
+                "daechwita",
+                "Daechwita", "Agust D",
+                "Give It To Me", "The Last",
+                1, 550
             )
         )
     }
