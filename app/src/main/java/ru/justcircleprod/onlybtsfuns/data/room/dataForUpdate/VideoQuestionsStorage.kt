@@ -88,6 +88,13 @@ object VideoQuestionsStorage {
     fun getQuestionsFor23Migration(): List<VideoQuestion> {
         return listOf(
             VideoQuestion(
+                12,
+                "fire_video",
+                "FIRE", "Boy With Luv",
+                "On", "MIC Drop",
+                1, 600
+            ),
+            VideoQuestion(
                 13,
                 "i_need_u_video",
                 "PERSONA", "I Need U",
@@ -135,6 +142,48 @@ object VideoQuestionsStorage {
                 "DNA", "IDOL",
                 "Daechwita", "We are Bulletproof : the Eternal",
                 4, 550
+            ),
+            VideoQuestion(
+                20,
+                "dope_video",
+                "Dope", "Blood Sweat & Tears",
+                "We are Bulletproof : the Eternal", "Black Swan",
+                1, 500
+            ),
+            VideoQuestion(
+                21,
+                "just_one_day_video",
+                "FAKE LOVE", "Just One Day",
+                "Life Goes On", "My Universe",
+                2, 550
+            ),
+            VideoQuestion(
+                22,
+                "serendipity_video",
+                "DNA", "My Universe",
+                "Serendipity", "Singularity",
+                3, 550
+            ),
+            VideoQuestion(
+                23,
+                "epilogue_young_forever_video",
+                "Run", "We are Bulletproof : the Eternal",
+                "Dynamite", "Epilogue: Young Forever",
+                4, 550
+            ),
+            VideoQuestion(
+                24,
+                "singularity_video",
+                "Singularity", "Life Goes On",
+                "Serendipity", "Euphoria",
+                1, 500
+            ),
+            VideoQuestion(
+                25,
+                "bonus_video",
+                "Это бонусный вопрос!", "1 правильный ответ!",
+                "Butter", "huh?",
+                3, 600
             )
         )
     }

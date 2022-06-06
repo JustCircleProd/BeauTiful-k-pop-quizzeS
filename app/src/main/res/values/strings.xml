@@ -42,8 +42,9 @@
     <string name="to_categories_text">К выбору категории</string>
     <string name="go_to_menu">В меню</string>
 
-    <string name="brand_image_content_description">Brand image</string>
-    <string name="image_for_question_description">Image for question</string>
-    <string name="result_image_content_description">Result Image</string>
-    <string name="audio_question_content_description">Audio question icon</string>
+    <string name="brand_image_content_description">Изображение бренда</string>
+    <string name="image_for_question_description">Изображение для вопроса</string>
+    <string name="video_for_question_description">Видео для вопроса</string>
+    <string name="audio_question_content_description">Иконка аудио изображения</string>
+    <string name="result_image_content_description">Изображение для результата</string>
 </resources>

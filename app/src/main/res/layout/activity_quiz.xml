@@ -208,7 +208,8 @@
                     <VideoView
                         android:id="@+id/video_question"
                         android:layout_width="@dimen/video_question_width"
-                        android:layout_height="@dimen/video_question_height" />
+                        android:layout_height="@dimen/video_question_height"
+                        android:contentDescription="@string/video_for_question_description"/>
 
                 </FrameLayout>
 

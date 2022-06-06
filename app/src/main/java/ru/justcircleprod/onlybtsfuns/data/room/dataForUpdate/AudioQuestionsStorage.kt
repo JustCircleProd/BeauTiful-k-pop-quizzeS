@@ -127,7 +127,7 @@ object AudioQuestionsStorage {
                 "i_need_u",
                 "PERSONA", "Boy With Luv",
                 "Save ME", "I NEED U",
-                4, 400
+                4, 350
             ),
             AudioQuestion(
                 18,
@@ -176,7 +176,98 @@ object AudioQuestionsStorage {
                 "daechwita",
                 "Daechwita", "Agust D",
                 "Give It To Me", "The Last",
-                1, 550
+                1, 500
+            ),
+            AudioQuestion(
+                25,
+                "boyz_with_fun",
+                "Spring Day", "I NEED U",
+                "Just One Day", "Boyz With Fun",
+                4, 450
+            ),
+            AudioQuestion(
+                26,
+                "ddaeng",
+                "Dynamite", "DDAENG",
+                "FIRE", "IDOL",
+                2, 350
+            ),
+            AudioQuestion(
+                27,
+                "dimple",
+                "Boyz With Fun", "The Truth Untold",
+                "Dimple", "Life Goes On",
+                3, 550
+            ),
+            AudioQuestion(
+                28,
+                "dis_ease",
+                "Dis-ease", "Pied Piper",
+                "Dimple", "Euphoria",
+                1, 500
+            ),
+            AudioQuestion(
+                29,
+                "dope",
+                "Silver Spoon", "Ugh!",
+                "PERSONA", "Dope",
+                4, 450
+            ),
+            AudioQuestion(
+                30,
+                "just_one_day",
+                "Boyz With Fun", "Just One Day",
+                "Butter", "Dis-ease",
+                2, 550
+            ),
+            AudioQuestion(
+                31,
+                "paradise",
+                "Boy With Luv", "Dimple",
+                "Paradise", "Just One Day",
+                3, 500
+            ),
+            AudioQuestion(
+                32,
+                "silver_spoon",
+                "Silver Spoon", "Daechwita",
+                "IDOL", "DDAENG",
+                1, 350
+            ),
+            AudioQuestion(
+                33,
+                "silver_spoon_2",
+                "Black Swan", "MIC Drop",
+                "My Universe", "Silver Spoon",
+                4, 400
+            ),
+            AudioQuestion(
+                34,
+                "ugh",
+                "Blood Sweat & Tears", "Silver Spoon",
+                "Ugh!", "PERSONA",
+                3, 500
+            ),
+            AudioQuestion(
+                35,
+                "serendipity",
+                "Spring Day", "Serendipity",
+                "Singularity", "Dimple",
+                2, 550
+            ),
+            AudioQuestion(
+                36,
+                "epilogue_young_forever",
+                "Epilogue: Young Forever", "Dis-ease",
+                "Paradise", "My Universe",
+                1, 350
+            ),
+            AudioQuestion(
+                37,
+                "singularity",
+                "Serendipity", "Just One Day",
+                "Euphoria", "Singularity",
+                4, 550
             )
         )
     }
