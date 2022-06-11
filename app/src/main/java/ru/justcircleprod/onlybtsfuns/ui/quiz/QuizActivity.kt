@@ -28,8 +28,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
     private val viewModel: QuizViewModel by viewModels()
 
-    private lateinit var correctAnswerPlayer: MediaPlayer
-    private lateinit var incorrectAnswerPlayer: MediaPlayer
+    private var answerPlayer: MediaPlayer? = null
     private var musicPlayer: MediaPlayer? = null
 
     private var positionOfVideoPlayer = 0
@@ -44,7 +43,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
         enableAnimation()
         initAd()
-        initPlayers()
         setOnOptionsClickListeners()
         setLoadingObserver()
 
@@ -124,11 +122,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         binding.bannerAdView.setAdSize(AdSize.BANNER_320x50)
         val adRequest = AdRequest.Builder().build()
         binding.bannerAdView.loadAd(adRequest)
-    }
-
-    private fun initPlayers() {
-        correctAnswerPlayer = MediaPlayer.create(this, R.raw.correct_answer)
-        incorrectAnswerPlayer = MediaPlayer.create(this, R.raw.incorrect_answer)
     }
 
     private fun setOnOptionsClickListeners() {
@@ -320,7 +313,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onRightAnswer(btn: MaterialButton) {
-        correctAnswerPlayer.start()
+        playAnswerSound("correct_answer")
+
         btn.setBackgroundColor(ContextCompat.getColor(this, R.color.correct_answer_color))
 
         val timer = object : CountDownTimer(2000, 2000) {
@@ -333,7 +327,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onWrongAnswer(btn: MaterialButton) {
-        incorrectAnswerPlayer.start()
+        playAnswerSound("incorrect_answer")
+
         btn.setBackgroundColor(ContextCompat.getColor(this, R.color.incorrect_answer_color))
 
         val timer = object : CountDownTimer(2000, 250) {
@@ -348,6 +343,22 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         timer.start()
+    }
+
+    private fun playAnswerSound(answerSoundName: String) {
+        answerPlayer = MediaPlayer()
+
+        answerPlayer?.setOnPreparedListener {
+            if (answerPlayer != null) {
+                answerPlayer!!.start()
+            }
+        }
+
+        answerPlayer?.setDataSource(
+            this,
+            Uri.parse("android.resource://$packageName/raw/$answerSoundName")
+        )
+        answerPlayer?.prepareAsync()
     }
 
     private fun showRightAnswer(answerNum: Int) {
