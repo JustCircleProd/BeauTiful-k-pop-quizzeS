@@ -15,11 +15,12 @@ class ResultsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         enableAnimation()
         binding.toMenuBtn.setOnClickListener { super.onBackPressed() }
         setScoresObserver()
+
+        setContentView(binding.root)
     }
 
     private fun enableAnimation() {

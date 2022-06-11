@@ -23,9 +23,10 @@ class CategoriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         setOnClickListeners()
+
+        setContentView(binding.root)
     }
 
     private fun setOnClickListeners() {

@@ -168,6 +168,12 @@ val MIGRATION_2_3: Migration = object : Migration(2, 3) {
             )
         }
 
+        for ((id, question) in TextQuestionsEditedQuestions.getQuestionForEdit23Migration()) {
+            database.execSQL(
+                "UPDATE OR IGNORE text_questions SET question = \'$question\' WHERE id = $id"
+            )
+        }
+
         with(database) {
             execSQL("CREATE TABLE settings_backup (id INTEGER NOT NULL, state INTEGER NOT NULL, PRIMARY KEY (id))")
             execSQL("INSERT INTO settings_backup SELECT id, state FROM settings")

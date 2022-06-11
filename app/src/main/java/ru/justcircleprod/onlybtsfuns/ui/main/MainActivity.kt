@@ -17,9 +17,10 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         setOnClickListeners()
+
+        setContentView(binding.root)
     }
 
     private fun setOnClickListeners() {

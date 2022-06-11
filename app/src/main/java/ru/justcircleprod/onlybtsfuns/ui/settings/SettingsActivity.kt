@@ -16,7 +16,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         setDifficultyObserver()
         setOnDifficultyChipsClickListeners()
@@ -24,6 +23,8 @@ class SettingsActivity : AppCompatActivity() {
         setQuestionsRepetitionObserver()
 
         binding.toMenuBtn.setOnClickListener { super.onBackPressed() }
+
+        setContentView(binding.root)
     }
 
     private fun setDifficultyObserver() {

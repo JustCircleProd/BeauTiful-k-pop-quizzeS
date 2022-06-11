@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Base64
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -40,13 +41,14 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         enableAnimation()
         initAd()
         initPlayers()
         setOnOptionsClickListeners()
         setLoadingObserver()
+
+        setContentView(binding.root)
     }
 
     override fun onStart() {
@@ -115,7 +117,10 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initAd() {
-        binding.bannerAdView.setAdUnitId("R-M-DEMO-320x50-app_install")
+        val adUnitId =
+            String(Base64.decode("", Base64.DEFAULT), Charsets.UTF_8)
+
+        binding.bannerAdView.setAdUnitId(adUnitId)
         binding.bannerAdView.setAdSize(AdSize.BANNER_320x50)
         val adRequest = AdRequest.Builder().build()
         binding.bannerAdView.loadAd(adRequest)

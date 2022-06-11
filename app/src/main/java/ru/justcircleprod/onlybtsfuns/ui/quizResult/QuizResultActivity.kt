@@ -23,7 +23,6 @@ class QuizResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizResultBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         enableAnimations()
 
@@ -31,6 +30,8 @@ class QuizResultActivity : AppCompatActivity() {
 
         setScoresObservers()
         setLoadingObserver()
+
+        setContentView(binding.root)
     }
 
     private fun enableAnimations() {
