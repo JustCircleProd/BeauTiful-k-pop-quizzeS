@@ -76,4 +76,20 @@ class SettingsViewModel @Inject constructor(private val repository: AppRepositor
             ).show()
         }
     }
+
+    fun deleteAllPassedQuestions(context: Context) {
+        viewModelScope.launch {
+            val deletedCount = withContext(Dispatchers.IO) {
+                repository.deleteAllPassedQuestions()
+            }
+
+            val toastMessage = context.getString(R.string.reset_n_passed_question, deletedCount)
+
+            Toast.makeText(
+                context,
+                toastMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 }

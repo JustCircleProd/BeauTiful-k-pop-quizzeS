@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.yandex.mobile.ads.banner.AdSize
+import com.yandex.mobile.ads.banner.BannerAdEventListener
 import com.yandex.mobile.ads.common.AdRequest
+import com.yandex.mobile.ads.common.AdRequestError
+import com.yandex.mobile.ads.common.ImpressionData
 import dagger.hilt.android.AndroidEntryPoint
 import ru.justcircleprod.onlybtsfuns.R
 import ru.justcircleprod.onlybtsfuns.data.models.AudioQuestion
@@ -28,7 +31,12 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
     private val viewModel: QuizViewModel by viewModels()
 
-    private var answerPlayer: MediaPlayer? = null
+    private lateinit var rightAnswerPlayer: MediaPlayer
+    private var isRightAnswerPlayerPrepared = false
+
+    private lateinit var wrongAnswerPlayer: MediaPlayer
+    private var isWrongAnswerPlayerPrepared = false
+
     private var musicPlayer: MediaPlayer? = null
 
     private var positionOfVideoPlayer = 0
@@ -43,6 +51,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
         enableAnimation()
         initAd()
+        initAnswerPlayers()
         setOnOptionsClickListeners()
         setLoadingObserver()
 
@@ -120,8 +129,51 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.bannerAdView.setAdUnitId(adUnitId)
         binding.bannerAdView.setAdSize(AdSize.BANNER_320x50)
+
         val adRequest = AdRequest.Builder().build()
+        binding.bannerAdView.setBannerAdEventListener(object : BannerAdEventListener {
+            override fun onAdLoaded() {
+                binding.bannerAdView.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(p0: AdRequestError) {}
+
+            override fun onAdClicked() {}
+
+            override fun onLeftApplication() {}
+
+            override fun onReturnedToApplication() {}
+
+            override fun onImpression(p0: ImpressionData?) {}
+        })
+
         binding.bannerAdView.loadAd(adRequest)
+    }
+
+    private fun initAnswerPlayers() {
+        rightAnswerPlayer = MediaPlayer()
+
+        rightAnswerPlayer.setOnPreparedListener {
+            isRightAnswerPlayerPrepared = true
+        }
+
+        rightAnswerPlayer.setDataSource(
+            this,
+            Uri.parse("android.resource://$packageName/raw/correct_answer")
+        )
+        rightAnswerPlayer.prepareAsync()
+
+        wrongAnswerPlayer = MediaPlayer()
+
+        wrongAnswerPlayer.setOnPreparedListener {
+            isWrongAnswerPlayerPrepared = true
+        }
+
+        wrongAnswerPlayer.setDataSource(
+            this,
+            Uri.parse("android.resource://$packageName/raw/incorrect_answer")
+        )
+        wrongAnswerPlayer.prepareAsync()
     }
 
     private fun setOnOptionsClickListeners() {
@@ -135,24 +187,26 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.isLoading.observe(this) { isLoading ->
             if (viewModel.isFirstStart) {
                 viewModel.isFirstStart = false
-            } else {
-                if (isLoading.all { !it }) {
-                    if (viewModel.questions.size == viewModel.countOfQuestions) {
-                        viewModel.setQuestionOnCurrentPosition()
+                return@observe
+            }
 
-                        setScoreObserver()
-                        setQuestionsObserver()
+            if (isLoading.all { !it }) {
+                if (viewModel.questions.size == viewModel.countOfQuestions) {
+                    viewModel.setQuestionOnCurrentPosition()
 
-                        binding.loadLayout.visibility = View.GONE
-                        binding.contentLayout.visibility = View.VISIBLE
-                    } else {
-                        // if the download was successful, but because of the "no repeat" option,
-                        // there are no questions left for the user
-                        binding.loadLayout.visibility = View.GONE
-                        setOutOfQuestionsLayout()
-                    }
+                    setScoreObserver()
+                    setQuestionsObserver()
+
+                    binding.loadLayout.visibility = View.GONE
+                    binding.contentLayout.visibility = View.VISIBLE
+                } else {
+                    // if the download was successful, but because of the "no repeat" option,
+                    // there are no questions left for the user
+                    binding.loadLayout.visibility = View.GONE
+                    setOutOfQuestionsLayout()
                 }
             }
+
         }
     }
 
@@ -313,7 +367,9 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onRightAnswer(btn: MaterialButton) {
-        playAnswerSound("correct_answer")
+        if (isRightAnswerPlayerPrepared) {
+            rightAnswerPlayer.start()
+        }
 
         btn.setBackgroundColor(ContextCompat.getColor(this, R.color.correct_answer_color))
 
@@ -327,7 +383,9 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onWrongAnswer(btn: MaterialButton) {
-        playAnswerSound("incorrect_answer")
+        if (isWrongAnswerPlayerPrepared) {
+            wrongAnswerPlayer.start()
+        }
 
         btn.setBackgroundColor(ContextCompat.getColor(this, R.color.incorrect_answer_color))
 
@@ -343,22 +401,6 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         timer.start()
-    }
-
-    private fun playAnswerSound(answerSoundName: String) {
-        answerPlayer = MediaPlayer()
-
-        answerPlayer?.setOnPreparedListener {
-            if (answerPlayer != null) {
-                answerPlayer!!.start()
-            }
-        }
-
-        answerPlayer?.setDataSource(
-            this,
-            Uri.parse("android.resource://$packageName/raw/$answerSoundName")
-        )
-        answerPlayer?.prepareAsync()
     }
 
     private fun showRightAnswer(answerNum: Int) {

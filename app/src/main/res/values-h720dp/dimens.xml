@@ -1,40 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="inner_layout_margin">20dp</dimen>
+    <dimen name="inner_layout_margin">18dp</dimen>
 
-    <dimen name="brand_margin_bottom">15dp</dimen>
-    <dimen name="brand_text_size">25sp</dimen>
+    <dimen name="brand_margin_bottom">12dp</dimen>
 
-    <dimen name="hint_text_size">21sp</dimen>
-
-    <dimen name="setting_chip_text_size">16sp</dimen>
-
-    <dimen name="button_text_size">17sp</dimen>
     <dimen name="button_pudding">10dp</dimen>
 
-    <dimen name="points_text_size">14sp</dimen>
+    <dimen name="content_loading_progress_size">60dp</dimen>
 
-    <dimen name="tv_question_height">250dp</dimen>
+    <dimen name="question_height">220dp</dimen>
+
     <dimen name="tv_question_margin_top">15dp</dimen>
-    <dimen name="tv_question_margin_bottom">23dp</dimen>
+    <dimen name="tv_question_margin_bottom">21dp</dimen>
 
     <dimen name="question_image_top_margin">15dp</dimen>
-    <dimen name="question_image_bottom_margin">23dp</dimen>
+    <dimen name="question_image_bottom_margin">21dp</dimen>
 
-    <dimen name="video_question_width">285dp</dimen>
-    <dimen name="video_question_height">160dp</dimen>
-    <dimen name="video_question_margin_top">57dp</dimen>
-    <dimen name="video_question_margin_bottom">71dp</dimen>
+    <dimen name="video_question_width">250dp</dimen>
+    <dimen name="video_question_height">140dp</dimen>
+    <dimen name="video_question_margin_top">52dp</dimen>
+    <dimen name="video_question_margin_bottom">64dp</dimen>
 
     <dimen name="audio_question_size">100dp</dimen>
-    <dimen name="audio_question_margin_top">84dp</dimen>
-    <dimen name="audio_question_margin_bottom">104dp</dimen>
+    <dimen name="audio_question_margin_top">69dp</dimen>
+    <dimen name="audio_question_margin_bottom">87dp</dimen>
 
-    <dimen name="result_text_size">22sp</dimen>
-
-    <dimen name="best_score_text_size">17sp</dimen>
-    <dimen name="best_score_size">19sp</dimen>
-
-    <dimen name="congratulation_text_size">22sp</dimen>
-
+    <dimen name="ad_margin_top">12dp</dimen>
 </resources>

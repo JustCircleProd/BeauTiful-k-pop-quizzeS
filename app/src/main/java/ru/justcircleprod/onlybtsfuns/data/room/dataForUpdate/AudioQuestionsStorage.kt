@@ -271,4 +271,114 @@ object AudioQuestionsStorage {
             )
         )
     }
+
+    fun getQuestionsFor34Migration(): List<AudioQuestion> {
+        return listOf(
+            AudioQuestion(
+                38,
+                "danger",
+                "Danger", "IDOL",
+                "Ugh!", "FIRE",
+                1, 350,
+            ),
+            AudioQuestion(
+                39,
+                "hold_me_tight",
+                "Serendipity", "Hold Me Tight",
+                "We are Bulletproof : the Eternal", "Trust Me",
+                2, 550,
+            ),
+            AudioQuestion(
+                40,
+                "house_of_cards",
+                "Boyz With Fun", "Silver Spoon",
+                "House Of Cards", "PERSONA",
+                3, 500,
+            ),
+            AudioQuestion(
+                41,
+                "jamais_vu",
+                "Dimple", "Hold Me Tight",
+                "Spring Day", "Jamais Vu",
+                4, 550,
+            ),
+            AudioQuestion(
+                42,
+                "lie",
+                "Lie", "On",
+                "RUN", "PERSONA",
+                1, 350,
+            ),
+            AudioQuestion(
+                43,
+                "louder_than_bombs",
+                "Singularity", "Louder Than Bombs",
+                "My Universe", "Dis-ease",
+                2, 400,
+            ),
+            AudioQuestion(
+                44,
+                "mikrokosmos",
+                "My Universe", "Whalien 52",
+                "Mikrokosmos", "Jamais Vu",
+                3, 500,
+            ),
+            AudioQuestion(
+                45,
+                "my_time",
+                "Mikrokosmos", "Pied Piper",
+                "Serendipity", "My Time",
+                4, 500,
+            ),
+            AudioQuestion(
+                46,
+                "no_more_dream",
+                "No More Dream", "MIC Drop",
+                "Daechwita", "House Of Cards",
+                1, 500,
+            ),
+            AudioQuestion(
+                47,
+                "outro_wings",
+                "DNA", "Outro : Wings",
+                "Boyz With Fun", "Sea",
+                2, 400,
+            ),
+            AudioQuestion(
+                48,
+                "sea",
+                "Hold Me Tight", "Butter",
+                "Sea", "Paradise",
+                3, 450,
+            ),
+            AudioQuestion(
+                49,
+                "so_what",
+                "Louder Than Bombs", "RUN",
+                "Dynamite", "So What",
+                4, 300,
+            ),
+            AudioQuestion(
+                50,
+                "trivia_seesaw",
+                "Trivia 轉 : Seesaw", "Permission to Dance",
+                "Just One Day", "Boy With Luv",
+                1, 500,
+            ),
+            AudioQuestion(
+                51,
+                "whalien_52",
+                "House Of Cards", "Whalien 52",
+                "No More Dream", "Trivia 轉 : Seesaw",
+                2, 550,
+            ),
+            AudioQuestion(
+                52,
+                "yet_to_come",
+                "So What", "Outro : Wings",
+                "Yet To Come", "My Universe",
+                3, 300,
+            )
+        )
+    }
 }

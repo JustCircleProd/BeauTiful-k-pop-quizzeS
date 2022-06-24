@@ -54,7 +54,7 @@
                     android:layout_marginBottom="@dimen/hint_bottom_margin"
                     android:gravity="top|center_horizontal"
                     android:text="@string/tv_choose_category"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_text_size"
                     app:layout_constraintBottom_toTopOf="@id/line"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -11,16 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
-        <activity
-            android:name=".ui.settings.SettingsActivity" />
-        <activity
-            android:name=".ui.categories.CategoriesActivity" />
-        <activity
-            android:name=".ui.results.ResultsActivity" />
-        <activity
-            android:name=".ui.quizResult.QuizResultActivity" />
-        <activity
-            android:name=".ui.quiz.QuizActivity" />
+        <activity android:name=".ui.settings.SettingsActivity" />
+        <activity android:name=".ui.categories.CategoriesActivity" />
+        <activity android:name=".ui.results.ResultsActivity" />
+        <activity android:name=".ui.quizResult.QuizResultActivity" />
+        <activity android:name=".ui.quiz.QuizActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"

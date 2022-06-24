@@ -15,7 +15,9 @@ class QuizResultViewModel @Inject constructor(
     private val repository: AppRepository,
     state: SavedStateHandle
 ) : ViewModel() {
-    val isLoading = MutableLiveData(true)
+    // 0 - loading and calculating scores
+    // 1 - working with interstitial ad
+    val isLoading = MutableLiveData(listOf(true, true))
 
     private val categoryId = state.get<Int>("categoryId")!!
 
@@ -29,11 +31,11 @@ class QuizResultViewModel @Inject constructor(
 
             if (currentScore.value!! > lastScoreValue) {
                 repository.updateScore(categoryId, currentScore.value!!)
-                isLoading.postValue(false)
+                isLoading.postValue(listOf(false, isLoading.value!![1]))
                 return@launch
             }
 
-            isLoading.postValue(false)
+            isLoading.postValue(listOf(false, isLoading.value!![1]))
         }
     }
 }

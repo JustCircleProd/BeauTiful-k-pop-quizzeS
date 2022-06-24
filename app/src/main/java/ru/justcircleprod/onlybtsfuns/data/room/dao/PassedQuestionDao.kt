@@ -13,4 +13,7 @@ interface PassedQuestionDao {
 
     @Insert
     suspend fun insert(passedQuestions: PassedQuestion)
+
+    @Query("DELETE FROM passed_questions")
+    suspend fun deleteAll(): Int
 }

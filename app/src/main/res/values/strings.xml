@@ -5,7 +5,6 @@
     <string name="settings">Настройки</string>
     <string name="button_text_results">Результаты</string>
 
-
     <string name="difficulty">Сложность вопросов</string>
     <string name="random_difficulty">Случайная</string>
     <string name="usual_difficulty">Обычная</string>
@@ -14,6 +13,13 @@
     <string name="no_questions_repetition">Без повторения</string>
     <string name="set_no_questions_repetition">Опция \"Без повторения вопросов\" включена</string>
     <string name="unset_no_questions_repetition">Опция \"Без повторения вопросов\" выключена</string>
+    <string name="reset_passed_question">Сбросить пройденные вопросы?</string>
+
+    <string name="confirmation">Подтверждение</string>
+    <string name="close_dialog_content_description">Закрытие диалога</string>
+    <string name="reset_confirmation_question">Вы действительно хотите сбросить пройденные вопросы?</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="reset_n_passed_question">Сброшено пройденных вопросов: %1$d</string>
 
     <string name="tv_choose_category">Выберите категорию</string>
     <string name="random_questions">Случайные вопросы</string>
@@ -26,7 +32,7 @@
 
     <string name="tv_loading_quiz_text">Подготавливаем самые интересные вопросы</string>
 
-    <string name="tv_out_of_questions_hint_text">Похоже, что вы ответили на все вопросы в данной категории!\nВы можете выключить опцию \"Без повторения\" и вернуться снова :)</string>
+    <string name="tv_out_of_questions_hint_text">Похоже, что вы ответили на все вопросы в данной категории!\nВы можете выключить опцию \"Без повторения\" или сбросить пройденные вопросы и вернуться снова :)</string>
 
     <string name="tv_points_label">За вопрос: %1$d</string>
     <string name="tv_score_label">Всего очков: %1$d</string>

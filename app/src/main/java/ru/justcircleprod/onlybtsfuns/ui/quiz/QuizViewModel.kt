@@ -209,6 +209,7 @@ class QuizViewModel @Inject constructor(
             if (questions.size == countOfQuestions) {
                 questions = questions.shuffled() as MutableList<Question>
             }
+
             isLoading.value!![loadingIndex] = false
             isLoading.postValue(isLoading.value!!)
         } else {

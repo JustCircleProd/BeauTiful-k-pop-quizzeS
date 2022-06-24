@@ -200,8 +200,36 @@ val MIGRATION_2_3: Migration = object : Migration(2, 3) {
     }
 }
 
+val MIGRATION_3_4: Migration = object : Migration(3, 4) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        for (question in ImageQuestionsStorage.getQuestionsFor34Migration()) {
+            database.execSQL(
+                """INSERT OR IGNORE INTO image_questions
+                | (id, image_entry_name, first_option, second_option, 
+                | third_option, fourth_option, answer_num, points) 
+                | VALUES (${question.id}, "${question.image_entry_name}",
+                | "${question.firstOption}", "${question.secondOption}",
+                | "${question.thirdOption}", "${question.fourthOption}",
+                | ${question.answerNum}, ${question.points})""".trimMargin()
+            )
+        }
+
+        for (question in AudioQuestionsStorage.getQuestionsFor34Migration()) {
+            database.execSQL(
+                """INSERT OR IGNORE INTO audio_questions
+                | (id, audio_entry_name, first_option, second_option, 
+                | third_option, fourth_option, answer_num, points) 
+                | VALUES (${question.id}, "${question.audio_entry_name}",
+                | "${question.firstOption}", "${question.secondOption}",
+                | "${question.thirdOption}", "${question.fourthOption}",
+                | ${question.answerNum}, ${question.points})""".trimMargin()
+            )
+        }
+    }
+}
+
 @Database(
-    version = 3,
+    version = 4,
     entities = [TextQuestion::class, ImageQuestion::class, AudioQuestion::class,
         VideoQuestion::class, PassedQuestion::class, Score::class, Setting::class]
 )
@@ -219,7 +247,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, "db.db")
                 .createFromAsset("database/db.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build()
     }
 }

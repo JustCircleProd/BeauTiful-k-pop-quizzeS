@@ -13,7 +13,7 @@
 
     <color name="chip_setting_background">#EFEFEF</color>
     <color name="line_color">#A8AAAAAA</color>
-    <color name="hint_text_color">#757575</color>
+    <color name="text_color">#757575</color>
     <color name="progress_color">#b480cb</color>
 
     <color name="btn_stroke_color">#b681ce</color>

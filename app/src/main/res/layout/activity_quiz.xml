@@ -57,9 +57,9 @@
                     android:layout_marginBottom="@dimen/tv_question_margin_bottom"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/load_text_pudding"
-                    android:textColor="@color/hint_text_color"
-                    android:textSize="@dimen/hint_text_size"
-                    android:text="@string/tv_loading_quiz_text" />
+                    android:text="@string/tv_loading_quiz_text"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/hint_text_size" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/load_progress"
@@ -88,7 +88,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/load_text_pudding"
                     android:text="@string/tv_out_of_questions_hint_text"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_text_size" />
 
                 <View
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_points_label"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/points_text_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -144,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_score_label"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/points_text_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -152,13 +152,13 @@
                 <TextView
                     android:id="@+id/text_question"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/tv_question_height"
+                    android:layout_height="@dimen/question_height"
                     android:layout_marginTop="@dimen/tv_question_margin_top"
                     android:layout_marginBottom="@dimen/tv_question_margin_bottom"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/tv_question_pudding"
-                    android:textColor="@color/hint_text_color"
-                    android:textSize="@dimen/hint_text_size"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_question_text_size"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@id/progress"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +181,7 @@
                 <ImageView
                     android:id="@+id/image_question"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/tv_question_height"
+                    android:layout_height="@dimen/question_height"
                     android:layout_marginTop="@dimen/question_image_top_margin"
                     android:layout_marginBottom="@dimen/question_image_bottom_margin"
                     android:contentDescription="@string/image_for_question_description"
@@ -209,7 +209,7 @@
                         android:id="@+id/video_question"
                         android:layout_width="@dimen/video_question_width"
                         android:layout_height="@dimen/video_question_height"
-                        android:contentDescription="@string/video_for_question_description"/>
+                        android:contentDescription="@string/video_for_question_description" />
 
                 </FrameLayout>
 
@@ -221,7 +221,7 @@
                     android:layout_marginBottom="@dimen/audio_question_margin_bottom"
                     android:contentDescription="@string/audio_question_content_description"
                     android:src="@drawable/ic_audio_question"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@id/progress"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -235,7 +235,6 @@
                     android:indeterminate="false"
                     android:max="6"
                     android:progress="0"
-                    android:progressBackgroundTint="@color/progress_color"
                     android:progressTint="@color/progress_color"
                     app:layout_constraintBottom_toTopOf="@id/first_option"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -334,11 +333,13 @@
             android:id="@+id/banner_ad_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/root_cardview"
+            android:layout_marginTop="@dimen/ad_margin_top"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/root_cardview"
+            app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

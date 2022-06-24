@@ -1,6 +1,11 @@
 package ru.justcircleprod.onlybtsfuns.ui.settings
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +26,7 @@ class SettingsActivity : AppCompatActivity() {
         setOnDifficultyChipsClickListeners()
 
         setQuestionsRepetitionObserver()
+        makeResetPassedQuestionsClickable()
 
         binding.toMenuBtn.setOnClickListener { super.onBackPressed() }
 
@@ -92,5 +98,24 @@ class SettingsActivity : AppCompatActivity() {
                 viewModel.updateQuestionsRepetition(this, QuestionsRepetitionState.REPETITION)
             }
         }
+    }
+
+    private fun makeResetPassedQuestionsClickable() {
+        val spannableString = SpannableString(binding.resetPassedQuestionsHint.text)
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                ResetPassedQuestionsConfirmationDialog().show(supportFragmentManager, null)
+            }
+        }
+
+        spannableString.setSpan(
+            clickableSpan,
+            0,
+            binding.resetPassedQuestionsHint.text.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        binding.resetPassedQuestionsHint.text = spannableString
+        binding.resetPassedQuestionsHint.movementMethod = LinkMovementMethod.getInstance()
     }
 }

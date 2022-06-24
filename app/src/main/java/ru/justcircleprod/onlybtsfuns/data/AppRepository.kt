@@ -18,7 +18,8 @@ class AppRepository @Inject constructor(
         var ids = db.textQuestionDao().getIds(lowerPoints, upperPoints)
 
         if (noQuestionRepetition) {
-            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
+            val passedQuestionsId =
+                getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -36,7 +37,8 @@ class AppRepository @Inject constructor(
         var ids = db.imageQuestionDao().getIds(lowerPoints, upperPoints)
 
         if (noQuestionRepetition) {
-            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.IMAGE_CONTENT_TYPE)
+            val passedQuestionsId =
+                getPassedQuestionsId(PassedQuestionContentType.IMAGE_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -54,7 +56,8 @@ class AppRepository @Inject constructor(
         var ids = db.audioQuestionDao().getIds(lowerPoints, upperPoints)
 
         if (noQuestionRepetition) {
-            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.AUDIO_CONTENT_TYPE)
+            val passedQuestionsId =
+                getPassedQuestionsId(PassedQuestionContentType.AUDIO_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -72,7 +75,8 @@ class AppRepository @Inject constructor(
         var ids = db.videoQuestionDao().getIds(lowerPoints, upperPoints)
 
         if (noQuestionRepetition) {
-            val passedQuestionsId = getPassedQuestionsId(PassedQuestionContentType.VIDEO_CONTENT_TYPE)
+            val passedQuestionsId =
+                getPassedQuestionsId(PassedQuestionContentType.VIDEO_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -81,12 +85,15 @@ class AppRepository @Inject constructor(
         return db.videoQuestionDao().getByIds(ids.toIntArray())
     }
 
-    suspend fun getPassedQuestionsId(questionContentType: PassedQuestionContentType) =
+    private suspend fun getPassedQuestionsId(questionContentType: PassedQuestionContentType) =
         db.passedQuestionDao().getIdsByContentType(questionContentType)
 
     suspend fun insertPassedQuestion(passedQuestion: PassedQuestion) {
         db.passedQuestionDao().insert(passedQuestion)
     }
+
+    suspend fun deleteAllPassedQuestions() =
+        db.passedQuestionDao().deleteAll()
 
     suspend fun getSetting(id: Int) = db.settingDao().getById(id)
 

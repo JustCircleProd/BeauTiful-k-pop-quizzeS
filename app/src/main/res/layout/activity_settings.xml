@@ -52,7 +52,7 @@
                     android:layout_marginBottom="@dimen/hint_bottom_margin"
                     android:gravity="top|center_horizontal"
                     android:text="@string/difficulty"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_text_size"
                     app:layout_constraintBottom_toTopOf="@id/scroll_for_difficulty_chips"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
                     android:id="@+id/line2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_height"
-                    android:layout_marginBottom="@dimen/settings_item_line_bottom_margin"
+                    android:layout_marginBottom="@dimen/settings_item_bottom_margin"
                     android:background="@color/line_color"
                     app:layout_constraintBottom_toTopOf="@id/questions_repetition_hint"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,19 +116,32 @@
                     android:id="@+id/questions_repetition_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/hint_bottom_margin"
+                    android:layout_marginBottom="@dimen/settings_item_bottom_margin"
                     android:text="@string/no_questions_repetition"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_text_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/line3" />
+                    app:layout_constraintBottom_toTopOf="@id/reset_passed_questions_hint"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/questions_repetition_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintBaseline_toBaselineOf="@id/questions_repetition_hint"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/reset_passed_questions_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/hint_bottom_margin"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="top|center_horizontal"
+                    android:text="@string/reset_passed_question"
+                    android:textSize="@dimen/reset_passed_questions_hint_text_size"
+                    app:layout_constraintBottom_toTopOf="@id/line3"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBaseline_toBaselineOf="@id/questions_repetition_hint" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <View
                     android:id="@+id/line3"
