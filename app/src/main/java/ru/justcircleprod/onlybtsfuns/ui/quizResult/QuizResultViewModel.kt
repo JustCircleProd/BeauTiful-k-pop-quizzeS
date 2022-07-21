@@ -19,7 +19,7 @@ class QuizResultViewModel @Inject constructor(
     // 1 - working with interstitial ad
     val isLoading = MutableLiveData(listOf(true, true))
 
-    private val categoryId = state.get<Int>("categoryId")!!
+    val categoryId = state.get<Int>("categoryId")!!
 
     val currentScore = MutableLiveData(state.get<Int>("score"))
     val lastScore = MutableLiveData<Int>()

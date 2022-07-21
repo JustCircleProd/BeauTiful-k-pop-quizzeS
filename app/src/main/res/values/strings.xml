@@ -45,7 +45,14 @@
     <string name="text_for_bad_result">Мы в тебя верим!</string>
     <string name="text_for_good_result">Отлично получается!</string>
     <string name="text_for_best_result">Новый рекорд!</string>
+
+    <string name="share_result">Поделиться результатом</string>
+    <string name="for_sharing_result">Смотри! Мой результат в категории \"%1$s\" равен %2$d. Сможешь набрать больше?</string>
+    <string name="play_store_link">https://play.google.com/store/apps/details?id=ru.justcircleprod.onlybtsfuns</string>
+
     <string name="to_categories_text">К выбору категории</string>
+    <string name="sharing_result_not_available">На данный момент функция недоступна</string>
+
     <string name="go_to_menu">В меню</string>
 
     <string name="brand_image_content_description">Изображение бренда</string>

@@ -3,12 +3,12 @@ package ru.justcircleprod.onlybtsfuns.ui.settings
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import me.saket.bettermovementmethod.BetterLinkMovementMethod
 import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
 import ru.justcircleprod.onlybtsfuns.data.room.constants.QuestionsRepetitionState
 import ru.justcircleprod.onlybtsfuns.databinding.ActivitySettingsBinding
@@ -116,6 +116,6 @@ class SettingsActivity : AppCompatActivity() {
         )
 
         binding.resetPassedQuestionsHint.text = spannableString
-        binding.resetPassedQuestionsHint.movementMethod = LinkMovementMethod.getInstance()
+        binding.resetPassedQuestionsHint.movementMethod = BetterLinkMovementMethod.getInstance()
     }
 }

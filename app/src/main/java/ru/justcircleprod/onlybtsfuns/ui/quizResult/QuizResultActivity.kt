@@ -1,11 +1,14 @@
 package ru.justcircleprod.onlybtsfuns.ui.quizResult
 
 import android.animation.LayoutTransition
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Base64
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.yandex.mobile.ads.common.AdRequest
@@ -24,6 +27,7 @@ class QuizResultActivity : AppCompatActivity() {
     private val viewModel: QuizResultViewModel by viewModels()
 
     private lateinit var interstitialAd: InterstitialAd
+    private var isAdShown = false
 
     private lateinit var resultPlayer: MediaPlayer
 
@@ -43,6 +47,8 @@ class QuizResultActivity : AppCompatActivity() {
         setLoadingObserver()
         workWithInterstitialAd()
         setScoresObservers()
+
+        setOnShareResultBtnClickListener()
 
         setContentView(binding.root)
     }
@@ -80,6 +86,7 @@ class QuizResultActivity : AppCompatActivity() {
 
         val adUnitId =
             String(Base64.decode("", Base64.DEFAULT), Charsets.UTF_8)
+
         interstitialAd.setAdUnitId(adUnitId)
 
         val adRequest = AdRequest.Builder().build()
@@ -91,12 +98,16 @@ class QuizResultActivity : AppCompatActivity() {
 
             override fun onAdFailedToLoad(p0: AdRequestError) {
                 viewModel.isLoading.value = listOf(viewModel.isLoading.value!![0], false)
+                interstitialAd.destroy()
             }
 
-            override fun onAdShown() {}
+            override fun onAdShown() {
+                isAdShown = true
+            }
 
             override fun onAdDismissed() {
                 viewModel.isLoading.value = listOf(viewModel.isLoading.value!![0], false)
+                interstitialAd.destroy()
             }
 
             override fun onAdClicked() {}
@@ -109,6 +120,18 @@ class QuizResultActivity : AppCompatActivity() {
         })
 
         interstitialAd.loadAd(adRequest)
+
+        // to limit the time to load an ad
+        object : CountDownTimer(3500, 1000) {
+            override fun onTick(mills: Long) {}
+
+            override fun onFinish() {
+                if (!isAdShown) {
+                    viewModel.isLoading.value = listOf(viewModel.isLoading.value!![0], false)
+                    interstitialAd.destroy()
+                }
+            }
+        }.start()
     }
 
     private fun setScoresObservers() {
@@ -157,11 +180,64 @@ class QuizResultActivity : AppCompatActivity() {
         resultPlayer.prepareAsync()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private fun setOnShareResultBtnClickListener() {
+        binding.shareResultBtn.setOnClickListener {
+            if (viewModel.currentScore.value == null) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.sharing_result_not_available),
+                    Toast.LENGTH_SHORT
+                )
 
-        if (::interstitialAd.isInitialized) {
-            interstitialAd.destroy()
+                return@setOnClickListener
+            }
+
+            val resultStr =
+                getString(
+                    R.string.for_sharing_result,
+                    getCategoryName(),
+                    viewModel.currentScore.value!!
+                )
+
+            val playStoreLink = getString(R.string.play_store_link)
+
+            val shareContentBuilder = StringBuilder()
+            shareContentBuilder.append(resultStr, '\n', playStoreLink)
+
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    shareContentBuilder.toString()
+                )
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+    }
+
+    private fun getCategoryName(): String {
+        return when (viewModel.categoryId) {
+            1 -> {
+                getString(R.string.random_questions)
+            }
+            2 -> {
+                getString(R.string.text_questions)
+            }
+            3 -> {
+                getString(R.string.image_questions)
+            }
+            4 -> {
+                getString(R.string.video_questions)
+            }
+            5 -> {
+                getString(R.string.audio_questions)
+            }
+            else -> {
+                getString(R.string.random_questions)
+            }
         }
     }
 }

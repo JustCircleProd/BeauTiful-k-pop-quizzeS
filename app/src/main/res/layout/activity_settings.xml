@@ -135,7 +135,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/hint_bottom_margin"
-                    android:background="?android:attr/selectableItemBackground"
                     android:gravity="top|center_horizontal"
                     android:text="@string/reset_passed_question"
                     android:textSize="@dimen/reset_passed_questions_hint_text_size"

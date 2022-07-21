@@ -6,7 +6,7 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class OnlyBTSFans : Application() {
-    // to determine the display of ads after each 4 passed the test
+    // to determine the display of ads after each 3 passed the test
     var passedTestNum = 0
     val passedTestNumForShowingAd = 3
 

@@ -1,7 +1,5 @@
 package ru.justcircleprod.onlybtsfuns.data.models
 
-import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
-
 enum class PassedQuestionContentType {
     TEXT_CONTENT_TYPE,
     IMAGE_CONTENT_TYPE,
@@ -9,6 +7,6 @@ enum class PassedQuestionContentType {
     AUDIO_CONTENT_TYPE;
 
     companion object {
-        fun fromString(value: String) = DifficultyState.values().first { it.toString() == value }
+        fun fromString(value: String) = values().first { it.toString() == value }
     }
 }

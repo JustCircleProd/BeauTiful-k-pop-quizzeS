@@ -381,4 +381,79 @@ object AudioQuestionsStorage {
             )
         )
     }
+
+    fun getQuestionsFor45Migration(): List<AudioQuestion> {
+        return listOf(
+            AudioQuestion(
+                53,
+                "pluto_134340",
+                "PERSONA", "House Of Cards",
+                "Dionysus", "134340 (Pluto)",
+                4, 550,
+            ),
+            AudioQuestion(
+                54,
+                "airplane_pt_2",
+                "Airplane Pt. 2", "Just One Day",
+                "Sea", "Life Goes On",
+                1, 450,
+            ),
+            AudioQuestion(
+                55,
+                "dionysus",
+                "Serendipity", "Dionysus",
+                "Dis-ease", "My Time",
+                2, 550,
+            ),
+            AudioQuestion(
+                56,
+                "dream_glow",
+                "Yet To Come", "Butter",
+                "Dream Glow", "Silver Spoon",
+                3, 300,
+            ),
+            AudioQuestion(
+                57,
+                "epiphany",
+                "Telepathy", "Spring Day",
+                "Mikrokosmos", "Epiphany",
+                4, 500,
+            ),
+            AudioQuestion(
+                58,
+                "go_go",
+                "Go Go", "FIRE",
+                "Lie", "Love Maze",
+                1, 350,
+            ),
+            AudioQuestion(
+                59,
+                "love_maze",
+                "Louder Than Bombs", "Love Maze",
+                "Paradise", "Boy With Luv",
+                2, 400,
+            ),
+            AudioQuestion(
+                60,
+                "more",
+                "DDAENG", "MIC Drop",
+                "MORE", "Ugh!",
+                3, 450,
+            ),
+            AudioQuestion(
+                61,
+                "telepathy",
+                "Epiphany", "Hold Me Tight",
+                "Dope", "Telepathy",
+                4, 500,
+            ),
+            AudioQuestion(
+                62,
+                "tomorrow",
+                "Tomorrow", "Whalien 52",
+                "Outro : Wings", "Sea",
+                1, 400,
+            )
+        )
+    }
 }
