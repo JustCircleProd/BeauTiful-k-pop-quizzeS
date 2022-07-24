@@ -14,8 +14,8 @@ android {
         applicationId "ru.justcircleprod.onlybtsfuns"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 29
-        versionName "1.6"
+        versionCode 31
+        versionName "1.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {

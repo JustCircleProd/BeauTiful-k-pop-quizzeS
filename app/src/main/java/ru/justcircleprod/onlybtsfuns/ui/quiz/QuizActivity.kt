@@ -128,7 +128,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             String(Base64.decode("", Base64.DEFAULT), Charsets.UTF_8)
 
         binding.bannerAdView.setAdUnitId(adUnitId)
-        binding.bannerAdView.setAdSize(AdSize.BANNER_320x50)
+        binding.bannerAdView.setAdSize(AdSize.stickySize(320))
 
         val adRequest = AdRequest.Builder().build()
         binding.bannerAdView.setBannerAdEventListener(object : BannerAdEventListener {

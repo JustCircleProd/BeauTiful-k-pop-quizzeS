@@ -456,4 +456,79 @@ object AudioQuestionsStorage {
             )
         )
     }
+
+    fun getQuestionsFor56Migration(): List<AudioQuestion> {
+        return listOf(
+            AudioQuestion(
+                63,
+                "anpanman",
+                "DNA", "Anpanman",
+                "Hold Me Tight", "Converse High",
+                2, 400,
+            ),
+            AudioQuestion(
+                64,
+                "attack_on_bangtan",
+                "MORE", "Dionysus",
+                "Attack on Bangtan", "Danger",
+                3, 450,
+            ),
+            AudioQuestion(
+                65,
+                "converse_high",
+                "Go Go", "Silver Spoon",
+                "FIRE", "Converse High",
+                4, 300,
+            ),
+            AudioQuestion(
+                66,
+                "dead_leaves",
+                "Dead Leaves", "Dimple",
+                "Rain", "Epiphany",
+                1, 500,
+            ),
+            AudioQuestion(
+                67,
+                "friends",
+                "Jamais Vu", "Friends",
+                "My Time", "Stay",
+                2, 550,
+            ),
+            AudioQuestion(
+                68,
+                "like",
+                "Dope", "Attack on Bangtan",
+                "Like", "PERSONA",
+                3, 600,
+            ),
+            AudioQuestion(
+                69,
+                "rain",
+                "Sea", "Dead Leaves",
+                "Love Maze", "Rain",
+                4, 600,
+            ),
+            AudioQuestion(
+                70,
+                "stay",
+                "Stay", "Lie",
+                "I NEED U", "FAKE LOVE",
+                1, 350,
+            ),
+            AudioQuestion(
+                71,
+                "trivia_just_dance",
+                "Just One Day", "Trivia 起 : Just Dance",
+                "Boyz With Fun", "Stay",
+                2, 300,
+            ),
+            AudioQuestion(
+                72,
+                "zero_o_clock",
+                "Trivia 起 : Just Dance", "Go Go",
+                "00:00 (Zero O’Clock)", "Singularity",
+                3, 350,
+            )
+        )
+    }
 }

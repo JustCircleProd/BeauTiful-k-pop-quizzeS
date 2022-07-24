@@ -167,4 +167,118 @@ object TextQuestionsStorage {
             )
         )
     }
+
+    fun getQuestionsFor56Migration(): List<TextQuestion> {
+        return listOf(
+            TextQuestion(
+                124,
+                "RM выучил английский во время просмотра ситкома ...",
+                "Друзья", "Теория большого взрыва",
+                "Офис", "Клиника",
+                1, 600,
+            ), TextQuestion(
+                125,
+                "Кто часто сам стрижёт себе волосы?",
+                "V", "Jin",
+                "Jungkook", "RM",
+                2, 500,
+            ), TextQuestion(
+                126,
+                "Кто настолько неуклюж, что часто падает со стула?",
+                "Suga", "J-Hope",
+                "Jimin", "Jin",
+                3, 400,
+            ), TextQuestion(
+                127,
+                "Кого почти год после дебюта группы, не мог запомнить генеральный директор их музыкальной компании?",
+                "Jungkook", "Jin",
+                "Suga", "V",
+                4, 550,
+            ), TextQuestion(
+                128,
+                "С кого упали штаны во время дебютного выступления?",
+                "Jin", "Jimin",
+                "V", "RM",
+                1, 500,
+            ), TextQuestion(
+                129,
+                "Кто хорошо владеет пальцами ног?",
+                "Suga", "Jin",
+                "J-Hope", "Jungkook",
+                2, 550,
+            ), TextQuestion(
+                130,
+                "Из-за какой еды однажды поссорились Jimin и V?",
+                "Кимчи", "Тток",
+                "Дамплинги", "Токпокки ",
+                3, 600,
+            ), TextQuestion(
+                131,
+                "Какое сценическое имя изначально взял себе RM?",
+                "Rare Malady", "Real Me",
+                "Rude Manager", "Rap Monster",
+                4, 400,
+            ), TextQuestion(
+                132,
+                "Как однажды RM по-новому расшифровал своё сценическое имя?",
+                "Real Me", "Rare Miracle",
+                "Rich Mind", "Rude Manager",
+                1, 550,
+            ), TextQuestion(
+                133,
+                "Кто был в хорошем финансовом положении ещё до дебюта?",
+                "Jungkook", "Jin",
+                "RM", "J-Hope",
+                2, 550,
+            ), TextQuestion(
+                134,
+                "BTS стали первой K-pop группой, которые получили собственные смайлики в ...",
+                "Telegram", "YouTube",
+                "Twitter", "Pinterest",
+                3, 450,
+            ), TextQuestion(
+                135,
+                "Настоящее имя RM",
+                "Jung Hoseok", "Park Jimin",
+                "Kim Seokjin", "Kim Namjoon",
+                4, 400,
+            ), TextQuestion(
+                136,
+                "Настоящее имя Jin",
+                "Kim Seokjin", "Min Yoongi",
+                "Jung Hoseok", "Kim Namjoon",
+                1, 400,
+            ), TextQuestion(
+                137,
+                "Настоящее имя J-Hope",
+                "Jeongguk", "Jung Hoseok",
+                "Kim Seokjin", "Kim Taehyung",
+                2, 350,
+            ), TextQuestion(
+                138,
+                "Настоящее имя V",
+                "Min Yoongi", "Kim Namjoon",
+                "Kim Taehyung", "Kim Seokjin",
+                3, 400,
+            ), TextQuestion(
+                139,
+                "Настоящее имя Jimin",
+                "Jeongguk", "Kim Seokjin",
+                "Jung Hoseok", "Park Jimin",
+                4, 300,
+            ), TextQuestion(
+                140,
+                "Настоящее имя Jungkook",
+                "Jeongguk", "Jung Hoseok",
+                "Kim Namjoon", "Min Yoongi",
+                1, 300,
+            ), TextQuestion(
+                141,
+                "Настоящее имя Suga",
+                "Park Jimin", "Min Yoongi",
+                "Kim Seokjin", "Kim Taehyung",
+                2, 400,
+            )
+        )
+    }
 }
