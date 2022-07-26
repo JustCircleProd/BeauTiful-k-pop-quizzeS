@@ -42,9 +42,29 @@
     <string name="tv_text_your_result">Ваш результат</string>
     <string name="tv_text_best_result">Лучший результат</string>
 
-    <string name="text_for_bad_result">Мы в тебя верим!</string>
-    <string name="text_for_good_result">Отлично получается!</string>
-    <string name="text_for_best_result">Новый рекорд!</string>
+    <string-array name="texts_for_bad_result">
+        <item>Мы в тебя верим!</item>
+        <item>Ты сможешь!</item>
+        <item>Верь в себя!</item>
+        <item>В следующий раз получится!</item>
+        <item>Не сдавайся!</item>
+    </string-array>
+
+    <string-array name="texts_for_good_result">
+        <item>Отлично получается!</item>
+        <item>Ты молодец!</item>
+        <item>Ещё немного!</item>
+        <item>Почти рекорд!</item>
+        <item>Не сдавайся!</item>
+    </string-array>
+
+    <string-array name="texts_for_best_result">
+        <item>Новый рекорд!</item>
+        <item>Ура!</item>
+        <item>Поздравляем!</item>
+        <item>Ты молодец!</item>
+        <item>Мы не сомневались!</item>
+    </string-array>
 
     <string name="share_result">Поделиться результатом</string>
     <string name="for_sharing_result">Смотри! Мой результат в категории \"%1$s\" равен %2$d. Сможешь набрать больше?</string>

@@ -1,12 +1,12 @@
 package ru.justcircleprod.onlybtsfuns.data.room
 
 import androidx.room.TypeConverter
-import ru.justcircleprod.onlybtsfuns.data.models.PassedQuestionContentType
+import ru.justcircleprod.onlybtsfuns.data.models.QuestionContentType
 
 class Converters {
     @TypeConverter
-    fun toPassedQuestionContentType(value: String) = PassedQuestionContentType.fromString(value)
+    fun toPassedQuestionContentType(value: String) = QuestionContentType.fromString(value)
 
     @TypeConverter
-    fun fromPassedQuestionContentType(value: PassedQuestionContentType) = value.toString()
+    fun fromPassedQuestionContentType(value: QuestionContentType) = value.toString()
 }

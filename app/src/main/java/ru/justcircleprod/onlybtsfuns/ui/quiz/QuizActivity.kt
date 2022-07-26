@@ -190,7 +190,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 return@observe
             }
 
-            if (isLoading.all { !it }) {
+            if (!isLoading) {
                 if (viewModel.questions.size == viewModel.countOfQuestions) {
                     viewModel.setQuestionOnCurrentPosition()
 

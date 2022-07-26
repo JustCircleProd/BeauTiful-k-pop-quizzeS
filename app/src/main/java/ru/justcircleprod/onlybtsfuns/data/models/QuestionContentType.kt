@@ -1,6 +1,6 @@
 package ru.justcircleprod.onlybtsfuns.data.models
 
-enum class PassedQuestionContentType {
+enum class QuestionContentType {
     TEXT_CONTENT_TYPE,
     IMAGE_CONTENT_TYPE,
     VIDEO_CONTENT_TYPE,

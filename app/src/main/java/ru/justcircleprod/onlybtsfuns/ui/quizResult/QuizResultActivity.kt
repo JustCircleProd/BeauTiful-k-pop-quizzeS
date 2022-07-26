@@ -149,18 +149,42 @@ class QuizResultActivity : AppCompatActivity() {
                 binding.bestScoreLabel.visibility = View.GONE
                 binding.bestScore.visibility = View.GONE
 
-                binding.resultText.text = resources.getString(R.string.text_for_best_result)
-                binding.resultImage.setImageResource(R.drawable.best_image_result)
+                binding.resultText.text =
+                    resources.getStringArray(R.array.texts_for_best_result).toList().shuffled()[0]
+
+                val imageResource = listOf(
+                    R.drawable.best_result,
+                    R.drawable.best_result_2,
+                    R.drawable.best_result_3
+                ).shuffled()[0]
+                binding.resultImage.setImageResource(imageResource)
+
                 playResultSound("best_result")
             }
             viewModel.currentScore.value!! < 1000 -> {
-                binding.resultText.text = resources.getString(R.string.text_for_bad_result)
-                binding.resultImage.setImageResource(R.drawable.bad_image_result)
+                binding.resultText.text =
+                    resources.getStringArray(R.array.texts_for_bad_result).toList().shuffled()[0]
+
+                val imageResource = listOf(
+                    R.drawable.bad_result,
+                    R.drawable.bad_result_2,
+                    R.drawable.bad_result_3
+                ).shuffled()[0]
+                binding.resultImage.setImageResource(imageResource)
+
                 playResultSound("bad_result")
             }
             else -> {
-                binding.resultText.text = resources.getString(R.string.text_for_good_result)
-                binding.resultImage.setImageResource(R.drawable.good_image_result)
+                binding.resultText.text =
+                    resources.getStringArray(R.array.texts_for_good_result).toList().shuffled()[0]
+
+                val imageResource = listOf(
+                    R.drawable.good_result,
+                    R.drawable.good_result_2,
+                    R.drawable.good_result_3
+                ).shuffled()[0]
+                binding.resultImage.setImageResource(imageResource)
+
                 playResultSound("good_result")
             }
         }

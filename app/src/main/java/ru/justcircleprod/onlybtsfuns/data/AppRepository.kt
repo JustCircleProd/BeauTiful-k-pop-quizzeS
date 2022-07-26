@@ -2,6 +2,8 @@ package ru.justcircleprod.onlybtsfuns.data
 
 import ru.justcircleprod.onlybtsfuns.data.models.*
 import ru.justcircleprod.onlybtsfuns.data.room.AppDatabase
+import ru.justcircleprod.onlybtsfuns.data.room.constants.AppDatabaseConstants
+import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,7 +21,7 @@ class AppRepository @Inject constructor(
 
         if (noQuestionRepetition) {
             val passedQuestionsId =
-                getPassedQuestionsId(PassedQuestionContentType.TEXT_CONTENT_TYPE)
+                getPassedQuestionsId(QuestionContentType.TEXT_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -38,7 +40,7 @@ class AppRepository @Inject constructor(
 
         if (noQuestionRepetition) {
             val passedQuestionsId =
-                getPassedQuestionsId(PassedQuestionContentType.IMAGE_CONTENT_TYPE)
+                getPassedQuestionsId(QuestionContentType.IMAGE_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -57,7 +59,7 @@ class AppRepository @Inject constructor(
 
         if (noQuestionRepetition) {
             val passedQuestionsId =
-                getPassedQuestionsId(PassedQuestionContentType.AUDIO_CONTENT_TYPE)
+                getPassedQuestionsId(QuestionContentType.AUDIO_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -76,7 +78,7 @@ class AppRepository @Inject constructor(
 
         if (noQuestionRepetition) {
             val passedQuestionsId =
-                getPassedQuestionsId(PassedQuestionContentType.VIDEO_CONTENT_TYPE)
+                getPassedQuestionsId(QuestionContentType.VIDEO_CONTENT_TYPE)
             ids = ids.filter { it !in passedQuestionsId }
         }
 
@@ -85,7 +87,119 @@ class AppRepository @Inject constructor(
         return db.videoQuestionDao().getByIds(ids.toIntArray())
     }
 
-    private suspend fun getPassedQuestionsId(questionContentType: PassedQuestionContentType) =
+    suspend fun getRandomQuestions(
+        countOfQuestions: Int,
+        lowerPoints: Int,
+        upperPoints: Int,
+        noQuestionRepetition: Boolean
+    ): List<Question> {
+        // questionsIds[?][0] - id,
+        // questionsIds[?][1] - QuestionContentType ordinal,
+        var questionsIds: MutableList<List<Int>> = mutableListOf()
+
+        var textQuestionsIds = getTextQuestionIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId =
+                getPassedQuestionsId(QuestionContentType.TEXT_CONTENT_TYPE)
+            textQuestionsIds = textQuestionsIds.filter { it !in passedQuestionsId }
+        }
+
+        questionsIds.addAll(textQuestionsIds.map {
+            listOf(it, QuestionContentType.TEXT_CONTENT_TYPE.ordinal)
+        })
+
+
+        var imageQuestionsIds = getImageQuestionIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId =
+                getPassedQuestionsId(QuestionContentType.IMAGE_CONTENT_TYPE)
+            imageQuestionsIds = imageQuestionsIds.filter { it !in passedQuestionsId }
+        }
+
+        questionsIds.addAll(imageQuestionsIds.map {
+            listOf(it, QuestionContentType.IMAGE_CONTENT_TYPE.ordinal)
+        })
+
+
+        var audioQuestionsIds = getAudioQuestionIds(lowerPoints, upperPoints)
+
+        if (noQuestionRepetition) {
+            val passedQuestionsId =
+                getPassedQuestionsId(QuestionContentType.AUDIO_CONTENT_TYPE)
+            audioQuestionsIds = audioQuestionsIds.filter { it !in passedQuestionsId }
+        }
+
+        questionsIds.addAll(audioQuestionsIds.map {
+            listOf(it, QuestionContentType.AUDIO_CONTENT_TYPE.ordinal)
+        })
+
+
+        // add Video Questions if difficultyState != USUAL
+        val difficultyState =
+            DifficultyState.fromInt(getSetting(AppDatabaseConstants.DIFFICULTY_SETTING_ID).state)
+
+        if (difficultyState != DifficultyState.USUAL) {
+            var videoQuestionsIds = getVideoQuestionIds(lowerPoints, upperPoints)
+
+            if (noQuestionRepetition) {
+                val passedQuestionsId =
+                    getPassedQuestionsId(QuestionContentType.VIDEO_CONTENT_TYPE)
+                videoQuestionsIds = videoQuestionsIds.filter { it !in passedQuestionsId }
+            }
+
+            questionsIds.addAll(videoQuestionsIds.map {
+                listOf(it, QuestionContentType.VIDEO_CONTENT_TYPE.ordinal)
+            })
+        }
+
+        questionsIds = questionsIds.shuffled().take(countOfQuestions).toMutableList()
+
+
+        val questions: MutableList<Question> = mutableListOf()
+
+        questionsIds.forEach {
+            when (it[1]) {
+                QuestionContentType.TEXT_CONTENT_TYPE.ordinal -> {
+                    questions.addAll(
+                        db.textQuestionDao().getByIds(intArrayOf(it[0]))
+                    )
+                }
+                QuestionContentType.IMAGE_CONTENT_TYPE.ordinal -> {
+                    questions.addAll(
+                        db.imageQuestionDao().getByIds(intArrayOf(it[0]))
+                    )
+                }
+                QuestionContentType.AUDIO_CONTENT_TYPE.ordinal -> {
+                    questions.addAll(
+                        db.audioQuestionDao().getByIds(intArrayOf(it[0]))
+                    )
+                }
+                QuestionContentType.VIDEO_CONTENT_TYPE.ordinal -> {
+                    questions.addAll(
+                        db.videoQuestionDao().getByIds(intArrayOf(it[0]))
+                    )
+                }
+            }
+        }
+
+        return questions
+    }
+
+    private suspend fun getTextQuestionIds(lowerPoints: Int, upperPoints: Int) =
+        db.textQuestionDao().getIds(lowerPoints, upperPoints)
+
+    private suspend fun getImageQuestionIds(lowerPoints: Int, upperPoints: Int) =
+        db.imageQuestionDao().getIds(lowerPoints, upperPoints)
+
+    private suspend fun getAudioQuestionIds(lowerPoints: Int, upperPoints: Int) =
+        db.audioQuestionDao().getIds(lowerPoints, upperPoints)
+
+    private suspend fun getVideoQuestionIds(lowerPoints: Int, upperPoints: Int) =
+        db.videoQuestionDao().getIds(lowerPoints, upperPoints)
+
+    private suspend fun getPassedQuestionsId(questionContentType: QuestionContentType) =
         db.passedQuestionDao().getIdsByContentType(questionContentType)
 
     suspend fun insertPassedQuestion(passedQuestion: PassedQuestion) {

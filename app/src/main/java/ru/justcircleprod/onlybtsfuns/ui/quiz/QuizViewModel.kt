@@ -24,7 +24,7 @@ class QuizViewModel @Inject constructor(
 ) : ViewModel() {
     // list of boolean values, each of which indicates the loading status from different sources
     // (the size may vary depending on the category)
-    val isLoading = MutableLiveData(mutableListOf(true, true, true, true))
+    val isLoading = MutableLiveData(true)
 
     // value to prevent the observer from triggering when setting the default value
     var isFirstStart = true
@@ -52,28 +52,24 @@ class QuizViewModel @Inject constructor(
             when (categoryId) {
                 QuizCategory.TEXT_CATEGORY.value -> {
                     setTextQuestions(
-                        countOfQuestions,
                         lowerPoints,
                         upperPoints
                     )
                 }
                 QuizCategory.IMAGE_CATEGORY.value -> {
                     setImageQuestions(
-                        countOfQuestions,
                         lowerPoints,
                         upperPoints
                     )
                 }
                 QuizCategory.VIDEO_CATEGORY.value -> {
                     setVideoQuestions(
-                        countOfQuestions,
                         lowerPoints,
                         upperPoints
                     )
                 }
                 QuizCategory.AUDIO_CATEGORY.value -> {
                     setAudioQuestions(
-                        countOfQuestions,
                         lowerPoints,
                         upperPoints
                     )
@@ -119,25 +115,18 @@ class QuizViewModel @Inject constructor(
         lowerPoints: Int,
         upperPoints: Int
     ) {
-        val countOfAudioQuestion = (1..2).random()
-        val countOfImageQuestion = if (upperPoints >= 500) (1..2).random() else (2..3).random()
-        val countOfVideoQuestion = if (upperPoints >= 500) 1 else 0
-        val countOfTextQuestion =
-            countOfQuestions - (countOfImageQuestion + countOfAudioQuestion) - countOfVideoQuestion
+        val randomQuestions = repository.getRandomQuestions(
+            countOfQuestions,
+            lowerPoints,
+            upperPoints,
+            noQuestionRepetition
+        )
 
-        setTextQuestions(countOfTextQuestion, lowerPoints, upperPoints)
-        setImageQuestions(countOfImageQuestion, lowerPoints, upperPoints)
-        setAudioQuestions(countOfAudioQuestion, lowerPoints, upperPoints)
-
-        if (countOfVideoQuestion != 0) {
-            setVideoQuestions(countOfVideoQuestion, lowerPoints, upperPoints)
-        } else {
-            isLoading.value!![2] = false
-        }
+        questions.addAll(randomQuestions)
+        onLoadingEnd()
     }
 
     private suspend fun setTextQuestions(
-        countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ) {
@@ -149,11 +138,10 @@ class QuizViewModel @Inject constructor(
         )
 
         questions.addAll(textQuestions)
-        onLoadingEnd(0)
+        onLoadingEnd()
     }
 
     private suspend fun setImageQuestions(
-        countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ) {
@@ -165,11 +153,10 @@ class QuizViewModel @Inject constructor(
         )
 
         questions.addAll(imageQuestions)
-        onLoadingEnd(1)
+        onLoadingEnd()
     }
 
     private suspend fun setVideoQuestions(
-        countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ) {
@@ -182,11 +169,10 @@ class QuizViewModel @Inject constructor(
             )
 
         questions.addAll(videoQuestions)
-        onLoadingEnd(2)
+        onLoadingEnd()
     }
 
     private suspend fun setAudioQuestions(
-        countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int
     ) {
@@ -199,23 +185,14 @@ class QuizViewModel @Inject constructor(
             )
 
         questions.addAll(audioQuestions)
-        onLoadingEnd(3)
+        onLoadingEnd()
     }
 
     // a method that updates the download status
     // and shuffles them when the desired number of questions is reached
-    private fun onLoadingEnd(loadingIndex: Int) {
-        if (categoryId == QuizCategory.RANDOM_CATEGORY.value) {
-            if (questions.size == countOfQuestions) {
-                questions = questions.shuffled() as MutableList<Question>
-            }
-
-            isLoading.value!![loadingIndex] = false
-            isLoading.postValue(isLoading.value!!)
-        } else {
-            questions = questions.shuffled() as MutableList<Question>
-            isLoading.postValue(mutableListOf(false))
-        }
+    private fun onLoadingEnd() {
+        questions = questions.shuffled() as MutableList<Question>
+        isLoading.postValue(false)
     }
 
     fun setQuestionOnCurrentPosition() {

@@ -9,25 +9,25 @@ import androidx.room.PrimaryKey
 data class PassedQuestion(
     @NonNull @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @NonNull @ColumnInfo(name = "question_id") val questionId: Int,
-    @NonNull @ColumnInfo(name = "question_content_type") val questionContentType: PassedQuestionContentType,
+    @NonNull @ColumnInfo(name = "question_content_type") val questionContentType: QuestionContentType,
 ) {
     companion object {
         fun Question.toPassedQuestion(): PassedQuestion {
             val contentType = when (this) {
                 is TextQuestion -> {
-                    PassedQuestionContentType.TEXT_CONTENT_TYPE
+                    QuestionContentType.TEXT_CONTENT_TYPE
                 }
                 is ImageQuestion -> {
-                    PassedQuestionContentType.IMAGE_CONTENT_TYPE
+                    QuestionContentType.IMAGE_CONTENT_TYPE
                 }
                 is VideoQuestion -> {
-                    PassedQuestionContentType.VIDEO_CONTENT_TYPE
+                    QuestionContentType.VIDEO_CONTENT_TYPE
                 }
                 is AudioQuestion -> {
-                    PassedQuestionContentType.AUDIO_CONTENT_TYPE
+                    QuestionContentType.AUDIO_CONTENT_TYPE
                 }
                 else -> {
-                    PassedQuestionContentType.TEXT_CONTENT_TYPE
+                    QuestionContentType.TEXT_CONTENT_TYPE
                 }
             }
 
