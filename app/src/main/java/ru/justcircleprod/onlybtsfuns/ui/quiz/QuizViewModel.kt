@@ -15,6 +15,7 @@ import ru.justcircleprod.onlybtsfuns.data.models.Question
 import ru.justcircleprod.onlybtsfuns.data.room.constants.AppDatabaseConstants
 import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
 import ru.justcircleprod.onlybtsfuns.data.room.constants.QuestionsRepetitionState
+import ru.justcircleprod.onlybtsfuns.util.areEnglishResourcesUsed
 import javax.inject.Inject
 
 @HiltViewModel
@@ -119,7 +120,8 @@ class QuizViewModel @Inject constructor(
             countOfQuestions,
             lowerPoints,
             upperPoints,
-            noQuestionRepetition
+            noQuestionRepetition = noQuestionRepetition,
+            withTextQuestions = !areEnglishResourcesUsed()
         )
 
         questions.addAll(randomQuestions)

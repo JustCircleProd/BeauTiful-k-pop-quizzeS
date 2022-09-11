@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
+        <activity android:name=".ui.settings.creatorsLicenses.CreatorsLicenses" />
         <activity android:name=".ui.settings.SettingsActivity" />
         <activity android:name=".ui.categories.CategoriesActivity" />
         <activity android:name=".ui.results.ResultsActivity" />

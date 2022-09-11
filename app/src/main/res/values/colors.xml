@@ -24,4 +24,7 @@
 
     <color name="result_color">#5e5e5e</color>
     <color name="setting_label_color">#4E4E4E</color>
+
+    <color name="creators_and_licences_text_color">#F2DCF7</color>
+    <color name="license_card_color">#EAEAEA</color>
 </resources>

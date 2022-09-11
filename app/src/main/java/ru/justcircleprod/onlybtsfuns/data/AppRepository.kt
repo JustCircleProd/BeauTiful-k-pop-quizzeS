@@ -91,23 +91,26 @@ class AppRepository @Inject constructor(
         countOfQuestions: Int,
         lowerPoints: Int,
         upperPoints: Int,
-        noQuestionRepetition: Boolean
+        noQuestionRepetition: Boolean,
+        withTextQuestions: Boolean = true
     ): List<Question> {
         // questionsIds[?][0] - id,
         // questionsIds[?][1] - QuestionContentType ordinal,
         var questionsIds: MutableList<List<Int>> = mutableListOf()
 
-        var textQuestionsIds = getTextQuestionIds(lowerPoints, upperPoints)
+        if (withTextQuestions) {
+            var textQuestionsIds = getTextQuestionIds(lowerPoints, upperPoints)
 
-        if (noQuestionRepetition) {
-            val passedQuestionsId =
-                getPassedQuestionsId(QuestionContentType.TEXT_CONTENT_TYPE)
-            textQuestionsIds = textQuestionsIds.filter { it !in passedQuestionsId }
+            if (noQuestionRepetition) {
+                val passedQuestionsId =
+                    getPassedQuestionsId(QuestionContentType.TEXT_CONTENT_TYPE)
+                textQuestionsIds = textQuestionsIds.filter { it !in passedQuestionsId }
+            }
+
+            questionsIds.addAll(textQuestionsIds.map {
+                listOf(it, QuestionContentType.TEXT_CONTENT_TYPE.ordinal)
+            })
         }
-
-        questionsIds.addAll(textQuestionsIds.map {
-            listOf(it, QuestionContentType.TEXT_CONTENT_TYPE.ordinal)
-        })
 
 
         var imageQuestionsIds = getImageQuestionIds(lowerPoints, upperPoints)

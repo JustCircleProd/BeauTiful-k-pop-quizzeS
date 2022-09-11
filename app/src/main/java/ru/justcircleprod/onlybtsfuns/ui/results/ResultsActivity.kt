@@ -2,10 +2,12 @@ package ru.justcircleprod.onlybtsfuns.ui.results
 
 import android.animation.LayoutTransition
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import ru.justcircleprod.onlybtsfuns.databinding.ActivityResultsBinding
+import ru.justcircleprod.onlybtsfuns.util.areEnglishResourcesUsed
 
 @AndroidEntryPoint
 class ResultsActivity : AppCompatActivity() {
@@ -15,6 +17,12 @@ class ResultsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultsBinding.inflate(layoutInflater)
+
+        if (areEnglishResourcesUsed()) {
+            binding.textQuestionsScoreLabel.visibility = View.GONE
+            binding.textQuestionsScore.visibility = View.GONE
+            binding.line2.visibility = View.GONE
+        }
 
         enableAnimation()
         binding.toMenuBtn.setOnClickListener { super.onBackPressed() }

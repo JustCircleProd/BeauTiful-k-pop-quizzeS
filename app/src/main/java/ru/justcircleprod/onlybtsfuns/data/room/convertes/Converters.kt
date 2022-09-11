@@ -1,4 +1,4 @@
-package ru.justcircleprod.onlybtsfuns.data.room
+package ru.justcircleprod.onlybtsfuns.data.room.convertes
 
 import androidx.room.TypeConverter
 import ru.justcircleprod.onlybtsfuns.data.models.QuestionContentType

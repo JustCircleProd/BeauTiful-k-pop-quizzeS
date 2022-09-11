@@ -211,7 +211,7 @@ class QuizResultActivity : AppCompatActivity() {
                     this,
                     getString(R.string.sharing_result_not_available),
                     Toast.LENGTH_SHORT
-                )
+                ).show()
 
                 return@setOnClickListener
             }

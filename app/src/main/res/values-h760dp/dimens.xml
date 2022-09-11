@@ -6,6 +6,8 @@
 
     <dimen name="button_pudding">10dp</dimen>
 
+    <dimen name="creators_licenses_content_height">480dp</dimen>
+
     <dimen name="content_loading_progress_size">70dp</dimen>
 
     <dimen name="question_height">250dp</dimen>

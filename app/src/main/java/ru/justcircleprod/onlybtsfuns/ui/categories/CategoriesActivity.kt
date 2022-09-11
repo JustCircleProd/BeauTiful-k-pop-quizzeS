@@ -2,6 +2,7 @@ package ru.justcircleprod.onlybtsfuns.ui.categories
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import ru.justcircleprod.onlybtsfuns.appConstants.QuizCategory
 import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
 import ru.justcircleprod.onlybtsfuns.databinding.ActivityCategoriesBinding
 import ru.justcircleprod.onlybtsfuns.ui.quiz.QuizActivity
+import ru.justcircleprod.onlybtsfuns.util.areEnglishResourcesUsed
 
 
 @AndroidEntryPoint
@@ -24,6 +26,9 @@ class CategoriesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
 
+        if (areEnglishResourcesUsed()) {
+            binding.textQuestions.visibility = View.GONE
+        }
         setOnClickListeners()
 
         setContentView(binding.root)

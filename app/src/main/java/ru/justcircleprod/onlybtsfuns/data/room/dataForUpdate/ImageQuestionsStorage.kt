@@ -317,4 +317,135 @@ object ImageQuestionsStorage {
             )
         )
     }
+
+    fun getQuestionsFor67Migration(): List<ImageQuestion> {
+        return listOf(
+            ImageQuestion(
+                201,
+                "chimmy_3",
+                "Chimmy", "Cooky",
+                "Koya", "Mang",
+                1, 600,
+            ),
+            ImageQuestion(
+                202,
+                "cooky_3",
+                "Tata", "Cooky",
+                "Shooky", "Rj",
+                2, 600,
+            ),
+            ImageQuestion(
+                203,
+                "koya_3",
+                "Mang", "Chimmy",
+                "Koya", "Shooky",
+                3, 600,
+            ),
+            ImageQuestion(
+                204,
+                "mang_3",
+                "Rj", "Tata",
+                "Chimmy", "Mang",
+                4, 600,
+            ),
+            ImageQuestion(
+                205,
+                "rj_3",
+                "Rj", "Koya",
+                "Tata", "Cooky",
+                1, 600,
+            ),
+            ImageQuestion(
+                206,
+                "shooky_3",
+                "Koya", "Shooky",
+                "Mang", "Chimmy",
+                2, 600,
+            ),
+            ImageQuestion(
+                207,
+                "tata_3",
+                "Cooky", "Rj",
+                "Tata", "Mang",
+                3, 600,
+            ),
+            ImageQuestion(
+                208,
+                "jeon_jung_kook_27",
+                "Jimin", "J-Hope",
+                "Suga", "Jungkook",
+                4, 550,
+            ),
+            ImageQuestion(
+                209,
+                "jung_ho_seok_25",
+                "J-Hope", "Jungkook",
+                "Jin", "V",
+                1, 600,
+            ),
+            ImageQuestion(
+                210,
+                "kim_nam_joon_26",
+                "Jin", "RM",
+                "V", "Jimin",
+                2, 550,
+            ),
+            ImageQuestion(
+                211,
+                "kim_seok_jin_29",
+                "RM", "Suga",
+                "Jin", "Jungkook",
+                3, 600,
+            ),
+            ImageQuestion(
+                212,
+                "kim_tae_hyung_29",
+                "J-Hope", "Jin",
+                "Jimin", "V",
+                4, 600,
+            ),
+            ImageQuestion(
+                213,
+                "min_yoon_gi_28",
+                "Suga", "J-Hope",
+                "Jungkook", "Jimin",
+                1, 600,
+            ),
+            ImageQuestion(
+                214,
+                "park_ji_min_27",
+                "V", "Jimin",
+                "Suga", "Jungkook",
+                2, 600,
+            ),
+            ImageQuestion(
+                215,
+                "jhope_jimin_1",
+                "J-Hope, Jungkook", "V, Jimin",
+                "J-Hope, Jimin", "J-Hope, Suga",
+                3, 600,
+            ),
+            ImageQuestion(
+                216,
+                "jin_v_1",
+                "Suga, V", "V, Jin",
+                "V, Jungkook", "Jin, V",
+                4, 500,
+            ),
+            ImageQuestion(
+                217,
+                "jungkook_rm_1",
+                "Jungkook, RM", "J-Hope, RM",
+                "Jungkook, V", "Jungkook, Jimin",
+                1, 400,
+            ),
+            ImageQuestion(
+                218,
+                "suga_jimin_1",
+                "Suga, Jimin", "Suga, Jimin",
+                "RM, Jimin", "J-Hope, Jimin",
+                2, 600,
+            )
+        )
+    }
 }

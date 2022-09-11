@@ -168,7 +168,7 @@ object AudioQuestionsStorage {
                 23,
                 "we_are_bulletproof_the_eternal",
                 "PERSONA", "Euphoria",
-                "We are Bulletproof : the Eternal", "Pied Piper",
+                "We are Bulletproof: the Eternal", "Pied Piper",
                 3, 500
             ),
             AudioQuestion(
@@ -285,7 +285,7 @@ object AudioQuestionsStorage {
                 39,
                 "hold_me_tight",
                 "Serendipity", "Hold Me Tight",
-                "We are Bulletproof : the Eternal", "Trust Me",
+                "We are Bulletproof: the Eternal", "Trust Me",
                 2, 550,
             ),
             AudioQuestion(
@@ -340,7 +340,7 @@ object AudioQuestionsStorage {
             AudioQuestion(
                 47,
                 "outro_wings",
-                "DNA", "Outro : Wings",
+                "DNA", "Outro: Wings",
                 "Boyz With Fun", "Sea",
                 2, 400,
             ),
@@ -361,7 +361,7 @@ object AudioQuestionsStorage {
             AudioQuestion(
                 50,
                 "trivia_seesaw",
-                "Trivia 轉 : Seesaw", "Permission to Dance",
+                "Trivia: Seesaw", "Permission to Dance",
                 "Just One Day", "Boy With Luv",
                 1, 500,
             ),
@@ -369,13 +369,13 @@ object AudioQuestionsStorage {
                 51,
                 "whalien_52",
                 "House Of Cards", "Whalien 52",
-                "No More Dream", "Trivia 轉 : Seesaw",
+                "No More Dream", "Trivia: Seesaw",
                 2, 550,
             ),
             AudioQuestion(
                 52,
                 "yet_to_come",
-                "So What", "Outro : Wings",
+                "So What", "Outro: Wings",
                 "Yet To Come", "My Universe",
                 3, 300,
             )
@@ -394,7 +394,7 @@ object AudioQuestionsStorage {
             AudioQuestion(
                 54,
                 "airplane_pt_2",
-                "Airplane Pt. 2", "Just One Day",
+                "Airplane Pt.2", "Just One Day",
                 "Sea", "Life Goes On",
                 1, 450,
             ),
@@ -451,7 +451,7 @@ object AudioQuestionsStorage {
                 62,
                 "tomorrow",
                 "Tomorrow", "Whalien 52",
-                "Outro : Wings", "Sea",
+                "Outro: Wings", "Sea",
                 1, 400,
             )
         )
@@ -518,17 +518,112 @@ object AudioQuestionsStorage {
             AudioQuestion(
                 71,
                 "trivia_just_dance",
-                "Just One Day", "Trivia 起 : Just Dance",
+                "Just One Day", "Trivia: Just Dance",
                 "Boyz With Fun", "Stay",
                 2, 300,
             ),
             AudioQuestion(
                 72,
                 "zero_o_clock",
-                "Trivia 起 : Just Dance", "Go Go",
+                "Trivia: Just Dance", "Go Go",
                 "00:00 (Zero O’Clock)", "Singularity",
                 3, 350,
             )
+        )
+    }
+
+    fun getQuestionsFor67Migration(): List<AudioQuestion> {
+        return listOf(
+            AudioQuestion(
+                73,
+                "arson",
+                "Dead Leaves", "FIRE",
+                "PERSONA", "Arson",
+                4, 600,
+            ),
+            AudioQuestion(
+                74,
+                "crystal_snow",
+                "Crystal Snow", "Outro: Wings",
+                "Fly to My Room", "Anpanman",
+                1, 400,
+            ),
+            AudioQuestion(
+                75,
+                "cypher_part_1",
+                "Attack on Bangtan", "Cypher Pt.1",
+                "I'm Fine", "Dis-ease",
+                2, 500,
+            ),
+            AudioQuestion(
+                76,
+                "dont_leave_me",
+                "Stay", "Save ME",
+                "Don't Leave Me", "Airplane Pt.2",
+                3, 350,
+            ),
+            AudioQuestion(
+                77,
+                "fly_to_my_room",
+                "Stay Gold", "Life Goes On",
+                "Anpanman", "Fly to My Room",
+                4, 400,
+            ),
+            AudioQuestion(
+                78,
+                "hip_hop_phile",
+                "Hip Hop Phile", "The Truth Untold",
+                "Converse High", "00:00 (Zero O’Clock)",
+                1, 350,
+            ),
+            AudioQuestion(
+                79,
+                "home",
+                "Boyz With Fun", "HOME",
+                "Sea", "I'm Fine",
+                2, 450,
+            ),
+            AudioQuestion(
+                80,
+                "im_fine",
+                "Danger", "Outro: Wings",
+                "I'm Fine", "So What",
+                3, 400,
+            ),
+            AudioQuestion(
+                81,
+                "stay_gold",
+                "Trivia: Love", "Dope",
+                "The Truth Untold", "Stay Gold",
+                4, 400,
+            ),
+            AudioQuestion(
+                82,
+                "the_truth_untold",
+                "The Truth Untold", "Paradise",
+                "Stay Gold", "Epiphany",
+                1, 550,
+            ),
+            AudioQuestion(
+                83,
+                "trivia_love",
+                "FAKE LOVE", "Trivia: Love",
+                "HOME", "Trivia: Just Dance",
+                2, 450,
+            ),
+            AudioQuestion(
+                84,
+                "your_eyes_tell",
+                "Pied Piper", "Serendipity",
+                "Your Eyes Tell", "Singularity",
+                3, 600,
+            )
+        )
+    }
+
+    fun getUpdatedPointsFor67Migration(): Map<Int, Int> {
+        return mapOf(
+            7 to 400
         )
     }
 }

@@ -1,17 +1,22 @@
 package ru.justcircleprod.onlybtsfuns.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import me.saket.bettermovementmethod.BetterLinkMovementMethod
+import ru.justcircleprod.onlybtsfuns.R
 import ru.justcircleprod.onlybtsfuns.data.room.constants.DifficultyState
 import ru.justcircleprod.onlybtsfuns.data.room.constants.QuestionsRepetitionState
 import ru.justcircleprod.onlybtsfuns.databinding.ActivitySettingsBinding
+import ru.justcircleprod.onlybtsfuns.ui.settings.creatorsLicenses.CreatorsLicenses
 
 @AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
@@ -27,6 +32,8 @@ class SettingsActivity : AppCompatActivity() {
 
         setQuestionsRepetitionObserver()
         makeResetPassedQuestionsClickable()
+
+        makeCreatorsAndLicensesTextClickable()
 
         binding.toMenuBtn.setOnClickListener { super.onBackPressed() }
 
@@ -117,5 +124,36 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.resetPassedQuestionsHint.text = spannableString
         binding.resetPassedQuestionsHint.movementMethod = BetterLinkMovementMethod.getInstance()
+    }
+
+    private fun makeCreatorsAndLicensesTextClickable() {
+        val spannableString = SpannableString(binding.creatorsAndLicenses.text)
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                val intent = Intent(this@SettingsActivity, CreatorsLicenses::class.java)
+                startActivity(intent)
+            }
+        }
+
+        spannableString.setSpan(
+            clickableSpan,
+            0,
+            binding.creatorsAndLicenses.text.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableString.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    this,
+                    R.color.creators_and_licences_text_color
+                )
+            ),
+            0,
+            binding.creatorsAndLicenses.text.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        binding.creatorsAndLicenses.text = spannableString
+        binding.creatorsAndLicenses.movementMethod = BetterLinkMovementMethod.getInstance()
     }
 }
