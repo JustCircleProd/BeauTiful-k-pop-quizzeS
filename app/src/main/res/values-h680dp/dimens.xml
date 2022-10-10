@@ -6,7 +6,7 @@
 
     <dimen name="button_pudding">9dp</dimen>
 
-    <dimen name="creators_licenses_content_height">420dp</dimen>
+    <dimen name="developers_licenses_content_height">420dp</dimen>
 
     <dimen name="content_loading_progress_size">60dp</dimen>
 

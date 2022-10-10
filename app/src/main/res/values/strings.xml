@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Only BTS Fans</string>
+    <string name="app_name" translatable="false">BeauTiful k-pop quizzeS</string>
 
     <string name="start_quiz">Start quiz</string>
     <string name="settings">Settings</string>
@@ -14,7 +14,7 @@
     <string name="set_no_questions_repetition">The \"No repeat questions\" option is enabled</string>
     <string name="unset_no_questions_repetition">The \"No repeat questions\" option is disabled</string>
     <string name="reset_passed_question">Reset passed questions?</string>
-    <string name="creators_and_licenses">Creators and Licenses</string>
+    <string name="developers_and_licenses">Developers and Licenses</string>
 
     <string name="creators">Creators</string>
     <string name="creators_content_description" translatable="false">JustCircle Prod.</string>
@@ -40,7 +40,7 @@
 
     <string name="tv_out_of_questions_hint_text">It looks like you have answered all the questions in this category!\You can turn off the \"No repeat\" option or reset the passed questions and come back again :)</string>
 
-    <string name="tv_points_label">For this question: %1$d</string>
+    <string name="tv_points_label">Points: %1$d</string>
     <string name="tv_score_label">Total points: %1$d</string>
 
     <string name="tv_loading_result_text">Counting the points</string>

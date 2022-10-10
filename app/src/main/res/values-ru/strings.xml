@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Only BTS Fans</string>
-
     <string name="start_quiz">Начать тест</string>
     <string name="settings">Настройки</string>
     <string name="button_text_results">Результаты</string>
@@ -13,7 +11,7 @@
     <string name="no_questions_repetition">Без повторения</string>
     <string name="set_no_questions_repetition">Опция \"Без повторения вопросов\" включена</string>
     <string name="unset_no_questions_repetition">Опция \"Без повторения вопросов\" выключена</string>
-    <string name="creators_and_licenses">Создатели и лицензии</string>
+    <string name="developers_and_licenses">Создатели и лицензии</string>
 
     <string name="reset_passed_question">Сбросить пройденные вопросы?</string>
     <string name="creators">Создатели</string>

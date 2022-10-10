@@ -7,7 +7,7 @@
     <dimen name="inner_layout_margin">10dp</dimen>
 
     <dimen name="brand_margin_bottom">4dp</dimen>
-    <dimen name="brand_text_size">22sp</dimen>
+    <dimen name="brand_text_size">20sp</dimen>
     <dimen name="brand_image_padding_horizontal">20dp</dimen>
 
     <dimen name="hint_text_size">19sp</dimen>
@@ -22,7 +22,7 @@
     <dimen name="reset_passed_questions_hint_text_size">16sp</dimen>
     <dimen name="creators_and_licenses_text_size">15sp</dimen>
 
-    <dimen name="creators_licenses_content_height">330dp</dimen>
+    <dimen name="developers_licenses_content_height">330dp</dimen>
 
     <dimen name="dialog_padding">14dp</dimen>
     <dimen name="dialog_title_text_size">18sp</dimen>

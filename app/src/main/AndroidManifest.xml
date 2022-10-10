@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.justcircleprod.onlybtsfuns">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".OnlyBTSFans"
+        android:name=".App"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
-        <activity android:name=".ui.settings.creatorsLicenses.CreatorsLicenses" />
+        <activity android:name=".ui.settings.developersAndLicenses.DevelopersAndLicenses" />
         <activity android:name=".ui.settings.SettingsActivity" />
         <activity android:name=".ui.categories.CategoriesActivity" />
         <activity android:name=".ui.results.ResultsActivity" />
