@@ -23,8 +23,6 @@ class QuizViewModel @Inject constructor(
     private val repository: AppRepository,
     state: SavedStateHandle
 ) : ViewModel() {
-    // list of boolean values, each of which indicates the loading status from different sources
-    // (the size may vary depending on the category)
     val isLoading = MutableLiveData(true)
 
     // value to prevent the observer from triggering when setting the default value
