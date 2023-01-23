@@ -11,7 +11,7 @@ import com.justcircleprod.beautifulkpopquizzes.data.room.dao.*
 
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [TextQuestion::class, ImageQuestion::class, AudioQuestion::class,
         VideoQuestion::class, PassedQuestion::class, Score::class, Setting::class]
 )
@@ -29,6 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, "db.db")
                 .createFromAsset("database/db.db")
+                .addMigrations(MIGRATION_1_2)
                 .build()
     }
 }
