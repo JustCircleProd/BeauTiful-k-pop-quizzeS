@@ -45,7 +45,6 @@ Tech stack:
 - Coroutines
 - Room
 - Hilt
-- WorkManager
 - [BetterLinkMovementMethod](https://github.com/saket/Better-Link-Movement-Method)
 - Architecture
     - MVVM Architecture (View - LiveData - ViewModel - Model)
@@ -53,7 +52,7 @@ Tech stack:
   
 ### Tech explanation
 
-The app is built on several activities. MMVM is used.
+The app is built on several activities. MММM is used.
 
 Room is used to store questions, scores, settings and passed questions (for "No question repetition" option).
   
