@@ -148,21 +148,21 @@
                     android:layout_height="@dimen/line_height"
                     android:layout_marginBottom="@dimen/line_bottom_margin"
                     android:background="@color/line_color"
-                    app:layout_constraintBottom_toTopOf="@id/to_menu_btn"
+                    app:layout_constraintBottom_toTopOf="@id/back_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/to_menu_btn"
-                    style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+                    android:id="@+id/back_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:elevation="@dimen/button_elevation"
                     android:padding="@dimen/button_pudding"
                     android:stateListAnimator="@null"
-                    android:text="@string/go_to_menu"
+                    android:text="@string/back"
                     android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
                     app:cornerRadius="@dimen/button_corner_radius"
@@ -185,11 +185,11 @@
             android:gravity="top|center_horizontal"
             android:text="@string/developers_and_licenses"
             android:textSize="@dimen/creators_and_licenses_text_size"
-            app:layout_constraintTop_toBottomOf="@id/root_cardview"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/root_cardview"
+            app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

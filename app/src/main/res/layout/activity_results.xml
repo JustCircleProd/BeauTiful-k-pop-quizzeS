@@ -44,9 +44,9 @@
                 android:id="@+id/cardview_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/inner_layout_margin"
                 android:animateLayoutChanges="true"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/inner_layout_margin">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/no_category_score_label"
@@ -177,16 +177,16 @@
                     android:background="@color/line_color" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/to_menu_btn"
-                    style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+                    android:id="@+id/back_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:elevation="@dimen/button_elevation"
                     android:padding="@dimen/button_pudding"
                     android:stateListAnimator="@null"
-                    android:text="@string/go_to_menu"
+                    android:text="@string/back"
                     android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
                     app:cornerRadius="@dimen/button_corner_radius"

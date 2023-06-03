@@ -60,7 +60,6 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/start_quiz"
-                    style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -69,6 +68,7 @@
                     android:stateListAnimator="@null"
                     android:text="@string/start_quiz"
                     android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
                     app:cornerRadius="@dimen/button_corner_radius"
@@ -81,7 +81,6 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/settings"
-                    style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -90,6 +89,7 @@
                     android:stateListAnimator="@null"
                     android:text="@string/settings"
                     android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
                     app:cornerRadius="@dimen/button_corner_radius"
@@ -102,7 +102,6 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/results"
-                    style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -111,6 +110,7 @@
                     android:stateListAnimator="@null"
                     android:text="@string/button_text_results"
                     android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/button_text_size"
                     app:cornerRadius="@dimen/button_corner_radius"

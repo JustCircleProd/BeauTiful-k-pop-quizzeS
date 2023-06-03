@@ -36,9 +36,9 @@ class SettingsActivity : AppCompatActivity() {
         setQuestionsRepetitionObserver()
         makeResetPassedQuestionsClickable()
 
-        makeCreatorsAndLicensesTextClickable()
+        makeDevelopersAndLicensesTextClickable()
 
-        binding.toMenuBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         setContentView(binding.root)
     }
@@ -129,7 +129,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.resetPassedQuestionsHint.movementMethod = BetterLinkMovementMethod.getInstance()
     }
 
-    private fun makeCreatorsAndLicensesTextClickable() {
+    private fun makeDevelopersAndLicensesTextClickable() {
         val spannableString = SpannableString(binding.creatorsAndLicenses.text)
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
@@ -148,7 +148,7 @@ class SettingsActivity : AppCompatActivity() {
             ForegroundColorSpan(
                 ContextCompat.getColor(
                     this,
-                    R.color.creators_and_licences_text_color
+                    R.color.white
                 )
             ),
             0,

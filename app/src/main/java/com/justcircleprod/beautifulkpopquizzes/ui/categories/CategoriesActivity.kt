@@ -29,10 +29,11 @@ class CategoriesActivity : AppCompatActivity() {
 
         binding.brandLabel.makeBrandLabelColorful()
 
-
         if (areEnglishResourcesUsed()) {
             binding.textQuestions.visibility = View.GONE
         }
+
+        binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setOnClickListeners()
 
         setContentView(binding.root)

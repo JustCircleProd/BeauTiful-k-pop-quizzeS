@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.justcircleprod.beautifulkpopquizzes.R
 import com.justcircleprod.beautifulkpopquizzes.databinding.ActivityDevelopersAndLicensesBinding
 import com.justcircleprod.beautifulkpopquizzes.ui.extensions.makeBrandLabelColorful
-import com.justcircleprod.beautifulkpopquizzes.ui.settings.developersAndLicenses.licenses.Licenses
+import com.justcircleprod.beautifulkpopquizzes.ui.settings.developersAndLicenses.licenses.licenses
 
 class DevelopersAndLicenses : AppCompatActivity() {
     private lateinit var binding: ActivityDevelopersAndLicensesBinding
@@ -40,7 +40,7 @@ class DevelopersAndLicenses : AppCompatActivity() {
 
         binding.brandLabel.makeBrandLabelColorful()
 
-        binding.toSettingsBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
@@ -51,12 +51,11 @@ class DevelopersAndLicenses : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     item {
-                        SectionTitle(text = stringResource(id = R.string.creators))
+                        SectionTitle(text = stringResource(id = R.string.developers))
                     }
                     item {
                         CreatorsImage()
                     }
-
                     item {
                         Line()
                     }
@@ -65,7 +64,7 @@ class DevelopersAndLicenses : AppCompatActivity() {
                         SectionTitle(text = stringResource(id = R.string.licenses))
                     }
 
-                    Licenses.licenses.forEachIndexed { index, license ->
+                    licenses.forEachIndexed { index, license ->
                         item {
                             LicenseName(licenseName = license["licenseName"] as String)
                         }
@@ -73,13 +72,13 @@ class DevelopersAndLicenses : AppCompatActivity() {
                         for (packageInfo in (license["packages"] as List<Map<String, String>>)) {
                             item {
                                 PackageInfoElement(
-                                    packageName = packageInfo["packageName"]!!,
-                                    licenseInfo = packageInfo["licenseInfo"]!!
+                                    packageName = packageInfo["projectNameVersion"]!!,
+                                    licenseInfo = packageInfo["projectInfo"]!!
                                 )
                             }
                         }
                         item {
-                            if (index == Licenses.licenses.size - 1) {
+                            if (index == licenses.size - 1) {
                                 LicenseText(
                                     licenseText = license["licenseText"] as String,
                                     paddingBottom = 0.dp
@@ -114,7 +113,7 @@ class DevelopersAndLicenses : AppCompatActivity() {
     @Composable
     fun CreatorsImage() {
         Image(
-            painter = painterResource(id = R.drawable.creators_image),
+            painter = painterResource(id = R.drawable.developers_image),
             contentDescription = stringResource(id = R.string.creators_content_description),
             contentScale = ContentScale.Crop,
             modifier = Modifier

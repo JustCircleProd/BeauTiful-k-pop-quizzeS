@@ -14,9 +14,8 @@
     <string name="developers_and_licenses">Создатели и лицензии</string>
 
     <string name="reset_passed_question">Сбросить пройденные вопросы?</string>
-    <string name="creators">Создатели</string>
+    <string name="developers">Создатели</string>
     <string name="licenses">Лицензии</string>
-    <string name="go_to_settings">В Настройки</string>
 
     <string name="confirmation">Подтверждение</string>
     <string name="close_dialog_content_description">Закрытие диалога</string>
@@ -71,12 +70,13 @@
 
     <string name="share_result">Поделиться результатом</string>
     <string name="for_sharing_result">Смотри! Мой результат в категории \"%1$s\" равен %2$d. Сможешь набрать больше?</string>
-    <string name="play_store_link">https://play.google.com/store/apps/details?id=ru.justcircleprod.onlybtsfuns</string>
-
-    <string name="to_categories_text">К выбору категории</string>
     <string name="sharing_result_not_available">На данный момент функция недоступна</string>
 
-    <string name="go_to_menu">В меню</string>
+    <string name="repeat_quiz">Пройти снова</string>
+
+    <string name="to_categories_text">К выбору категории</string>
+
+    <string name="back">Назад</string>
 
     <string name="brand_image_content_description">Изображение бренда</string>
     <string name="image_for_question_description">Изображение для вопроса</string>

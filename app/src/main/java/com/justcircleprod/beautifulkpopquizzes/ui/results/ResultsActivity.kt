@@ -28,7 +28,7 @@ class ResultsActivity : AppCompatActivity() {
         }
 
         enableAnimation()
-        binding.toMenuBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         setScoresObserver()
 
         setContentView(binding.root)

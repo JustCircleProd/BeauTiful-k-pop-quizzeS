@@ -216,7 +216,7 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setOutOfQuestionsLayout() {
-        binding.toCategories.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.outOfQuestionsLayout.visibility = View.VISIBLE
     }
 

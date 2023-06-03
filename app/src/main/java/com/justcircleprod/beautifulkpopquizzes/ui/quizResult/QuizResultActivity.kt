@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import com.justcircleprod.beautifulkpopquizzes.R
 import com.justcircleprod.beautifulkpopquizzes.databinding.ActivityQuizResultBinding
 import com.justcircleprod.beautifulkpopquizzes.ui.extensions.makeBrandLabelColorful
+import com.justcircleprod.beautifulkpopquizzes.ui.quiz.QuizActivity
 
 @AndroidEntryPoint
 class QuizResultActivity : AppCompatActivity() {
@@ -40,13 +41,15 @@ class QuizResultActivity : AppCompatActivity() {
 
         enableAnimations()
 
-        binding.toCategories.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         setLoadingObserver()
         // workWithInterstitialAd()
         setScoresObservers()
 
         setOnShareResultBtnClickListener()
+
+        setOnRepeatQuizBtnClickListener()
+        binding.toCategoriesBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         setContentView(binding.root)
     }
@@ -262,6 +265,15 @@ class QuizResultActivity : AppCompatActivity() {
             else -> {
                 getString(R.string.random_questions)
             }
+        }
+    }
+
+    private fun setOnRepeatQuizBtnClickListener() {
+        binding.repeatQuizBtn.setOnClickListener {
+            val intent = Intent(this, QuizActivity::class.java)
+            intent.putExtra(CATEGORY_ID_ARGUMENT_NAME, this.intent.extras!!.getInt(CATEGORY_ID_ARGUMENT_NAME))
+            startActivity(intent)
+            finish()
         }
     }
 }

@@ -47,16 +47,16 @@
                 android:layout_height="@dimen/developers_licenses_content_height" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/to_settings_btn"
-                style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+                android:id="@+id/back_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:elevation="@dimen/button_elevation"
                 android:padding="@dimen/button_pudding"
                 android:stateListAnimator="@null"
-                android:text="@string/go_to_settings"
+                android:text="@string/back"
                 android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/button_text_size"
                 app:cornerRadius="@dimen/button_corner_radius"
