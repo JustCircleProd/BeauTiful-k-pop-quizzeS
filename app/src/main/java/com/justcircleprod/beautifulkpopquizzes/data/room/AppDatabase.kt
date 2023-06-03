@@ -8,10 +8,12 @@ import androidx.room.TypeConverters
 import com.justcircleprod.beautifulkpopquizzes.data.models.*
 import com.justcircleprod.beautifulkpopquizzes.data.room.convertes.Converters
 import com.justcircleprod.beautifulkpopquizzes.data.room.dao.*
+import com.justcircleprod.beautifulkpopquizzes.data.room.migrations.MIGRATION_1_2
+import com.justcircleprod.beautifulkpopquizzes.data.room.migrations.MIGRATION_2_3
 
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [TextQuestion::class, ImageQuestion::class, AudioQuestion::class,
         VideoQuestion::class, PassedQuestion::class, Score::class, Setting::class]
 )
@@ -29,7 +31,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, "db.db")
                 .createFromAsset("database/db.db")
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build()
     }
 }

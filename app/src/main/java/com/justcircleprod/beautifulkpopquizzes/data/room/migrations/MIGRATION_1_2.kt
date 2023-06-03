@@ -1,4 +1,4 @@
-package com.justcircleprod.beautifulkpopquizzes.data.room
+package com.justcircleprod.beautifulkpopquizzes.data.room.migrations
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
