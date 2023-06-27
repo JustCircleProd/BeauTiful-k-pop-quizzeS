@@ -60,4 +60,7 @@ Room is used to store questions, scores, settings and passed questions (for "No 
 [<img src="https://user-images.githubusercontent.com/62091531/212752612-c556935e-e573-45d7-9bec-36dc967d432f.png" target="_blank" align="left" width="15%"/>](https://play.google.com/store/apps/details?id=com.justcircleprod.beautifulkpopquizzes)
 
 **Copying the source code and the application is prohibited.**  
-The current working version of the application can be downloaded from the Google Play.
+The current working versions of the application can be downloaded from the Google Play:
+- [BeauTiful k-pop quizzeS](https://play.google.com/store/apps/details?id=com.justcircleprod.beautifulkpopquizzes) (English + Russian)
+- [BTS Тест](https://play.google.com/store/apps/details?id=com.justcircleprod.btsquiz) (Only Russian)
+

@@ -10,10 +10,11 @@ import com.justcircleprod.beautifulkpopquizzes.data.room.convertes.Converters
 import com.justcircleprod.beautifulkpopquizzes.data.room.dao.*
 import com.justcircleprod.beautifulkpopquizzes.data.room.migrations.MIGRATION_1_2
 import com.justcircleprod.beautifulkpopquizzes.data.room.migrations.MIGRATION_2_3
+import com.justcircleprod.beautifulkpopquizzes.data.room.migrations.MIGRATION_3_4
 
 
 @Database(
-    version = 3,
+    version = 4,
     entities = [TextQuestion::class, ImageQuestion::class, AudioQuestion::class,
         VideoQuestion::class, PassedQuestion::class, Score::class, Setting::class]
 )
@@ -31,7 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, "db.db")
                 .createFromAsset("database/db.db")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build()
     }
 }
