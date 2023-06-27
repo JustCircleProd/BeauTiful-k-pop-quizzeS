@@ -57,7 +57,6 @@ The app is built on several activities. MММM is used.
 Room is used to store questions, scores, settings and passed questions (for "No question repetition" option).
   
 ## Copying is prohibited🚫
-[<img src="https://user-images.githubusercontent.com/62091531/212752612-c556935e-e573-45d7-9bec-36dc967d432f.png" target="_blank" align="left" width="15%"/>](https://play.google.com/store/apps/details?id=com.justcircleprod.beautifulkpopquizzes)
 
 **Copying the source code and the application is prohibited.**  
 The current working versions of the application can be downloaded from the Google Play:
