@@ -8,6 +8,11 @@
   <img src="https://user-images.githubusercontent.com/62091531/214564391-d80cf645-7f7c-4650-a15e-3f3489ab59a4.png"/>
 </p>
 
+<br>
+<p align="center">  
+  This version is no longer supported. The current version can be found <a href="https://github.com/JustCircleProd/BTSQuiz">here</a>.
+</p>
+
 
 ## Features🕺
 
@@ -17,8 +22,6 @@ With this app you can take quizzes about the most famous k-pop group, BTS, in 5 
 - Audio questions (about 100)
 - Video questions (about 25)
 - Random questions (from all categories)
-
-Access to text questions is available only if the system language is Russian or close to it.  
 
 The app saves the best result for each category.  
 You can also select the difficulty of the questions and enable the "No question repetition" option.
@@ -52,14 +55,14 @@ Tech stack:
   
 ### Tech explanation
 
-The app is built on several activities. MММM is used.
+The app is built on several activities. MVVM is used.
 
 Room is used to store questions, scores, settings and passed questions (for "No question repetition" option).
+
   
 ## Copying is prohibited🚫
 
 **Copying the source code and the application is prohibited.**  
-The current working versions of the application can be downloaded from the Google Play:
-- [BeauTiful k-pop quizzeS](https://play.google.com/store/apps/details?id=com.justcircleprod.beautifulkpopquizzes) (English + Russian)
-- [BTS Тест](https://play.google.com/store/apps/details?id=com.justcircleprod.btsquiz) (Only Russian)
+The current working version of the application can be downloaded from the Google Play:
+- [BTS Тест](https://play.google.com/store/apps/details?id=com.justcircleprod.btsquiz)
 
